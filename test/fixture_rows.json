@@ -1,0 +1,127 @@
+{
+ "01_halden_kickoff.txt": [
+  {
+   "action": "send the spend export for the last twelve months",
+   "owner": "Sofia Lindqvist",
+   "due": "2026-10-22",
+   "due_note": "converted from 'by Thursday' using meeting date 2026-10-20",
+   "source_line": "3",
+   "status": "open"
+  },
+  {
+   "action": "send the draft category taxonomy to Sofia",
+   "owner": "Aiden Brooks",
+   "due": "2026-10-27",
+   "due_note": "",
+   "source_line": "5",
+   "status": "open"
+  },
+  {
+   "action": "set up the introductions to the three logistics partners",
+   "owner": "Daniel Okafor",
+   "due": "2026-10-31",
+   "due_note": "converted from 'by the end of this month' using meeting date 2026-10-20",
+   "source_line": "6",
+   "status": "open"
+  }
+ ],
+ "02_meridian_pricing.txt": [
+  {
+   "action": "send the revised price list to the distributors",
+   "owner": "not stated",
+   "due": "2026-10-28",
+   "due_note": "",
+   "source_line": "3",
+   "status": "open"
+  },
+  {
+   "action": "update the scenario B model with distributor volumes and send to Hannah",
+   "owner": "Mei Ling Chong",
+   "due": "2026-10-24",
+   "due_note": "",
+   "source_line": "5",
+   "status": "open"
+  },
+  {
+   "action": "brief the sales team before the price list goes out",
+   "owner": "not stated",
+   "due": "not stated",
+   "due_note": "",
+   "source_line": "6",
+   "status": "open"
+  }
+ ],
+ "03_northgate_claims.txt": [
+  {
+   "action": "get the claims handler interview list to Lena",
+   "owner": "Yusuf Rahman",
+   "due": "by next Friday",
+   "due_note": "relative date, meeting date not stated",
+   "source_line": "3",
+   "status": "confirm"
+  },
+  {
+   "action": "share the current process maps",
+   "owner": "Grace Tan",
+   "due": "by Wednesday",
+   "due_note": "relative date, meeting date not stated",
+   "source_line": "5",
+   "status": "confirm"
+  }
+ ],
+ "04_halden_finance.txt": [
+  {
+   "action": "send the cost centre mapping",
+   "owner": "Priya Nair",
+   "due": "2026-10-29",
+   "due_note": "",
+   "source_line": "3",
+   "status": "open"
+  },
+  {
+   "action": "confirm with the board secretary that the diagnostic is on the November agenda",
+   "owner": "Daniel Okafor",
+   "due": "2026-10-30",
+   "due_note": "",
+   "source_line": "5",
+   "status": "open"
+  },
+  {
+   "action": "send the first cut of the mapping once Priya's file is in",
+   "owner": "not stated",
+   "due": "not stated",
+   "due_note": "once Priya's file is in",
+   "source_line": "6",
+   "status": "open"
+  }
+ ],
+ "05_meridian_update.txt": [],
+ "07_halden_followup.txt": [
+  {
+   "action": "book the category workshop with Sofia's team",
+   "owner": "Aiden Brooks",
+   "due": "2026-11-06",
+   "due_note": "",
+   "source_line": "6",
+   "status": "open"
+  }
+ ],
+ "08_meridian_contracts.txt": [
+  {
+   "action": "send the distributor contract list",
+   "owner": "Hannah Cole",
+   "due": "2026-10-15",
+   "due_note": "",
+   "source_line": "2",
+   "status": "open"
+  },
+  {
+   "action": "mark the agreements with a price-change clause and send the marked list to Tom",
+   "owner": "Mei Ling Chong",
+   "due": "2026-10-29",
+   "due_note": "",
+   "source_line": "3",
+   "status": "open"
+  }
+ ]
+}

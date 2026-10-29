@@ -1,0 +1,15 @@
+action_id,transcript,source_line,action,owner,owner_company,owner_role,due,due_note,status,added_run,closed_run,closed_by
+A001,01_halden_kickoff.txt,3,Send the spend export for the last twelve months,Sofia Lindqvist,Halden Logistics,Head of Procurement,2026-10-22,"""by Thursday"", meeting date 2026-10-20",closed,R2026-10-25-1,R2026-10-25-1,07_halden_followup.txt line 2
+A002,01_halden_kickoff.txt,5,Send the draft category taxonomy to Sofia Lindqvist,Aiden Brooks,Our firm,Consultant,2026-10-27,"""by 27 October"", meeting date 2026-10-20",open,R2026-10-25-1,,
+A003,01_halden_kickoff.txt,6,Set up the introductions to Halden Logistics' three logistics partners,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-31,"""by the end of this month"", meeting date 2026-10-20",open,R2026-10-25-1,,
+A004,02_meridian_pricing.txt,3,Send the revised price list to the distributors,not stated,,,2026-10-28,"""by 28 October"", meeting date 2026-10-21",open,R2026-10-25-1,,
+A005,02_meridian_pricing.txt,5,Update the scenario B model with the distributor volumes and send it to Hannah Cole,Mei Ling Chong,Our firm,Consultant,2026-10-24,"""by 24 October"", meeting date 2026-10-21",closed,R2026-10-25-1,R2026-10-25-1,05_meridian_update.txt line 1
+A006,02_meridian_pricing.txt,6,Brief the sales team before the price list goes out,not stated,,,not stated,"""before the list goes out"", names no date",open,R2026-10-25-1,,
+A007,03_northgate_claims.txt,3,Get the claims handler interview list to Lena Marsh,Yusuf Rahman,Northgate Insurance,Head of Claims,by next Friday,"relative date, meeting date not stated",confirm,R2026-10-25-1,,
+A008,03_northgate_claims.txt,5,Share the current process maps,Grace Tan,Northgate Insurance,Transformation Lead,by Wednesday,"relative date, meeting date not stated",confirm,R2026-10-25-1,,
+A009,07_halden_followup.txt,6,Book the category workshop with Sofia Lindqvist's team,Aiden Brooks,Our firm,Consultant,2026-11-06,"""by 6 November"", meeting date 2026-10-23",open,R2026-10-25-1,,
+A010,04_halden_finance.txt,3,Send the cost centre mapping,Priya Nair,Halden Logistics,Finance Director,2026-10-29,"""by 29 October"", meeting date 2026-10-22",open,R2026-10-25-1,,
+A011,04_halden_finance.txt,5,Confirm with the board secretary that the diagnostic is on the November agenda,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-30,"""by 30 October"", meeting date 2026-10-22",open,R2026-10-25-1,,
+A012,04_halden_finance.txt,6,Send the first cut of the mapping once Priya Nair's file is in,not stated,,,not stated,"""once Priya's file is in"", names no date",open,R2026-10-25-1,,
+A013,08_meridian_contracts.txt,2,Send the distributor contract list,Hannah Cole,Meridian Foods,Operations Manager,2026-10-15,"""by 15 October"", meeting date 2026-10-22",open,R2026-10-25-1,,
+A014,08_meridian_contracts.txt,3,Mark the agreements with a price-change clause and send the marked list to Tom Reyes,Mei Ling Chong,Our firm,Consultant,2026-10-29,"""by 29 October"", meeting date 2026-10-22",open,R2026-10-25-1,,

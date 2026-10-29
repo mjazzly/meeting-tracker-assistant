@@ -1,0 +1,25 @@
+{
+  "gate": "past_due",
+  "rows": [],
+  "held": 2,
+  "forbidden_lines": [],
+  "closed": [],
+  "transcript": "08_meridian_contracts.txt",
+  "as_of": "2026-10-24",
+  "rows_after_answer": [
+    {
+      "source_line": "2",
+      "owner": "Hannah Cole",
+      "owner_company": "Meridian Foods",
+      "due": "2026-10-15",
+      "status": "open"
+    },
+    {
+      "source_line": "3",
+      "owner": "Mei Ling Chong",
+      "owner_company": "Our firm",
+      "due": "2026-10-29",
+      "status": "open"
+    }
+  ]
+}

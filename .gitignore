@@ -1,0 +1,11 @@
+node_modules/
+.env
+eval/runs/
+eval/runs-mock/
+test/out/
+dist/
+
+# never in the public repo
+.DS_Store
+*.pdf
+*.tar.gz

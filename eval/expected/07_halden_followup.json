@@ -1,0 +1,25 @@
+{
+  "gate": null,
+  "rows": [
+    {
+      "source_line": "6",
+      "owner": "Aiden Brooks",
+      "owner_company": "Our firm",
+      "due": "2026-11-06",
+      "status": "open"
+    }
+  ],
+  "forbidden_lines": [
+    "4",
+    "5",
+    "7"
+  ],
+  "closed": [
+    {
+      "transcript": "01_halden_kickoff.txt",
+      "source_line": "3"
+    }
+  ],
+  "transcript": "07_halden_followup.txt",
+  "as_of": "2026-10-24"
+}

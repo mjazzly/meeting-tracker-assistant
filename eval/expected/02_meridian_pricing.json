@@ -1,0 +1,32 @@
+{
+  "gate": null,
+  "rows": [
+    {
+      "source_line": "3",
+      "owner": "not stated",
+      "owner_company": "",
+      "due": "2026-10-28",
+      "status": "open"
+    },
+    {
+      "source_line": "5",
+      "owner": "Mei Ling Chong",
+      "owner_company": "Our firm",
+      "due": "2026-10-24",
+      "status": "open"
+    },
+    {
+      "source_line": "6",
+      "owner": "not stated",
+      "owner_company": "",
+      "due": "not stated",
+      "status": "open"
+    }
+  ],
+  "forbidden_lines": [
+    "7"
+  ],
+  "closed": [],
+  "transcript": "02_meridian_pricing.txt",
+  "as_of": "2026-10-24"
+}

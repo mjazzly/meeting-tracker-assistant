@@ -1,0 +1,11 @@
+{
+  "gate": "confidential",
+  "rows": [],
+  "forbidden_lines": [
+    "2",
+    "3"
+  ],
+  "closed": [],
+  "transcript": "06_northgate_board.txt",
+  "as_of": "2026-10-24"
+}

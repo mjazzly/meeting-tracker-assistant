@@ -1,0 +1,15 @@
+{
+  "gate": "no_actions",
+  "rows": [],
+  "forbidden_lines": [
+    "5"
+  ],
+  "closed": [
+    {
+      "transcript": "02_meridian_pricing.txt",
+      "source_line": "5"
+    }
+  ],
+  "transcript": "05_meridian_update.txt",
+  "as_of": "2026-10-24"
+}

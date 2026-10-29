@@ -1,0 +1,128 @@
+{
+  "label": "S202610251817-haiku-5-5",
+  "date": "2026-10-25",
+  "started_at": "2026-10-25T18:17:45.808Z",
+  "skill_version": "v1.3",
+  "model": "claude-haiku-5-5",
+  "effort": null,
+  "matched": 6,
+  "of": 6,
+  "tokens": {
+    "input": 38,
+    "output": 7031,
+    "cache_read": 64922,
+    "cache_write": 7229
+  },
+  "total_input": 72189,
+  "cost_usd": 0.005072145,
+  "cases": [
+    {
+      "case": "1. Ordinary: a conversation to a partner brief",
+      "request": "I have the transcript of a call with a client stakeholder and the partner wants one page on what was said before Thursday",
+      "expected": "MATCH",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "I have the transcript of a call with a client stakeholder and the partner wants one page on what was said before Thursday"
+          }
+        }
+      ],
+      "model_calls": 2,
+      "reply": "Route A: connected tools.\n\nThis exists: Conversation Brief Assistant (v1.4, v1.5 written, not run). Use it when a partner needs a one-page brief to read in three minutes before the next meeting, after a client conversation, and you have the transcript with numbered turns. Inputs: the filled input template as one message (engagement question, stakeholder role, date, who it is for, permitted organisation names, any leave-out notes), then the transcript. Output: a one-page brief with a headline, findings tagged FACT, VIEW, RISK, GAP or ASK with turn references, quotes word for word, open questions, and a next step. Limits: declines, one line each at the top, then delivers the rest: inventing or sharpening a quote; attributing a statement the transcript does not show; keeping a personal name (it keeps the role label). Leaves out personal matters about an identifiable person. Asks for any missing required input. One transcript per run. Tested on: Claude Project, Sonnet 5.5 at Low: 4 of 5 cases matched, rehearsal passed, both declines held. Custom GPT, GPT-5.6 Sol at High: 2 of 5, not passed. Final runs 7 Oct 2026, five synthetic transcripts, one run per case. The Claude miss was T2, a figure given inside a concern tagged FACT where the check expects RISK; v1.5 carries the rule and has not been run. Where: 00-interview-brief/ in the pack, and the tested v1.4 set at ~/Examplers/interview-brief-exemplar-v1.4 (the working name in the tested block is Interview Brief Assistant).\n\nInside its limits: reuse Conversation Brief Assistant as it stands.\n\nTo run it, I need from you:\n1. The engagement question.\n2. The stakeholder's role (not their name, which the brief does not keep).\n3. The date of the call.\n4. Who the brief is for (the partner's name or role).\n5. The permitted organisation names, if any, that may appear in the brief.\n6. Any leave-out notes: personal matters or topics to keep out.\n7. The transcript, and confirmation that its turns are numbered. The turn references depend on the numbering. If it is not numbered, I will say so rather than guess."
+    },
+    {
+      "case": "2. Ordinary: many spreadsheets, different headers",
+      "request": "We get about 300 Excel exports from the regional offices every quarter, same data but the column headers are all different, and we need them in one table",
+      "expected": "MATCH",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "We get about 300 Excel exports from the regional offices every quarter, same data but the column headers are all different, and we need them in one table"
+          }
+        }
+      ],
+      "model_calls": 2,
+      "reply": "**Route A: the library tools are connected.**\nThis exists: Column Mapper (v1.0). Use it when many Excel or CSV files carry the same information under different headers and you need one table. Inputs: the header listing (every header with a count and a sample value) and your canonical field list: name, meaning, type; seven to fifteen fields is normal. Output: the mapping table with every doubtful header flagged for your decision, then the Power Query that applies it, piloted on fifty files before the rest. Limits: never sees your files and never fills a gap. Fewer than ten files: open them instead. Files with different information, not just different headers, are a data model question. Mixed date formats always need your decision. Headers in more than one language untested. Over 200 distinct headers goes in two halves. Tested on: not yet run. The instruction block, five cases and the Test 1 answer key were written 1 Oct 2026; the results table is empty, so this entry is untested. Where: 01-column-mapper.md.\n\nInside its limits: reuse Column Mapper as it stands.\n\nYour request is about 300 files with the same data and different headers, going into one table. That is inside the limits: the volume is well above the ten-file floor, and the request is about headers, not different information.\n\nBefore you run it, I need these from you:\n\n1. The header listing: every header across the exports, with how many files carry it and one sample value. The tool never sees the files, so this comes from you.\n2. Your canonical field list: for each field, its name, what it means and its type. Seven to fifteen fields is normal.\n3. Are there more than 200 distinct headers across the 300 files? If so, the work goes in two halves.\n4. Are any headers in a language other than English? That combination is untested.\n5. Do the exports use mixed date formats? If so, you will need to decide the date format yourself; the tool will always ask you.\n\nOnce you have those, the next step is yours: run the Column Mapper with the header listing and the field list. Its pilot on fifty files will show whether the mapping holds before you run the remaining 250."
+    },
+    {
+      "case": "3. Ordinary: which model tier",
+      "request": "This summarisation workflow runs on the biggest model, which is the smallest tier that still passes its cases?",
+      "expected": "MATCH",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "This summarisation workflow runs on the biggest model, which is the smallest tier that still passes its cases?"
+          }
+        }
+      ],
+      "model_calls": 2,
+      "reply": "Route A: connected tools.\n\nThis exists: Right-Size (v1.0). Use it when every time an exemplar passes its test log, before it goes in the library, to let evidence set the default tier, and whenever a consultant asks which model to use for a task. Inputs: the results of Test 1, the edge case and the refusal case run on the tier below the one the exemplar was built on, saved outputs included. Output: the lowest tier that passed the three cases, the tested-on line for the exemplar page, and a three-sentence note for the consultant with no cost words. Limits: hands untested prompts the check instead of a recommendation; not for general \"which model is best\" questions; knows nothing about any platform's pricing or limits. Tested on: not yet run. The instruction block, five cases and the Test 1 answer key were written 1 Oct 2026; the results table is empty. Where: 06-right-size.md.\n\nInside its limits: reuse Right-Size as it stands.\n\nYour question is a specific workflow's tier choice, so it sits inside the entry's limits. But the entry cannot give you the answer yet. It works from test results, and the library holds none for this workflow. Before it can return a tier, I need:\n\n1. The summarisation workflow's cases: the Test 1 prompt and its answer key, the edge case and the refusal case.\n2. The saved outputs from running those cases on the tier below the biggest model.\n3. The pass line for each case, if it differs from the entry's three-case standard.\n\nOnce you send those, Right-Size will return the lowest tier that passed all three cases. Until then, the library gives no tier for this workflow, and the entry's untested status means its result should be treated as a check, not a recommendation."
+    },
+    {
+      "case": "4. Edge: two entries that chain",
+      "request": "Map how the team shortlists CVs and then write the step by step runbook for doing it in chat only",
+      "expected": "POSSIBLE",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "Map how the team shortlists CVs and then write the step by step runbook for doing it in chat only"
+          }
+        }
+      ],
+      "model_calls": 2,
+      "reply": "Route A: the library tools are connected, so I'm searching the index with your request as written.\nThe search returned two entries that could fit, and your request reads as two steps: map the process, then write the runbook from that map. I haven't picked one.\n\n1. **Process Mapper** (v1.0, written, not run). Use it when a team wants a process improved or automated and can't yet write down what it does today, such as shortlisting. Limits: it records what was done, not what should be done, needs at least three recent real cases with names removed, and refuses to score or shortlist anyone. Tested on: not yet run.\n\n2. **Runbook Writer** (v1.0, written, not run). Use it when a process is mapped and signed, the only tools are chat interfaces, and someone needs to run it next week without the analyst present. Limits: in chat only, the person does every data fetch by hand; the runbook makes the chat steps consistent but doesn't shorten the process; steps that select people are never run as chat steps; unsigned maps are refused. Tested on: not yet run.\n\nWhich do you mean?\n1. Only the map: run Process Mapper first.\n2. Only the runbook, because a signed map already exists: run Runbook Writer, and I'll need the signed map, the tool list and the data rule confirmed in writing by the process owner.\n3. Both, in order: Process Mapper first, then Runbook Writer on its signed output. Say so and I'll take them one after the other."
+    },
+    {
+      "case": "5. New: nothing in the library",
+      "request": "Translate our client proposals into Bahasa Malaysia and keep the formatting of every table",
+      "expected": "NEW",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "Translate our client proposals into Bahasa Malaysia and keep the formatting of every table"
+          }
+        },
+        {
+          "name": "library_brief",
+          "input": {
+            "request": "Translate our client proposals into Bahasa Malaysia and keep the formatting of every table"
+          }
+        }
+      ],
+      "model_calls": 3,
+      "reply": "Route A (the library tools are connected).\n\n**Verdict: NEW.** Nothing in the library does this. The nearest entries are Column Mapper (it consolidates Excel and CSV files, not translation) and Conversation Brief Assistant (it turns transcripts into partner briefs). Neither is a fit, so I have not built anything. Here is the brief to fill. Its \"has it been done before\" field is already answered from the index.\n\n**The brief, before the prompt**\n\n| Field | Answer |\n|---|---|\n| The objective, in one line | |\n| Recurring or one-off | |\n| Has it been done before | No. Nearest entries, none a fit: Column Mapper, Conversation Brief Assistant. |\n| Which shape it needs (a prompt, a Project or custom GPT, a skill with scripts, a tool server) | |\n| Which platform and tier | |\n| What must never go in (client names, personal data, anything confidential) | |\n\n**The brief itself**\n\n| Field | Answer |\n|---|---|\n| The role, the reader and the task | |\n| The inputs, and the tools it may use | |\n| The steps in order, each with its check | |\n| The output, with one example and the title the reader will see | |\n| When to stop and what to decline | |\n| The rules and style that run the whole length | |\n\n**When it is built**\n\n| Field | Answer |\n|---|---|\n| The five cases, written before the first run (three ordinary, one edge, one refusal) | |\n| The entry for the library index: name, use it when, inputs, output, limits, tested on | |\n\n**Questions for you, before any build:**\n\n1. What is the objective in one line? For example, a Bahasa Malaysia version for the client to read, or for internal review, or both.\n2. Is this a one-off job or recurring? If recurring, how often, and how many proposals at a time?\n3. What format do the proposals arrive in (Word, PDF, slides, Excel tables), and what should the output be?\n4. How must the tables keep their formatting: same rows and columns, same merged cells, same number styles and currency, same heading levels?\n5. Which shape do you want: a single prompt, a Claude Project or custom GPT, a skill with scripts, or a tool server?\n6. Which platform and model tier will you run it on?\n7. What must never go into the translation or the tool: client names, personal data, or anything confidential? Should client names stay in English?\n8. Who reads the output, and does the translation need a human reviewer before it goes to a client?\n9. Should terms of art (for example, \"scope\", \"deliverables\", \"fees\") follow a glossary you already use? If so, please share it.\n10. Are there any proposal sections that must stay in English, such as legal clauses or product names?\n\nIf there is no one to ask for some of these, I will write my reading into the field marked \"assumed\" and say so. Once the brief is complete, the next step is the build, with the five cases written before the first run."
+    },
+    {
+      "case": "6. A match whose limits the request crosses (the skill's Gate 2)",
+      "request": "Take this week's meeting transcripts, update the action tracker and email each owner their open actions on Monday morning",
+      "expected": "MATCH",
+      "match": true,
+      "fails": [],
+      "tool_calls": [
+        {
+          "name": "library_search",
+          "input": {
+            "request": "Take this week's meeting transcripts, update the action tracker and email each owner their open actions on Monday morning"
+          }
+        }
+      ],
+      "model_calls": 2,
+      "reply": "Route A: the check-before-build tools are connected.\nThis runs on Route A (the connected tools).\n\nThis exists: Meeting Tracker Assistant (v2.0). Use it when meeting transcripts land in a folder every week and someone needs a running list of who committed to what, by when, with the questions the model would otherwise guess. Inputs: a folder of transcripts (a header with meeting, date and attendees; numbered lines) and a contacts table that stands in for a CRM. Output: the tracker appended with this week's actions, each with its source line, owner, company, role and due date; a run log; a summary and a one-page action board. Limits: synthetic transcripts and a synthetic contacts table; one folder; no scheduling; no email; no external system connected; append and status change only, never a rewrite; stops at four gates. Tested on: harness run, 25 Oct 2026: claude-opus-5-5 (high) 5 of 5, decline held; claude-haiku-5-5 4 of 5, decline held. Three runs by hand before that: 4 of 5, then 5 of 5. Where: this folder: skill/SKILL.md, server.mjs, eval/EXEMPLAR.md.\n\nYour request also asks for two things this entry does not do: emailing each owner, and sending on a Monday morning (scheduling). Two ways forward:\n\n1. Extend Meeting Tracker Assistant with a new version that adds the email and schedule steps.\n2. Write a new brief for the sending step, and keep the tracker update on the existing entry.\n\nWhich one do you want?"
+    }
+  ]
+}

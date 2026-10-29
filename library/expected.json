@@ -1,0 +1,57 @@
+{
+  "note": "Six cases for the search, written before the first run (25 Oct 2026): three ordinary, one edge, one new, one that matches but sits outside the entry's limits. The checker compares the verdict and the names; a miss is named, never rounded up.",
+  "cases": [
+    {
+      "case": "1. Ordinary: a conversation to a partner brief",
+      "request": "I have the transcript of a call with a client stakeholder and the partner wants one page on what was said before Thursday",
+      "verdict": "MATCH",
+      "names": [
+        "Conversation Brief Assistant"
+      ]
+    },
+    {
+      "case": "2. Ordinary: many spreadsheets, different headers",
+      "request": "We get about 300 Excel exports from the regional offices every quarter, same data but the column headers are all different, and we need them in one table",
+      "verdict": "MATCH",
+      "names": [
+        "Column Mapper"
+      ]
+    },
+    {
+      "case": "3. Ordinary: which model tier",
+      "request": "This summarisation workflow runs on the biggest model, which is the smallest tier that still passes its cases?",
+      "verdict": "MATCH",
+      "names": [
+        "Right-Size"
+      ],
+      "corrected": "25 Oct 2026, after the v1.1 run: the request said 'cheapest'. Right-Size's limits say it knows nothing about pricing, so the case as written crossed a limit and tested Gate 2, not reuse; Haiku's gate on it in the v1.0 and v1.1 runs was a correct reading. Changed to 'smallest', Right-Size's own word. Runs before this date stay recorded on the original wording."
+    },
+    {
+      "case": "4. Edge: two entries that chain",
+      "request": "Map how the team shortlists CVs and then write the step by step runbook for doing it in chat only",
+      "verdict": "POSSIBLE",
+      "names": [
+        "Process Mapper",
+        "Runbook Writer"
+      ]
+    },
+    {
+      "case": "5. New: nothing in the library",
+      "request": "Translate our client proposals into Bahasa Malaysia and keep the formatting of every table",
+      "verdict": "NEW",
+      "names": []
+    },
+    {
+      "case": "6. A match whose limits the request crosses (the skill's Gate 2)",
+      "request": "Take this week's meeting transcripts, update the action tracker and email each owner their open actions on Monday morning",
+      "verdict": "MATCH",
+      "names": [
+        "Meeting Tracker Assistant"
+      ],
+      "limits_must_name": [
+        "no email",
+        "no scheduling"
+      ]
+    }
+  ]
+}

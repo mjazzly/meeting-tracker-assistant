@@ -1,0 +1,25 @@
+{
+  "gate": null,
+  "rows": [
+    {
+      "source_line": "3",
+      "owner": "Yusuf Rahman",
+      "owner_company": "Northgate Insurance",
+      "due": "by next Friday",
+      "status": "confirm"
+    },
+    {
+      "source_line": "5",
+      "owner": "Grace Tan",
+      "owner_company": "Northgate Insurance",
+      "due": "by Wednesday",
+      "status": "confirm"
+    }
+  ],
+  "forbidden_lines": [
+    "7"
+  ],
+  "closed": [],
+  "transcript": "03_northgate_claims.txt",
+  "as_of": "2026-10-24"
+}

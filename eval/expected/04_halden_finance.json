@@ -1,0 +1,32 @@
+{
+  "gate": "duplicate_name",
+  "rows": [],
+  "held": 3,
+  "forbidden_lines": [],
+  "closed": [],
+  "transcript": "04_halden_finance.txt",
+  "as_of": "2026-10-24",
+  "rows_after_answer": [
+    {
+      "source_line": "3",
+      "owner": "Priya Nair",
+      "owner_company": "Halden Logistics",
+      "due": "2026-10-29",
+      "status": "open"
+    },
+    {
+      "source_line": "5",
+      "owner": "Daniel Okafor",
+      "owner_company": "Halden Logistics",
+      "due": "2026-10-30",
+      "status": "open"
+    },
+    {
+      "source_line": "6",
+      "owner": "not stated",
+      "owner_company": "",
+      "due": "not stated",
+      "status": "open"
+    }
+  ]
+}

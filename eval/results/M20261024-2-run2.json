@@ -1,0 +1,66 @@
+{
+  "label": "Run 2",
+  "run_id": "M20261024-2-run2",
+  "date": "2026-10-24",
+  "started_at": "2026-10-24T16:10",
+  "mode": "manual chat",
+  "blind": true,
+  "counted": true,
+  "skill_version": "v1.1",
+  "server_version": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "tokens": null,
+  "completed": true,
+  "verdict": {
+    "five_matched": 4,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": true
+  },
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "expected 2 rows, found 3"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    },
+    "07_halden_followup.txt": {
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "note": "First blind run. Four of five; the miss was case 3 line 6, a sentence about how interviews will be run taken as an unowned action. It came from v1.1's own fix for run 1. The v1.2 rule followed: an action needs something at the end that someone could check was done."
+}

@@ -1,0 +1,12 @@
+Meeting: Halden Logistics, procurement diagnostic kickoff
+Date: 2026-10-20
+Attendees: Daniel Okafor, Sofia Lindqvist, Lena Marsh, Aiden Brooks
+
+[1] Lena Marsh: Thanks everyone for joining. The purpose today is to agree the scope for the procurement diagnostic and who does what in the first two weeks.
+[2] Daniel Okafor: We want the baseline spend analysis before the board meeting in November, so the earlier the better.
+[3] Sofia Lindqvist: I will send the spend export for the last twelve months by Thursday.
+[4] Aiden Brooks: Once it lands I can start the category mapping.
+[5] Lena Marsh: Good. Aiden will send the draft category taxonomy to Sofia by 27 October.
+[6] Daniel Okafor: One more thing. I will set up the introductions to our three logistics partners by the end of this month.
+[7] Sofia Lindqvist: The ERP data access is already with our IT team, so nothing is needed from this group on that.
+[8] Lena Marsh: Noted. Thanks all, we will pick this up next week.

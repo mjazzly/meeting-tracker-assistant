@@ -1,0 +1,33 @@
+{
+  "gate": null,
+  "rows": [
+    {
+      "source_line": "3",
+      "owner": "Sofia Lindqvist",
+      "owner_company": "Halden Logistics",
+      "due": "2026-10-22",
+      "status": "open"
+    },
+    {
+      "source_line": "5",
+      "owner": "Aiden Brooks",
+      "owner_company": "Our firm",
+      "due": "2026-10-27",
+      "status": "open"
+    },
+    {
+      "source_line": "6",
+      "owner": "Daniel Okafor",
+      "owner_company": "Halden Logistics",
+      "due": "2026-10-31",
+      "status": "open"
+    }
+  ],
+  "forbidden_lines": [
+    "2",
+    "7"
+  ],
+  "closed": [],
+  "transcript": "01_halden_kickoff.txt",
+  "as_of": "2026-10-24"
+}

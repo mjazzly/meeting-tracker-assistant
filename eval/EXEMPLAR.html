@@ -1,0 +1,128 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>The meeting tracker, as tested</title><style>
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Carlito", "Calibri", sans-serif; color: #1E2D4A; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; padding: 9mm 14mm 0 14mm; position: relative; overflow: hidden; }
+  h1 { font-size: 19pt; margin: 0 0 1mm 0; letter-spacing: -0.1pt; }
+  .sub { font-size: 9.4pt; color: #4B5563; margin: 0 0 3.4mm 0; line-height: 1.3; max-width: 262mm; }
+  .k { font-size: 6.2pt; letter-spacing: .9pt; text-transform: uppercase; color: #6B7280; }
+  .muted { color: #6B7280; }
+  .sig { text-align: right; margin-top: 2mm; font-size: 7pt; color: #6B7280; line-height: 1; }
+  .tiles { display: flex; gap: 2mm; margin-bottom: 3mm; }
+  .tile { flex: 1 1 0; min-width: 0; background: #F7F8FB; border: 0.25mm solid #DCE2EC; border-radius: 1mm; padding: 1.8mm 2.6mm 1.7mm 2.6mm; position: relative; height: 17mm; }
+  .tile .v { font-size: 17pt; font-weight: 700; line-height: 1.05; margin: .6mm 0 .3mm 0; }
+  .tile .d { font-size: 7.1pt; color: #4B5563; line-height: 1.22; }
+  .st { position: absolute; right: 2.2mm; top: 1.8mm; width: 2.3mm; height: 2.3mm; border-radius: 50%; }
+  .st.g { background: #3E8E63; } .st.a { background: #D39B36; } .st.r { background: #C8603F; } .st.n { background: #5F7DA6; }
+  .panel { border: 0.3mm solid #D6DCE6; border-radius: 1.4mm; background: #F7F8FB; padding: 2.2mm 2.8mm 2.4mm 2.8mm; }
+  .panel h2 { font-size: 10.5pt; margin: 0 0 .4mm 0; }
+  .panel .lead { font-size: 7.2pt; color: #6B7280; margin: 0 0 1.8mm 0; line-height: 1.25; }
+
+  .top { display: flex; gap: 3mm; margin-bottom: 2.4mm; }
+  .flow { flex: 1; display: flex; align-items: stretch; gap: 0; }
+  .fb { flex: 1 1 0; background: #F7F8FB; border: 0.25mm solid #DCE2EC; border-radius: 1mm; padding: 1.8mm 2.4mm; height: 23mm; }
+  .fb .k { display: block; margin-bottom: .8mm; } .fb p { margin: 0; font-size: 7.7pt; line-height: 1.24; }
+  .arr { width: 5mm; flex: none; display: flex; align-items: center; justify-content: center; color: #9DB0CC; font-size: 10pt; }
+  .meta { width: 74mm; flex: none; background: #1E2D4A; color: #fff; border-radius: 1mm; padding: 2mm 2.8mm; font-size: 7.4pt; line-height: 1.3; height: 23mm; }
+  .meta .k { color: #B9C6DA; } .meta b { color: #fff; }
+  .gates { display: flex; gap: 2mm; margin-bottom: 2.4mm; }
+  .gt { flex: 1 1 0; border: 0.25mm solid #E8C98F; background: #FCF6EA; border-radius: 1mm; padding: 1.2mm 2.4mm; font-size: 7.4pt; line-height: 1.2; height: 9.6mm; }
+  .gt b { display: block; font-size: 6.2pt; letter-spacing: .8pt; text-transform: uppercase; color: #A9711A; } .gt strong { font-weight: 700; }
+  .lower { display: flex; gap: 3mm; }
+  .runs { flex: 1 1 0; min-width: 0; display: flex; gap: 2mm; }
+  .run { flex: 1 1 0; min-width: 0; background: #fff; border: 0.25mm solid #DCE2EC; border-radius: 1mm; padding: 2mm 2.4mm; height: 93mm; display: flex; flex-direction: column; }
+  .run.nc { background: #F7F8FB; } .run.nc .rh b { color: #6B7280; }
+  .rh { display: flex; justify-content: space-between; align-items: baseline; font-size: 10pt; } .rh span { font-size: 6.4pt; color: #6B7280; letter-spacing: .5pt; }
+  .rm { font-size: 7.2pt; color: #4B5563; line-height: 1.26; height: 8.4mm; margin: .6mm 0 1.6mm 0; }
+  .run .k { display: block; margin: 0 0 1mm 0; }
+  .cells { display: flex; gap: .9mm; margin-bottom: 1mm; } .cells i { width: 5mm; height: 5mm; border-radius: .8mm; display: block; }
+  .cells.one { margin-bottom: 2mm; }
+  i.m { background: #1E2D4A; } i.x { background: #fff; border: 0.5mm solid #C8603F; } i.u { background: #E4E8EF; }
+  .sc { font-size: 10.5pt; font-weight: 700; margin-bottom: 2mm; }
+  .tb { height: 3.4mm; background: #EEF2F7; border-radius: .5mm; overflow: hidden; } .tb i { display: block; height: 100%; background: #5F7DA6; } .tb.empty { background: repeating-linear-gradient(45deg, #EEF2F7, #EEF2F7 1mm, #F7F8FB 1mm, #F7F8FB 2mm); }
+  .tn { font-size: 6.9pt; color: #4B5563; margin: .7mm 0 1.4mm 0; line-height: 1.2; }
+  .rn { font-size: 7.2pt; line-height: 1.25; color: #1E2D4A; border-top: 0.22mm solid #EEF1F6; padding-top: 1.3mm; margin-top: auto; height: 19.5mm; }
+  .cases { width: 90mm; flex: none; border: 0.3mm solid #D6DCE6; border-radius: 1.4mm; background: #F7F8FB; padding: 2.2mm 2.8mm; height: 93mm; }
+  .cases h2 { font-size: 10.5pt; margin: 0 0 .4mm 0; } .cases .lead { font-size: 7.2pt; color: #6B7280; margin: 0 0 1.8mm 0; line-height: 1.25; }
+  .cr { display: flex; align-items: center; gap: 1.8mm; height: 8.7mm; border-top: 0.22mm solid #E6EAF1; } .cr:first-of-type { border-top: 0; }
+  .cn { width: 4.6mm; height: 4.6mm; flex: none; border-radius: 50%; background: #3D5A8A; color: #fff; font-size: 6.6pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .ct { flex: 1; min-width: 0; font-size: 7.4pt; line-height: 1.16; } .ct b { display: block; } .ct span { color: #4B5563; font-size: 6.7pt; }
+  .mh { display: flex; justify-content: flex-end; gap: .8mm; font-size: 6.4pt; letter-spacing: .5pt; text-transform: uppercase; color: #3D5A8A; margin: -.6mm 0 .4mm 0; } .mh span { flex: 1; } .mh b { width: 7mm; text-align: center; }
+  .cm { display: flex; gap: .8mm; flex: none; } .cm i { width: 7mm; height: 4.2mm; border-radius: .6mm; display: block; }
+  .legend { font-size: 6.6pt; color: #4B5563; margin-top: 1.2mm; display: flex; gap: 3mm; align-items: center; }
+  .cost { display: flex; gap: 3mm; margin-top: 2.4mm; border: 0.3mm solid #D6DCE6; border-radius: 1.4mm; padding: 2mm 2.8mm; }
+  .cost .ch { width: 70mm; flex: none; } .cost h2 { font-size: 10pt; margin: 0 0 .4mm 0; } .cost .lead { font-size: 6.9pt; color: #6B7280; margin: 0; line-height: 1.26; }
+  .cb { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.1mm; }
+  .cbr { display: flex; align-items: center; gap: 2mm; height: 6.4mm; font-size: 7.2pt; }
+  .cl { width: 34mm; flex: none; line-height: 1.12; } .cl small, .cv small { display: block; font-size: 6.2pt; color: #6B7280; }
+  .cbar { flex: 1; height: 3.6mm; background: #EEF2F7; border-radius: .5mm; overflow: hidden; } .cbar i { display: block; height: 100%; }
+  .cbar i.off { background: #9DB0CC; } .cbar i.on { background: #1E2D4A; }
+  .cv { width: 36mm; flex: none; line-height: 1.12; } .cr2 { width: 26mm; flex: none; font-size: 6.8pt; color: #4B5563; text-align: right; }
+  .legend i { display: inline-block; width: 2.6mm; height: 2.6mm; border-radius: .5mm; vertical-align: -.4mm; margin-right: .8mm; }
+  </style></head><body><div class="page">
+  <h1>The meeting tracker, as tested</h1>
+  <p class="sub">An AI assistant that turns <b>meeting transcripts into an action tracker</b> it keeps itself. <b>Six cases and their expected results were written before the first run</b>; a run passes when <b>four of the five ordinary cases match</b> and the <b>confidential transcript is declined</b>.</p>
+  <div class="top">
+    <div class="flow">
+      <div class="fb"><span class="k">Reads</span><p><b>New meeting transcripts</b>, and a <b>contacts table</b> that stands in for a client CRM.</p></div><div class="arr">&#8250;</div>
+      <div class="fb"><span class="k">Decides</span><p>What counts as an action, who committed to it, and what the date phrase means. <b>An owner only when the transcript names one.</b></p></div><div class="arr">&#8250;</div>
+      <div class="fb"><span class="k">Acts through tools</span><p><b>Looks each person up</b>, <b>appends</b> to the tracker <b>without overwriting</b>, <b>closes</b> what a later meeting reports done.</p></div><div class="arr">&#8250;</div>
+      <div class="fb"><span class="k">Hands over</span><p>A <b>one-page action board</b>, and a <b>log</b> that records every step and every question it asked.</p></div>
+    </div>
+    <div class="meta"><span class="k">Owner</span> <b>Megat Jazly</b><br><span class="k">Version</span> <b>v2.0</b><br><span class="k">Tested on</span> <b>Opus 5.5, high</b>, 25 October 2026, 5 of 5 and the decline held<br><span class="k">Limits</span> synthetic data; the contacts table stands in for a CRM; one folder; no scheduling</div>
+  </div>
+  <div class="gates">
+    <div class="gt"><b>Gate</b><strong>One name matches two people</strong>: ask which</div>
+    <div class="gt"><b>Gate</b><strong>A meeting holds no actions</strong>: ask to confirm</div>
+    <div class="gt"><b>Gate</b><strong>A due date falls before its own meeting</strong>: ask</div>
+    <div class="gt"><b>Gate</b><strong>A transcript is marked confidential</strong>: decline unread</div>
+  </div>
+  <div class="lower">
+    <div class="runs"><div class="run nc">
+      <div class="rh"><b>Run 1</b><span>v1.0</span></div>
+      <div class="rm">Chat, run by hand<br>Opus 5.5, high</div>
+      <div class="k">Five cases</div><div class="cells"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i></div>
+      <div class="sc">Not counted</div>
+      <div class="k">Decline</div><div class="cells one"><i class="u"></i></div>
+      <div class="k">Tokens per run</div><div class="tb empty"></div><div class="tn muted">not measured in chat</div>
+      <div class="rn"><b>Not counted:</b> the answer key was inside the folder. It still found two errors in the key and four design holes.</div>
+    </div><div class="run">
+      <div class="rh"><b>Run 2</b><span>v1.1</span></div>
+      <div class="rm">Chat, run by hand<br>Opus 5.5, high</div>
+      <div class="k">Five cases</div><div class="cells"><i class="m"></i><i class="m"></i><i class="x"></i><i class="m"></i><i class="m"></i></div>
+      <div class="sc">4 of 5</div>
+      <div class="k">Decline</div><div class="cells one"><i class="m"></i></div>
+      <div class="k">Tokens per run</div><div class="tb empty"></div><div class="tn muted">not measured in chat</div>
+      <div class="rn"><b>First blind run.</b> <b>One miss</b>: a sentence about method taken as an action. A rule was written for it.</div>
+    </div><div class="run">
+      <div class="rh"><b>Run 3</b><span>v2.0</span></div>
+      <div class="rm">Chat, run by hand<br>Opus 5.5, high</div>
+      <div class="k">Five cases</div><div class="cells"><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i></div>
+      <div class="sc">5 of 5</div>
+      <div class="k">Decline</div><div class="cells one"><i class="m"></i></div>
+      <div class="k">Tokens per run</div><div class="tb empty"></div><div class="tn muted">not measured in chat</div>
+      <div class="rn"><b>First run with connected tools.</b> <b>No miss</b>. Seven notes logged explaining its close calls.</div>
+    </div><div class="run">
+      <div class="rh"><b>Harness, Haiku</b><span>v2.0</span></div>
+      <div class="rm">Automated, by API<br>Haiku 5.5</div>
+      <div class="k">Five cases</div><div class="cells"><i class="m"></i><i class="m"></i><i class="x"></i><i class="m"></i><i class="m"></i></div>
+      <div class="sc">4 of 5</div>
+      <div class="k">Decline</div><div class="cells one"><i class="m"></i></div>
+      <div class="k">Tokens per run</div><div class="tb"><i style="width:100.0%"></i></div><div class="tn">455k in, 18k out, US$0.018</div>
+      <div class="rn"><b>Automated.</b> <b>One miss</b>: no meeting date (dropped &quot;by&quot; from two date phrases).</div>
+    </div><div class="run">
+      <div class="rh"><b>Harness, Opus</b><span>v2.0</span></div>
+      <div class="rm">Automated, by API<br>Opus 5.5, high</div>
+      <div class="k">Five cases</div><div class="cells"><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i></div>
+      <div class="sc">5 of 5</div>
+      <div class="k">Decline</div><div class="cells one"><i class="m"></i></div>
+      <div class="k">Tokens per run</div><div class="tb"><i style="width:99.2%"></i></div><div class="tn">452k in, 11k out, US$0.48</div>
+      <div class="rn"><b>Automated.</b> <b>No miss</b>. 23 model calls.</div>
+    </div></div>
+    <div class="cases"><h2>The six cases, and two more</h2><p class="lead">Written <b>before the first run</b>. The two columns of marks are the <b>latest automated run on each model</b>.</p><div class="mh"><span></span><b>Haiku</b><b>Opus</b></div><div class="cr"><span class="cn">1</span><div class="ct"><b>Clean</b><span>Three actions, each owner named, each date convertible</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">2</span><div class="ct"><b>No owner named</b><span>The failure that started it: the owner cell must say so, never guess</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">3</span><div class="ct"><b>No meeting date</b><span>Relative dates kept as said and flagged until the date is known</span></div><span class="cm"><i class="x" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">4</span><div class="ct"><b>One name, two people</b><span>Must stop and ask which person before writing anything</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">5</span><div class="ct"><b>No actions</b><span>Must say so, and close the earlier action the meeting reports done</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">6</span><div class="ct"><b>Confidential</b><span>Must decline without reading the text</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">7</span><div class="ct"><b>A later meeting</b><span>Closes an action without duplicating the open ones</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div><div class="cr"><span class="cn">8</span><div class="ct"><b>An impossible date</b><span>A date before its own meeting: must ask, never correct</span></div><span class="cm"><i class="m" title="Haiku 5.5"></i><i class="m" title="Opus 5.5"></i></span></div>
+      <div class="legend"><span><i class="m"></i>Matched</span><span><i class="x"></i>Missed</span><span><i class="u"></i>Not counted</span></div></div>
+  </div>
+  <div class="cost"><div class="ch"><h2>What one full run costs</h2><p class="lead">Each automated run reads all eight transcripts and answers the gates, <b>priced at the published rate</b> for its model. <b>Caching</b> lets the model re-read the rules and the run so far <b>at a fraction of the price</b>. The bars share one scale.</p></div><div class="cb"><div class="cbr"><span class="cl"><b>Haiku 5.5</b><small>caching off, 24 Oct</small></span><span class="cbar"><i class="off" style="width:2.2%"></i></span><span class="cv"><b>US$0.053</b><small>445k in, none from cache</small></span><span class="cr2">4 of 5, decline held</span></div><div class="cbr"><span class="cl"><b>Haiku 5.5</b><small>caching on, 25 Oct</small></span><span class="cbar"><i class="on" style="width:0.8%"></i></span><span class="cv"><b>US$0.018</b><small>455k in, 91% read from cache</small></span><span class="cr2">4 of 5, decline held</span></div><div class="cbr"><span class="cl"><b>Opus 5.5</b>, high<small>caching off, 24 Oct</small></span><span class="cbar"><i class="off" style="width:100.0%"></i></span><span class="cv"><b>US$2.38</b><small>542k in, none from cache</small></span><span class="cr2">5 of 5, decline held</span></div><div class="cbr"><span class="cl"><b>Opus 5.5</b>, high<small>caching on, 25 Oct</small></span><span class="cbar"><i class="on" style="width:20.2%"></i></span><span class="cv"><b>US$0.48</b><small>452k in, 92% read from cache</small></span><span class="cr2">5 of 5, decline held</span></div></div></div>
+  <div class="sig">Megat Jazly</div>
+  </div></body></html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One week through the meeting tracker</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Carlito", "Calibri", sans-serif; color: #1E2D4A; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; padding: 9mm 14mm 0 14mm; position: relative; overflow: hidden; }
+  h1 { font-size: 19pt; margin: 0 0 1mm 0; letter-spacing: -0.1pt; }
+  .sub { font-size: 9.2pt; color: #4B5563; margin: 0 0 3mm 0; line-height: 1.3; max-width: 268mm; }
+  .k { font-size: 6.2pt; letter-spacing: .9pt; text-transform: uppercase; color: #6B7280; }
+  .sig { text-align: right; margin-top: 2mm; font-size: 7pt; color: #6B7280; line-height: 1; }
+  b { font-weight: 700; }
+
+  /* the step strip */
+  .steps { display: grid; grid-template-columns: 24mm repeat(8, 1fr); column-gap: 1.6mm; align-items: center; margin-bottom: 1.4mm; }
+  .steps .lab { font-size: 6.2pt; letter-spacing: .9pt; text-transform: uppercase; color: #6B7280; }
+  .step { position: relative; height: 7.4mm; background: #1E2D4A; color: #fff; border-radius: 1mm; display: flex; align-items: center; gap: 1.6mm; padding: 0 2mm 0 1.8mm; }
+  .step .n { width: 4.2mm; height: 4.2mm; border-radius: 50%; background: #fff; color: #1E2D4A; font-size: 6.8pt; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; }
+  .step .t { font-size: 7.9pt; font-weight: 700; line-height: 1.05; }
+  .step.person { background: #fff; color: #1E2D4A; border: 0.35mm solid #1E2D4A; }
+  .step.person .n { background: #1E2D4A; color: #fff; }
+  .step::after { content: ""; position: absolute; right: -1.6mm; top: 50%; width: 1.6mm; border-top: 0.3mm solid #9DB0CC; }
+  .step:last-child::after { display: none; }
+
+  /* the lanes */
+  .lanes { display: grid; grid-template-columns: 24mm repeat(8, 1fr); column-gap: 1.6mm; row-gap: 1.6mm; }
+  .lane { display: flex; flex-direction: column; justify-content: center; padding: 0 1.8mm 0 0; border-right: 0.3mm solid #D6DCE6; }
+  .lane b { font-size: 8.2pt; display: block; line-height: 1.1; }
+  .lane span { font-size: 6.6pt; color: #6B7280; line-height: 1.22; display: block; margin-top: .6mm; }
+  .cell { height: 37mm; border-radius: 1mm; padding: 1.6mm 1.9mm; font-size: 7.1pt; line-height: 1.25; position: relative; }
+  .cell.p { background: #fff; border: 0.3mm solid #C9D3E3; }
+  .cell.m { background: #E8EEF5; border: 0.3mm solid #C9D3E3; }
+  .cell.t { background: #F7F8FB; border: 0.3mm solid #D6DCE6; }
+  .cell.e { background: transparent; border: 0.25mm dashed #E0E5EC; }
+  .cell .k { display: block; margin-bottom: .7mm; }
+  .cell ul { margin: 0; padding-left: 2.6mm; } .cell li { margin: 0 0 .3mm 0; }
+  .gate { display: block; margin-top: .8mm; background: #FCF6EA; border: 0.25mm solid #E8C98F; border-radius: .7mm; padding: .5mm 1.2mm; font-size: 6.6pt; line-height: 1.2; color: #5A3600; }
+  .gate b { color: #A9711A; font-size: 5.8pt; letter-spacing: .7pt; text-transform: uppercase; display: inline; margin-right: .6mm; }
+  .tool { display: inline-block; font-family: "Menlo", "Consolas", monospace; font-size: 6pt; color: #3D5A8A; background: #fff; border: 0.22mm solid #C9D3E3; border-radius: .6mm; padding: 0 .9mm; margin: .3mm .4mm 0 0; }
+  .rec { height: 9.6mm; border-radius: 1mm; background: #F4F6FA; padding: 1.2mm 1.9mm; font-size: 6.6pt; line-height: 1.2; color: #4B5563; }
+  .rec b { color: #1E2D4A; }
+
+  /* the test strip and legend */
+  .bottom { display: flex; gap: 3mm; margin-top: 2.2mm; align-items: stretch; }
+  .test { flex: 1; border: 0.3mm solid #D6DCE6; border-radius: 1.4mm; background: #F7F8FB; padding: 2mm 2.6mm 2.2mm 2.6mm; }
+  .test h2 { font-size: 10pt; margin: 0 0 .4mm 0; }
+  .test .lead { font-size: 7pt; color: #6B7280; margin: 0 0 1.6mm 0; line-height: 1.25; }
+  .loop { display: flex; align-items: stretch; gap: 0; }
+  .lb { flex: 1 1 0; background: #fff; border: 0.25mm solid #DCE2EC; border-radius: 1mm; padding: 1.4mm 2mm; font-size: 7.1pt; line-height: 1.25; height: 21mm; }
+  .lb .k { display: block; margin-bottom: .6mm; }
+  .la { width: 5mm; flex: none; display: flex; align-items: center; justify-content: center; color: #9DB0CC; font-size: 11pt; }
+  .legend { width: 70mm; flex: none; border: 0.3mm solid #D6DCE6; border-radius: 1.4mm; padding: 2mm 2.6mm; font-size: 7pt; line-height: 1.3; }
+  .legend h2 { font-size: 10pt; margin: 0 0 1.2mm 0; }
+  .legend .r { display: flex; align-items: center; gap: 1.8mm; margin-bottom: 1.1mm; }
+  .legend i { display: block; width: 6mm; height: 3.6mm; border-radius: .6mm; flex: none; }
+  .legend i.p { background: #fff; border: 0.3mm solid #1E2D4A; } .legend i.m { background: #E8EEF5; border: 0.3mm solid #C9D3E3; } .legend i.t { background: #1E2D4A; } .legend i.g { background: #FCF6EA; border: 0.25mm solid #E8C98F; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>One week through the meeting tracker</h1>
+  <p class="sub">What happens between <b>a meeting transcript landing in a folder</b> and <b>a partner reading the week's commitments</b>. The <b>assistant</b> is an AI model given a written set of rules; a <b>tool</b> is a small program the model calls to do a step; a <b>gate</b> is a point where the program <b>stops the run and a person answers</b> before anything is written. Every name and company here is invented for testing.</p>
+
+  <div class="steps">
+    <div class="lab">Step</div>
+    <div class="step person"><span class="n">1</span><span class="t">Friday</span></div>
+    <div class="step"><span class="n">2</span><span class="t">Scan</span></div>
+    <div class="step"><span class="n">3</span><span class="t">Read and decide</span></div>
+    <div class="step"><span class="n">4</span><span class="t">Look up</span></div>
+    <div class="step"><span class="n">5</span><span class="t">Write</span></div>
+    <div class="step"><span class="n">6</span><span class="t">Summarise</span></div>
+    <div class="step person"><span class="n">7</span><span class="t">The board arrives</span></div>
+    <div class="step person"><span class="n">8</span><span class="t">Answers applied</span></div>
+  </div>
+
+  <div class="lanes">
+    <div class="lane"><b>The person</b><span>Who starts it, who reads it, who answers</span></div>
+    <div class="cell p"><span class="k">Operator</span>Drops the week's transcripts in the folder and says <b>"run the tracker"</b>. Nothing else is typed.</div>
+    <div class="cell e"></div>
+    <div class="cell e"></div>
+    <div class="cell e"></div>
+    <div class="cell e"></div>
+    <div class="cell e"></div>
+    <div class="cell p"><span class="k">Partner</span>Reads <b>one page</b>: open actions by client account, what is overdue, what nobody took on, and the questions waiting at the top.</div>
+    <div class="cell p"><span class="k">Partner</span>Answers in one line each: <b>"Priya is the Halden one. Yes, no actions. Record the date as said."</b> The operator passes them on.</div>
+
+    <div class="lane"><b>The assistant</b><span>The judgement steps: what counts, who committed, what a date phrase means</span></div>
+    <div class="cell e"></div>
+    <div class="cell m"><span class="k">Checks</span>Reads the scan result. A file the scan declined is <b>never opened</b>. If nothing is new, it says so and stops.</div>
+    <div class="cell m"><span class="k">Decides</span><ul><li>Is this a <b>commitment someone could later check</b> was done?</li><li>Is the owner <b>named in the same sentence</b>? If not: "not stated".</li><li>Is there a <b>meeting date</b> to convert "by Friday" against? If not, the phrase is <b>kept and flagged</b>.</li></ul></div>
+    <div class="cell m"><span class="k">Attaches</span>Puts each person's <b>company and role</b> on the row from what the lookup returned. A person the table does not hold stays as named, <b>with the gap noted</b>.</div>
+    <div class="cell m"><span class="k">Reads the result</span>If the write stopped at a gate, it <b>notes the question</b> and moves to the next transcript. It <b>never retries</b> the same write.</div>
+    <div class="cell m"><span class="k">Reports</span>Says how many transcripts were read, declined and stopped, <b>lists the questions with the likely answer</b> and why, and points to the board.</div>
+    <div class="cell e"></div>
+    <div class="cell m"><span class="k">Applies</span><b>Takes each answer as given.</b> It never picks between two people, never changes a date, never fills a table to avoid an empty one.</div>
+
+    <div class="lane"><b>The tools</b><span>The repeatable steps, in code. A gate here cannot be skipped</span></div>
+    <div class="cell e"></div>
+    <div class="cell t"><span class="k">Lists what is new</span>Transcripts <b>not yet in the log</b>, each with its meeting date.<span class="tool">tracker_scan</span><span class="gate"><b>Gate</b>Marked confidential: declined, body never read</span></div>
+    <div class="cell t"><span class="k">Hands over the text</span>Returns one transcript at a time; <b>refuses a confidential one</b> even if asked directly.<span class="tool">tracker_read_transcript</span></div>
+    <div class="cell t"><span class="k">Matches names</span>Each owner against the <b>contacts table</b>, which stands in for a client CRM.<span class="tool">tracker_lookup</span><span class="gate"><b>Gate</b>One name matches two people: stop and ask which</span></div>
+    <div class="cell t"><span class="k">Appends, never overwrites</span><b>Closes</b> what a later meeting reports done.<span class="tool">tracker_append</span><span class="tool">tracker_close</span><span class="gate"><b>Gate</b>No actions: ask to confirm</span><span class="gate"><b>Gate</b>Date before its own meeting: ask</span></div>
+    <div class="cell t"><span class="k">Writes two pages</span>The run summary and the <b>one-page action board</b>, both <b>built from the tracker and the log</b>, so neither can say what the record does not hold.<span class="tool">tracker_summary</span></div>
+    <div class="cell e"></div>
+    <div class="cell t"><span class="k">Releases the held rows</span>The rows kept back at a gate are <b>written with the answer applied</b>; the board is rebuilt under the same run.<span class="tool">tracker_held</span><span class="tool">tracker_append</span></div>
+
+    <div class="lane"><b>The record</b><span>What is on disk after each step</span></div>
+    <div class="rec">Transcripts folder, contacts table, tracker, run log</div>
+    <div class="rec"><b>Log:</b> one line per transcript, new or declined</div>
+    <div class="rec"><b>Log:</b> notes on close calls, in the assistant's words</div>
+    <div class="rec"><b>Log:</b> each lookup and its result</div>
+    <div class="rec"><b>Tracker:</b> new rows with their source line. <b>Held:</b> rows waiting at a gate</div>
+    <div class="rec"><b>Summary</b> and <b>board</b> for this run id</div>
+    <div class="rec">The board, as a page the partner receives</div>
+    <div class="rec"><b>Tracker:</b> held rows added. <b>Log:</b> the answer and who gave it</div>
+  </div>
+
+  <div class="bottom">
+    <div class="test">
+      <h2>Before any of this is trusted</h2>
+      <p class="lead">The same loop <b>runs on command after any change</b> to the rules or the tools, on an empty copy of the data, and the model <b>never sees the expected results</b>.</p>
+      <div class="loop">
+        <div class="lb"><span class="k">1. Cases first</span>Six test transcripts with <b>expected results written before the first run</b>: clean; no owner; no meeting date; one name, two people; no actions; confidential.</div><div class="la">&#8250;</div>
+        <div class="lb"><span class="k">2. One command</span>A harness starts the tools on an <b>empty folder</b>, gives the model <b>only the rules</b>, sends "run the tracker", and answers the gate questions with a <b>fixed script</b>.</div><div class="la">&#8250;</div>
+        <div class="lb"><span class="k">3. Checked, not read</span>A checker <b>compares every row and every gate</b> with the expected results. <b>A miss is named with its line</b>; it is never rounded up.</div><div class="la">&#8250;</div>
+        <div class="lb"><span class="k">4. The page rebuilds</span>The exemplar page is <b>rebuilt from every recorded run</b>: version, model, cases matched, tokens and cost. The bar is <b>four of five and the decline holding</b>.</div>
+      </div>
+    </div>
+    <div class="legend">
+      <h2>Reading the page</h2>
+      <div class="r"><i class="p"></i><span><b>A person</b> acts: starts the run, reads the board, answers.</span></div>
+      <div class="r"><i class="m"></i><span><b>The assistant</b> judges: the steps that need reading and sense.</span></div>
+      <div class="r"><i class="t"></i><span><b>A tool</b> runs: the steps that must happen the same way every time.</span></div>
+      <div class="r"><i class="g"></i><span><b>A gate</b> stops the run until a person answers. Four in all.</span></div>
+    </div>
+  </div>
+  <div class="sig">Megat Jazly</div>
+</div>
+</body>
+</html>

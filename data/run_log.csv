@@ -1,0 +1,42 @@
+timestamp,run_id,transcript,step,result,detail
+2026-10-24T20:52:55,R2026-10-25-1,01_halden_kickoff.txt,scan,new,meeting date 2026-10-20
+2026-10-24T20:52:55,R2026-10-25-1,02_meridian_pricing.txt,scan,new,meeting date 2026-10-21
+2026-10-24T20:52:55,R2026-10-25-1,03_northgate_claims.txt,scan,new,meeting date not stated
+2026-10-24T20:52:55,R2026-10-25-1,04_halden_finance.txt,scan,new,meeting date 2026-10-22
+2026-10-24T20:52:55,R2026-10-25-1,05_meridian_update.txt,scan,new,meeting date 2026-10-22
+2026-10-24T20:52:55,R2026-10-25-1,06_northgate_board.txt,decline,declined,Classification: Confidential in header; body not read
+2026-10-24T20:52:55,R2026-10-25-1,07_halden_followup.txt,scan,new,meeting date 2026-10-23
+2026-10-24T20:52:55,R2026-10-25-1,08_meridian_contracts.txt,scan,new,meeting date 2026-10-22
+2026-10-24T20:53:16,R2026-10-25-1,01_halden_kickoff.txt,lookup,one,"Sofia Lindqvist: Halden Logistics, Head of Procurement"
+2026-10-24T20:53:17,R2026-10-25-1,01_halden_kickoff.txt,lookup,one,"Aiden Brooks: Our firm, Consultant"
+2026-10-24T20:53:17,R2026-10-25-1,01_halden_kickoff.txt,lookup,one,"Daniel Okafor: Halden Logistics, Chief Operating Officer"
+2026-10-24T20:53:25,R2026-10-25-1,01_halden_kickoff.txt,note,note,"Line 4 (Aiden Brooks: ""Once it lands I can start the category mapping"") read as a statement of sequence and readiness, not an action; the checkable deliverable from Aiden is the taxonomy on line 5. Line 8 (""we will pick this up next week"") read as a sign off with nothing specific to check. Line 2 is a wish; line 7 says ERP access is already handled."
+2026-10-24T20:53:29,R2026-10-25-1,01_halden_kickoff.txt,append,3 rows,"A001, A002, A003"
+2026-10-24T20:53:37,R2026-10-25-1,02_meridian_pricing.txt,lookup,one,"Mei Ling Chong: Our firm, Consultant"
+2026-10-24T20:53:42,R2026-10-25-1,02_meridian_pricing.txt,note,note,"Line 3 (price list to distributors) and line 6 (brief the sales team) kept as actions with owner not stated; Marcus Webb's ""Agreed"" on line 4 and Tom Reyes's ""leave that with the Meridian side to decide"" on line 7 name no owner. Line 6 due kept as not stated: ""before the list goes out"" names no calendar date. Line 2 is a decision (Scenario B), not an action."
+2026-10-24T20:53:43,R2026-10-25-1,02_meridian_pricing.txt,append,3 rows,"A004, A005, A006"
+2026-10-24T20:53:48,R2026-10-25-1,03_northgate_claims.txt,lookup,one,"Yusuf Rahman: Northgate Insurance, Head of Claims"
+2026-10-24T20:53:48,R2026-10-25-1,03_northgate_claims.txt,lookup,one,"Grace Tan: Northgate Insurance, Transformation Lead"
+2026-10-24T20:53:53,R2026-10-25-1,03_northgate_claims.txt,note,note,"Line 6 (Lena Marsh: ""We will mark anything that has changed when we interview the handlers"") and line 7 (keep interviews to forty minutes) read as how the interviews will be run, not actions (v1.2 rule). Header has no meeting date, so both date phrases kept as said with status confirm."
+2026-10-24T20:53:53,R2026-10-25-1,03_northgate_claims.txt,append,2 rows,"A007, A008"
+2026-10-24T20:54:00,R2026-10-25-1,04_halden_finance.txt,lookup,multiple,"Priya Nair: Halden Logistics, Finance Director; Meridian Foods, Marketing Director"
+2026-10-24T20:54:00,R2026-10-25-1,04_halden_finance.txt,lookup,one,"Daniel Okafor: Halden Logistics, Chief Operating Officer"
+2026-10-24T20:54:05,R2026-10-25-1,04_halden_finance.txt,note,note,"Line 1 (""Aiden has started the category mapping"") not read as closing A001: it does not say the spend export was sent. Line 6 (""We will send the first cut of the mapping once Priya's file is in"") kept as an action, owner not stated: ""we"" names no person, and the first cut is a deliverable someone could check was sent. Its due names no date."
+2026-10-24T20:54:05,R2026-10-25-1,04_halden_finance.txt,stop,held,"Gate 1 duplicate name: Priya Nair matches 2 contacts (Halden Logistics, Finance Director; Meridian Foods, Marketing Director)"
+2026-10-24T20:54:13,R2026-10-25-1,05_meridian_update.txt,close,A005,closed by line 1: Update the scenario B model with the distributor volumes and send it to Hannah Cole
+2026-10-24T20:54:16,R2026-10-25-1,05_meridian_update.txt,note,note,"Line 1 (""The scenario B model is updated and with Hannah"") read as a statement that A005 happened, so A005 closed. Line 5 (""We will keep the price list date as agreed"") confirms the existing A004 and is not a new action. No new actions found."
+2026-10-24T20:54:16,R2026-10-25-1,05_meridian_update.txt,stop,held,Gate 2 no actions: transcript held no actions; summary carries one sentence
+2026-10-24T20:54:22,R2026-10-25-1,07_halden_followup.txt,close,A001,closed by line 2: Send the spend export for the last twelve months
+2026-10-24T20:54:23,R2026-10-25-1,07_halden_followup.txt,lookup,one,"Aiden Brooks: Our firm, Consultant"
+2026-10-24T20:54:26,R2026-10-25-1,07_halden_followup.txt,note,note,"Line 2 closes A001 (spend export ""went across yesterday""). Lines 4 and 5 confirm A002 is still due; line 7 says A003 is in progress; neither is a closure or a new action."
+2026-10-24T20:54:27,R2026-10-25-1,07_halden_followup.txt,append,1 rows,A009
+2026-10-24T20:54:32,R2026-10-25-1,08_meridian_contracts.txt,lookup,one,"Hannah Cole: Meridian Foods, Operations Manager"
+2026-10-24T20:54:32,R2026-10-25-1,08_meridian_contracts.txt,lookup,one,"Mei Ling Chong: Our firm, Consultant"
+2026-10-24T20:54:37,R2026-10-25-1,08_meridian_contracts.txt,note,note,"Line 1 (Tom Reyes: ""We need the distributor contract list"") is the need that Hannah Cole takes on line 2, so it is recorded once, on line 2, not as a separate unowned row."
+2026-10-24T20:54:37,R2026-10-25-1,08_meridian_contracts.txt,stop,held,Gate 3 past due: line 2 due 2026-10-15 is before the meeting date 2026-10-22
+2026-10-24T20:54:43,R2026-10-25-1,,summary,written,~/Code/meeting-tracker-server/data/summary_R2026-10-25-1.md
+2026-10-24T20:56:13,R2026-10-25-1,04_halden_finance.txt,lookup,answered,"Priya Nair: Halden Logistics, Finance Director (user chose)"
+2026-10-24T20:56:13,R2026-10-25-1,04_halden_finance.txt,append,3 rows,"A010, A011, A012"
+2026-10-24T20:56:14,R2026-10-25-1,05_meridian_update.txt,append,0 rows,"no actions, confirmed by user"
+2026-10-24T20:56:14,R2026-10-25-1,08_meridian_contracts.txt,append,2 rows,"A013, A014; date recorded as said, confirmed by user"
+2026-10-24T20:56:16,R2026-10-25-1,,summary,written,~/Code/meeting-tracker-server/data/summary_R2026-10-25-1.md

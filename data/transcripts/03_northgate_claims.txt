@@ -1,0 +1,11 @@
+Meeting: Northgate Insurance, claims process working session
+Attendees: Yusuf Rahman, Grace Tan, Lena Marsh
+
+[1] Lena Marsh: Today is about the claims handler interviews and the current process maps, so we can start the as-is picture.
+[2] Yusuf Rahman: The handlers are stretched this month, so I want to pick the interviewees carefully.
+[3] Yusuf Rahman: I will get the claims handler interview list to you by next Friday.
+[4] Lena Marsh: That works. And the process maps?
+[5] Grace Tan: I will share the current process maps by Wednesday. They are two years old in places, so treat them as a starting point.
+[6] Lena Marsh: Understood. We will mark anything that has changed when we interview the handlers.
+[7] Yusuf Rahman: One request: please keep the interviews to forty minutes each.
+[8] Lena Marsh: Agreed. Thanks both.
