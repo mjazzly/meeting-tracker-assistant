@@ -7,11 +7,7 @@ var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function __require() {
-  try {
-    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-  } catch (e) {
-    throw mod = 0, e;
-  }
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
   for (var name in all)
@@ -3263,8 +3259,8 @@ var require_utils = __commonJS({
       }
       return ind;
     }
-    function removeDotSegments(path4) {
-      let input = path4;
+    function removeDotSegments(path6) {
+      let input = path6;
       const output = [];
       let nextSlash = -1;
       let len = 0;
@@ -3338,11 +3334,11 @@ var require_utils = __commonJS({
       }
       return output.join("");
     }
-    function removeDotSegmentsRelative(path4) {
-      if (path4 === "" || path4[0] === "/") {
-        return removeDotSegments(path4);
+    function removeDotSegmentsRelative(path6) {
+      if (path6 === "" || path6[0] === "/") {
+        return removeDotSegments(path6);
       }
-      const segments = path4.split("/");
+      const segments = path6.split("/");
       const last = segments.length - 1;
       const output = [];
       let trailingDirectory = false;
@@ -3705,8 +3701,8 @@ var require_schemes = __commonJS({
       }
       if (wsComponent.resourceName) {
         const queryIndex = wsComponent.resourceName.indexOf("?");
-        const path4 = queryIndex === -1 ? wsComponent.resourceName : wsComponent.resourceName.slice(0, queryIndex);
-        wsComponent.path = path4 && path4 !== "/" ? path4 : void 0;
+        const path6 = queryIndex === -1 ? wsComponent.resourceName : wsComponent.resourceName.slice(0, queryIndex);
+        wsComponent.path = path6 && path6 !== "/" ? path6 : void 0;
         wsComponent.query = queryIndex === -1 ? void 0 : wsComponent.resourceName.slice(queryIndex + 1);
         wsComponent.resourceName = void 0;
       }
@@ -3765,7 +3761,7 @@ var require_schemes = __commonJS({
       urnComponent.nss = (uuidComponent.uuid || "").toLowerCase();
       return urnComponent;
     }
-    var http = (
+    var http2 = (
       /** @type {SchemeHandler} */
       {
         scheme: "http",
@@ -3778,7 +3774,7 @@ var require_schemes = __commonJS({
       /** @type {SchemeHandler} */
       {
         scheme: "https",
-        domainHost: http.domainHost,
+        domainHost: http2.domainHost,
         parse: httpParse,
         serialize: httpSerialize
       }
@@ -3822,7 +3818,7 @@ var require_schemes = __commonJS({
     var SCHEMES = (
       /** @type {Record<SchemeName, SchemeHandler>} */
       {
-        http,
+        http: http2,
         https,
         ws,
         wss,
@@ -7243,12 +7239,12 @@ var require_dist = __commonJS({
         throw new Error(`Unknown format "${name}"`);
       return f;
     };
-    function addFormats(ajv, list, fs5, exportName) {
+    function addFormats(ajv, list, fs7, exportName) {
       var _a;
       var _b;
       (_a = (_b = ajv.opts.code).formats) !== null && _a !== void 0 ? _a : _b.formats = (0, codegen_1._)`require("ajv-formats/dist/formats").${exportName}`;
       for (const f of list)
-        ajv.addFormat(f, fs5[f]);
+        ajv.addFormat(f, fs7[f]);
     }
     module.exports = exports = formatsPlugin;
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -7257,8 +7253,8 @@ var require_dist = __commonJS({
 });
 
 // server.js
-import fs4 from "node:fs";
-import path3 from "node:path";
+import fs6 from "node:fs";
+import path5 from "node:path";
 import { fileURLToPath } from "node:url";
 
 // node_modules/zod/v3/external.js
@@ -7739,8 +7735,8 @@ function getErrorMap() {
 
 // node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
-  const { data, path: path4, errorMaps, issueData } = params;
-  const fullPath = [...path4, ...issueData.path || []];
+  const { data, path: path6, errorMaps, issueData } = params;
+  const fullPath = [...path6, ...issueData.path || []];
   const fullIssue = {
     ...issueData,
     path: fullPath
@@ -7856,11 +7852,11 @@ var errorUtil;
 
 // node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
-  constructor(parent, value, path4, key) {
+  constructor(parent, value, path6, key) {
     this._cachedPath = [];
     this.parent = parent;
     this.data = value;
-    this._path = path4;
+    this._path = path6;
     this._key = key;
   }
   get path() {
@@ -11089,7 +11085,7 @@ ZodNaN.create = (params) => {
     ...processCreateParams(params)
   });
 };
-var BRAND = /* @__PURE__ */ Symbol("zod_brand");
+var BRAND = Symbol("zod_brand");
 var ZodBranded = class extends ZodType {
   _parse(input) {
     const { ctx } = this._processInputParams(input);
@@ -11349,6 +11345,7 @@ function $constructor(name, initializer3, params) {
   Object.defineProperty(_, "name", { value: name });
   return _;
 }
+var $brand = Symbol("zod_brand");
 var $ZodAsyncError = class extends Error {
   constructor() {
     super(`Encountered Promise during synchronous parse. Use .parseAsync() instead.`);
@@ -11497,10 +11494,10 @@ function assignProp(target, prop, value) {
     configurable: true
   });
 }
-function getElementAtPath(obj, path4) {
-  if (!path4)
+function getElementAtPath(obj, path6) {
+  if (!path6)
     return obj;
-  return path4.reduce((acc, key) => acc?.[key], obj);
+  return path6.reduce((acc, key) => acc?.[key], obj);
 }
 function promiseAllObject(promisesObj) {
   const keys = Object.keys(promisesObj);
@@ -11820,11 +11817,11 @@ function aborted(x, startIndex = 0) {
   }
   return false;
 }
-function prefixIssues(path4, issues) {
+function prefixIssues(path6, issues) {
   return issues.map((iss) => {
     var _a;
     (_a = iss).path ?? (_a.path = []);
-    iss.path.unshift(path4);
+    iss.path.unshift(path6);
     return iss;
   });
 }
@@ -13852,6 +13849,8 @@ function en_default2() {
 }
 
 // node_modules/zod/v4/core/registries.js
+var $output = Symbol("ZodOutput");
+var $input = Symbol("ZodInput");
 var $ZodRegistry = class {
   constructor() {
     this._map = /* @__PURE__ */ new Map();
@@ -15235,11 +15234,11 @@ function normalizeObjectSchema(schema) {
   }
   return void 0;
 }
-function getDotPath(path4) {
-  if (path4.length === 0) {
+function getDotPath(path6) {
+  if (path6.length === 0) {
     return "object root";
   }
-  return path4.reduce((acc, seg, index) => {
+  return path6.reduce((acc, seg, index) => {
     if (index === 0) {
       return String(seg);
     }
@@ -17543,7 +17542,7 @@ function isTerminal(status) {
 }
 
 // node_modules/zod-to-json-schema/dist/esm/Options.js
-var ignoreOverride = /* @__PURE__ */ Symbol("Let zodToJsonSchema decide on which parser to use");
+var ignoreOverride = Symbol("Let zodToJsonSchema decide on which parser to use");
 var defaultOptions = {
   name: void 0,
   $refStrategy: "root",
@@ -20533,7 +20532,7 @@ var Server = class extends Protocol {
 };
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
-var COMPLETABLE_SYMBOL = /* @__PURE__ */ Symbol.for("mcp.completable");
+var COMPLETABLE_SYMBOL = Symbol.for("mcp.completable");
 function isCompletable(schema) {
   return !!schema && typeof schema === "object" && COMPLETABLE_SYMBOL in schema;
 }
@@ -21662,10 +21661,10 @@ var BASE_CSS = `
   .panel h2 { font-size: 10.5pt; margin: 0 0 .4mm 0; }
   .panel .lead { font-size: 7.2pt; color: #6B7280; margin: 0 0 1.8mm 0; line-height: 1.25; }
 `;
-function renderBoard(dataDir, { runId = "", asOf = null, title = "Where the week's commitments stand" } = {}) {
-  const tracker = readCsv(path.join(dataDir, "tracker.csv"));
-  const log = readCsv(path.join(dataDir, "run_log.csv")).filter((r) => !runId || r.run_id === runId);
-  const tdir = path.join(dataDir, "transcripts");
+function renderBoard(dataDir2, { runId = "", asOf = null, title = "Where the week's commitments stand" } = {}) {
+  const tracker = readCsv(path.join(dataDir2, "tracker.csv"));
+  const log = readCsv(path.join(dataDir2, "run_log.csv")).filter((r) => !runId || r.run_id === runId);
+  const tdir = path.join(dataDir2, "transcripts");
   const files = fs.existsSync(tdir) ? fs.readdirSync(tdir).filter((f) => f.endsWith(".txt")).sort() : [];
   const heads = Object.fromEntries(files.map((f) => [f, header(path.join(tdir, f))]));
   const runDate = asOf || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
@@ -21858,8 +21857,8 @@ var GateStop = class extends Error {
   }
 };
 var Store = class {
-  constructor(dataDir) {
-    this.data = path2.resolve(dataDir);
+  constructor(dataDir2) {
+    this.data = path2.resolve(dataDir2);
     this.transcripts = path2.join(this.data, "transcripts");
     this.contactsPath = path2.join(this.data, "contacts.csv");
     this.trackerPath = path2.join(this.data, "tracker.csv");
@@ -22363,12 +22362,384 @@ function brief(request2, template, matches = [], verdict = "NEW") {
   return template.replace("{{request}}", request2.trim() || "(not stated)").replace("{{done_before}}", done);
 }
 
+// lib/drive.js
+import fs4 from "node:fs";
+import os from "node:os";
+import path3 from "node:path";
+import http from "node:http";
+import crypto from "node:crypto";
+import { execFile } from "node:child_process";
+var SCOPES = ["https://www.googleapis.com/auth/drive.readonly", "https://www.googleapis.com/auth/drive.file"];
+var FOLDER_MIME = "application/vnd.google-apps.folder";
+var API = () => process.env.DRIVE_API_BASE || "https://www.googleapis.com";
+var AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
+function configDir() {
+  return process.env.TRACKER_GOOGLE_DIR || path3.join(os.homedir(), ".config", "meeting-tracker");
+}
+var clientPath = () => path3.join(configDir(), "client_secret.json");
+var tokenPath = () => path3.join(configDir(), "token.json");
+function loadClient() {
+  if (!fs4.existsSync(clientPath())) {
+    throw new Error(`No OAuth client at ${clientPath()}. Download the Desktop app client JSON from Google Cloud and save it there.`);
+  }
+  const j = JSON.parse(fs4.readFileSync(clientPath(), "utf8"));
+  const c = j.installed || j.web || j;
+  if (!c.client_id) throw new Error(`${clientPath()} has no client_id; it should be the Desktop app client JSON`);
+  return { id: c.client_id, secret: c.client_secret || "", tokenUrl: process.env.DRIVE_TOKEN_URL || c.token_uri || "https://oauth2.googleapis.com/token" };
+}
+function saveToken(t) {
+  fs4.mkdirSync(configDir(), { recursive: true, mode: 448 });
+  fs4.writeFileSync(tokenPath(), JSON.stringify(t, null, 2), { mode: 384 });
+}
+async function tokenRequest(client, params) {
+  const res = await fetch(client.tokenUrl, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ client_id: client.id, client_secret: client.secret, ...params })
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const e = new Error(`Google token request failed: ${body.error || res.status}${body.error_description ? ", " + body.error_description : ""}`);
+    e.code = body.error;
+    throw e;
+  }
+  return body;
+}
+async function authorize({ log = console.error } = {}) {
+  const client = loadClient();
+  const verifier = crypto.randomBytes(48).toString("base64url");
+  const challenge = crypto.createHash("sha256").update(verifier).digest("base64url");
+  const state = crypto.randomBytes(16).toString("hex");
+  const srv = http.createServer();
+  await new Promise((r) => srv.listen(0, "127.0.0.1", r));
+  const redirect = `http://127.0.0.1:${srv.address().port}`;
+  const url = `${AUTH_URL}?` + new URLSearchParams({
+    client_id: client.id,
+    redirect_uri: redirect,
+    response_type: "code",
+    scope: SCOPES.join(" "),
+    access_type: "offline",
+    prompt: "consent",
+    code_challenge: challenge,
+    code_challenge_method: "S256",
+    state
+  });
+  const code = await new Promise((resolve, reject) => {
+    srv.on("request", (req, res) => {
+      const q = new URL(req.url, redirect).searchParams;
+      if (!q.has("code") && !q.has("error")) {
+        res.writeHead(404);
+        res.end();
+        return;
+      }
+      const fine = q.get("state") === state && q.has("code");
+      res.writeHead(fine ? 200 : 400, { "content-type": "text/plain" });
+      res.end(fine ? "Signed in. You can close this tab and go back to Terminal." : `Sign-in failed: ${q.get("error") || "state did not match"}`);
+      fine ? resolve(q.get("code")) : reject(new Error(`sign-in failed: ${q.get("error") || "state did not match"}`));
+    });
+    log(`Opening the Google sign-in page. If it does not open, paste this into your browser:
+
+${url}
+`);
+    if (process.platform === "darwin") execFile("open", [url], () => {
+    });
+  });
+  srv.close();
+  const t = await tokenRequest(client, { grant_type: "authorization_code", code, code_verifier: verifier, redirect_uri: redirect });
+  if (!t.refresh_token) throw new Error("Google returned no refresh token. Remove the app's access at myaccount.google.com/permissions and run --auth again.");
+  const granted = (t.scope || "").split(" ");
+  const missing = SCOPES.filter((s) => !granted.includes(s));
+  saveToken({ refresh_token: t.refresh_token, access_token: t.access_token, expiry: Date.now() + t.expires_in * 1e3, scope: t.scope });
+  log(`Signed in. Token saved to ${tokenPath()}.`);
+  if (missing.length) log(`Warning: these scopes were not granted (tick both boxes on the consent page): ${missing.join(", ")}`);
+  return tokenPath();
+}
+var Drive = class {
+  constructor() {
+    this.client = null;
+    this.token = null;
+  }
+  async accessToken() {
+    if (!this.token) {
+      if (!fs4.existsSync(tokenPath())) throw new Error(`Not signed in to Google. Run this once in Terminal: node server.mjs --auth`);
+      this.token = JSON.parse(fs4.readFileSync(tokenPath(), "utf8"));
+    }
+    if (this.token.access_token && Date.now() < this.token.expiry - 6e4) return this.token.access_token;
+    this.client = this.client || loadClient();
+    try {
+      const t = await tokenRequest(this.client, { grant_type: "refresh_token", refresh_token: this.token.refresh_token });
+      this.token = { ...this.token, access_token: t.access_token, expiry: Date.now() + t.expires_in * 1e3 };
+      saveToken(this.token);
+      return this.token.access_token;
+    } catch (e) {
+      if (e.code === "invalid_grant") {
+        throw new Error("The Google sign-in has expired or was revoked. An app in Testing mode signs you out after 7 days. Run: node server.mjs --auth");
+      }
+      throw e;
+    }
+  }
+  async call(method, pathAndQuery, { body, headers = {}, raw = false } = {}) {
+    const res = await fetch(API() + pathAndQuery, {
+      method,
+      body,
+      headers: { authorization: `Bearer ${await this.accessToken()}`, ...headers }
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      const reason = j.error?.errors?.[0]?.reason || j.error?.status || "";
+      const e = new Error(`Drive ${method} ${pathAndQuery.split("?")[0]} failed: ${res.status} ${reason} ${j.error?.message || ""}`.trim());
+      e.status = res.status;
+      e.reason = reason;
+      throw e;
+    }
+    return raw ? res : res.json();
+  }
+  // Every file directly inside one folder (works for a shared drive too).
+  async list(folderId, extraQ = "") {
+    const files = [];
+    let pageToken = "";
+    do {
+      const q = new URLSearchParams({
+        q: `'${folderId}' in parents and trashed = false${extraQ}`,
+        pageSize: "1000",
+        fields: "nextPageToken, files(id, name, mimeType, modifiedTime, md5Checksum, size)",
+        supportsAllDrives: "true",
+        includeItemsFromAllDrives: "true",
+        ...pageToken ? { pageToken } : {}
+      });
+      const r = await this.call("GET", `/drive/v3/files?${q}`);
+      files.push(...r.files);
+      pageToken = r.nextPageToken || "";
+    } while (pageToken);
+    return files;
+  }
+  async meta(id) {
+    return this.call("GET", `/drive/v3/files/${id}?fields=id,name,mimeType,modifiedTime,md5Checksum,size&supportsAllDrives=true`);
+  }
+  // The file's bytes. With maxBytes, only the start of the file is fetched (a Range request).
+  async download(id, maxBytes = 0) {
+    const headers = maxBytes ? { range: `bytes=0-${maxBytes - 1}` } : {};
+    const res = await this.call("GET", `/drive/v3/files/${id}?alt=media&supportsAllDrives=true`, { headers, raw: true });
+    return Buffer.from(await res.arrayBuffer());
+  }
+  async createFolder(name, parentId) {
+    const body = JSON.stringify({ name, mimeType: FOLDER_MIME, ...parentId ? { parents: [parentId] } : {} });
+    return this.call(
+      "POST",
+      "/drive/v3/files?fields=id,name,parents&supportsAllDrives=true",
+      { body, headers: { "content-type": "application/json" } }
+    );
+  }
+  // Creates a file, or replaces the content of one this app created before (drive.file allows both).
+  async upload({ name, parentId, content, mimeType, replaceId = null }) {
+    if (replaceId) {
+      return this.call(
+        "PATCH",
+        `/upload/drive/v3/files/${replaceId}?uploadType=media&fields=id,name,modifiedTime&supportsAllDrives=true`,
+        { body: content, headers: { "content-type": mimeType } }
+      );
+    }
+    const boundary = "mt" + crypto.randomBytes(8).toString("hex");
+    const body = Buffer.concat([
+      Buffer.from(`--${boundary}\r
+content-type: application/json; charset=UTF-8\r
+\r
+${JSON.stringify({ name, parents: [parentId], mimeType })}\r
+`),
+      Buffer.from(`--${boundary}\r
+content-type: ${mimeType}\r
+\r
+`),
+      Buffer.from(content),
+      Buffer.from(`\r
+--${boundary}--`)
+    ]);
+    return this.call(
+      "POST",
+      "/upload/drive/v3/files?uploadType=multipart&fields=id,name,modifiedTime&supportsAllDrives=true",
+      { body, headers: { "content-type": `multipart/related; boundary=${boundary}` } }
+    );
+  }
+};
+
+// lib/source.js
+import fs5 from "node:fs";
+import path4 from "node:path";
+import crypto2 from "node:crypto";
+var HEAD_BYTES = 2048;
+var DETAIL_RE = /file id (\S+); modified (\S+); md5 (\w+)/;
+var md5 = (buf) => crypto2.createHash("md5").update(buf).digest("hex");
+var isTerminator = (line) => line.trim() === "" || line.trim().startsWith("[");
+var DriveSource = class {
+  constructor(store2, drive2, folderId) {
+    if (!folderId) throw new Error("No Drive folder id. Pass --folder <id> or set TRACKER_DRIVE_FOLDER.");
+    this.store = store2;
+    this.drive = drive2;
+    this.folder = folderId;
+  }
+  // What the log says each transcript is: the latest fetched or header-only row per file.
+  recorded() {
+    const byName = /* @__PURE__ */ new Map(), byId = /* @__PURE__ */ new Map();
+    for (const r of this.store.log()) {
+      if (r.step !== "source" || !["fetched", "header only"].includes(r.result)) continue;
+      const m = DETAIL_RE.exec(r.detail);
+      if (!m) continue;
+      const rec = { name: r.transcript, id: m[1], modified: m[2], md5: m[3], headerOnly: r.result === "header only" };
+      byName.set(rec.name, rec);
+      byId.set(rec.id, rec);
+    }
+    return { byName, byId };
+  }
+  flagOnce(run, transcript, key, message) {
+    if (this.store.log().some((r) => r.step === "source" && r.result === "flagged" && r.detail.startsWith(`key ${key};`))) return null;
+    this.store.writeLog(run, transcript, "source", "flagged", `key ${key}; ${message}`);
+    this.store.writeLog(run, transcript, "note", "note", `Drive: ${message}`);
+    return message;
+  }
+  cachePath(name) {
+    return path4.join(this.store.transcripts, name);
+  }
+  async fetch(run, f) {
+    const head = await this.drive.download(f.id, HEAD_BYTES);
+    const lines = head.toString("utf8").split(/\r?\n/);
+    const end = lines.findIndex(isTerminator);
+    if (end >= 0) {
+      fs5.writeFileSync(this.cachePath(f.name), lines.slice(0, end).join("\n") + "\n");
+      if (this.store.header(f.name).confidential) {
+        this.store.writeLog(run, f.name, "source", "header only", `file id ${f.id}; modified ${f.modifiedTime}; md5 ${f.md5Checksum}; header marks it confidential, body not written or read`);
+        return "header only";
+      }
+    }
+    const whole = f.size != null && head.length >= Number(f.size);
+    const buf = whole ? head : await this.drive.download(f.id);
+    const sum = md5(buf);
+    if (f.md5Checksum && sum !== f.md5Checksum) throw new Error(`${f.name}: downloaded content does not match Drive's md5 (edited mid-download?); scan again`);
+    fs5.writeFileSync(this.cachePath(f.name), buf);
+    this.store.writeLog(run, f.name, "source", "fetched", `file id ${f.id}; modified ${f.modifiedTime}; md5 ${sum}`);
+    return "fetched";
+  }
+  // Before tracker_scan: bring every new transcript in the folder into the run's transcripts folder.
+  async sync(run) {
+    const files = (await this.drive.list(this.folder)).filter((f) => f.mimeType !== FOLDER_MIME);
+    const { byName, byId } = this.recorded();
+    const done = this.store.processed();
+    const out = { folder: this.folder, listed: files.length, fetched: [], header_only: [], flagged: [] };
+    const flag = (t, key, msg) => {
+      const m = this.flagOnce(run, t, key, msg);
+      if (m) out.flagged.push(m);
+    };
+    const groups = /* @__PURE__ */ new Map();
+    for (const f of files) {
+      const plain = f.name.endsWith(".txt") && !f.mimeType.startsWith("application/vnd.google-apps");
+      const safe = path4.basename(f.name) === f.name && !f.name.startsWith(".");
+      if (!plain || !safe) {
+        flag("", `skipped ${f.id}`, `${f.name} was not read: only plain .txt transcripts are read (this file is ${f.mimeType}${safe ? "" : ", and its name is not a plain file name"}).`);
+        continue;
+      }
+      if (!groups.has(f.name)) groups.set(f.name, []);
+      groups.get(f.name).push(f);
+    }
+    for (const [name, group] of [...groups].sort(([a], [b]) => a.localeCompare(b))) {
+      if (group.length > 1) {
+        const known = group.filter((f) => byId.has(f.id));
+        for (const f of group.filter((g) => !byId.has(g.id))) {
+          flag(name, `duplicate ${f.id}`, `a second file named ${name} is in the folder (file id ${f.id}). It was not read; the tracker knows transcripts by name, so rename one of them.`);
+        }
+        if (!known.length) continue;
+      }
+      for (const f of group.filter((g) => group.length === 1 || byId.has(g.id))) {
+        const rec = byId.get(f.id);
+        if (rec && rec.name !== name) {
+          flag(name, `renamed ${f.id} ${name}`, `${rec.name} was renamed in Drive to ${name}. It is the same file (id ${f.id}), so it was not read again.`);
+        } else if (rec && f.md5Checksum && rec.md5 !== f.md5Checksum) {
+          if (done.has(name)) {
+            flag(name, `edited ${f.id} ${f.md5Checksum}`, `${name} was edited in Drive after it was processed (modified ${f.modifiedTime}; the version read was modified ${rec.modified}). It was not read again; the tracker keeps the rows from the version it read.`);
+          } else {
+            out[await this.fetch(run, f) === "fetched" ? "fetched" : "header_only"].push(name);
+            this.store.writeLog(run, name, "note", "note", `Drive: ${name} was edited before it was processed; the newer version (modified ${f.modifiedTime}) is the one read.`);
+          }
+        } else if (!rec && byName.has(name)) {
+          if (done.has(name)) {
+            flag(name, `replaced ${f.id}`, `${name} in Drive is now a different file (id ${f.id}; the one processed was ${byName.get(name).id}). It was not read; rename it if it is a new meeting.`);
+          } else {
+            out[await this.fetch(run, f) === "fetched" ? "fetched" : "header_only"].push(name);
+          }
+        } else if (!rec) {
+          out[await this.fetch(run, f) === "fetched" ? "fetched" : "header_only"].push(name);
+        }
+      }
+    }
+    return out;
+  }
+  // Before tracker_read_transcript: fetch the transcript again by its file id. If the content no longer
+  // matches what the scan recorded, the edit is flagged and the store reads the version scanned.
+  async read(name, run) {
+    const rec = this.recorded().byName.get(name);
+    if (!rec || rec.headerOnly || this.store.header(name).confidential) return;
+    const buf = await this.drive.download(rec.id);
+    const sum = md5(buf);
+    if (sum !== rec.md5) {
+      this.flagOnce(run, name, `edited ${rec.id} ${sum}`, `${name} was edited in Drive after this run's scan. The version scanned (md5 ${rec.md5}) is the one read; scan again in a later run to see the change flagged.`);
+      return;
+    }
+    fs5.writeFileSync(this.cachePath(name), buf);
+    this.store.writeLog(run, name, "source", "read", `file id ${rec.id}; md5 ${sum}; fetched by file id, matches the scan`);
+  }
+  // After tracker_summary: write the board to released/ inside the transcripts folder.
+  async release(boardPath, run) {
+    const base = path4.basename(boardPath);
+    const folderQ = ` and mimeType = '${FOLDER_MIME}' and name = 'released'`;
+    let where = "inside the transcripts folder";
+    let rel = (await this.drive.list(this.folder, folderQ))[0];
+    if (!rel) {
+      try {
+        rel = await this.drive.createFolder("released", this.folder);
+      } catch (e) {
+        if (e.status !== 403) throw e;
+        rel = (await this.drive.list("root", folderQ))[0] || await this.drive.createFolder("released");
+        where = "in My Drive, outside the transcripts folder";
+        this.flagOnce(run, "", `released-root ${rel.id}`, "the released/ folder was created in My Drive because Drive refused to add it to the transcripts folder under the drive.file scope. Drag it into the transcripts folder once; boards go there from then on.");
+      }
+    }
+    const existing = (await this.drive.list(rel.id, ` and name = '${base}'`))[0];
+    let file;
+    try {
+      file = await this.drive.upload({ name: base, parentId: rel.id, content: fs5.readFileSync(boardPath), mimeType: "text/html", replaceId: existing?.id });
+    } catch (e) {
+      if (e.status !== 403) throw e;
+      throw new Error("The tracker cannot write into this released/ folder because it did not create it (the drive.file scope reaches only its own files). Rename or delete that folder in Drive and run the summary again; the tracker will make its own.");
+    }
+    this.store.writeLog(run, "", "source", "released", `${base}; file id ${file.id}; folder released (id ${rel.id}), ${where}`);
+    return { name: base, file_id: file.id, folder_id: rel.id, where, replaced: !!existing };
+  }
+};
+
 // server.js
-var here = path3.dirname(fileURLToPath(import.meta.url));
-var store = new Store(process.env.TRACKER_DATA || path3.join(here, "data"));
-var LIBRARY = process.env.TRACKER_LIBRARY || path3.join(here, "library");
-var libraryIndex = () => loadIndex(path3.join(LIBRARY, "index.json"));
-var server = new McpServer({ name: "meeting-tracker", version: "2.1.0" });
+var here = path5.dirname(fileURLToPath(import.meta.url));
+var argv = process.argv.slice(2);
+var argOf = (name) => {
+  const i = argv.indexOf(`--${name}`);
+  return i >= 0 ? argv[i + 1] : null;
+};
+if (argv.includes("--auth")) {
+  await authorize();
+  process.exit(0);
+}
+var SOURCE = argOf("source") || process.env.TRACKER_SOURCE || "local";
+if (!["local", "drive"].includes(SOURCE)) {
+  console.error(`--source must be local or drive, not ${SOURCE}`);
+  process.exit(2);
+}
+var dataDir = process.env.TRACKER_DATA || path5.join(here, SOURCE === "drive" ? "data-drive" : "data");
+if (SOURCE === "drive" && !fs6.existsSync(path5.join(dataDir, "contacts.csv"))) {
+  fs6.mkdirSync(dataDir, { recursive: true });
+  fs6.copyFileSync(path5.join(here, "data", "contacts.csv"), path5.join(dataDir, "contacts.csv"));
+}
+var store = new Store(dataDir);
+var drive = SOURCE === "drive" ? new DriveSource(store, new Drive(), argOf("folder") || process.env.TRACKER_DRIVE_FOLDER) : null;
+var LIBRARY = process.env.TRACKER_LIBRARY || path5.join(here, "library");
+var libraryIndex = () => loadIndex(path5.join(LIBRARY, "index.json"));
+var server = new McpServer({ name: "meeting-tracker", version: "2.2.0" });
 var ok = (obj) => ({ content: [{ type: "text", text: typeof obj === "string" ? obj : JSON.stringify(obj, null, 2) }] });
 function wrap(fn) {
   return async (args) => {
@@ -22395,12 +22766,19 @@ server.registerTool("tracker_scan", {
   title: "Scan for new transcripts",
   description: "Step 1. Lists every transcript not yet processed, with its meeting date and attendees. Declines any transcript whose header is marked confidential (Gate 4) and logs it; its body is never returned.",
   inputSchema: { run_id }
-}, wrap(({ run_id: run_id2 }) => store.scan(run_id2)));
+}, wrap(async ({ run_id: run_id2 }) => {
+  if (!drive) return store.scan(run_id2);
+  const source = await drive.sync(run_id2);
+  return { ...store.scan(run_id2), source };
+}));
 server.registerTool("tracker_read_transcript", {
   title: "Read one transcript",
   description: "Step 2. Returns the full text of one transcript. Refuses a confidential one (Gate 4), so its body cannot be read even if the scan was skipped.",
   inputSchema: { transcript: external_exports.string().describe("File name, for example 01_halden_kickoff.txt"), run_id }
-}, wrap(({ transcript, run_id: run_id2 }) => store.readTranscript(transcript, run_id2)));
+}, wrap(async ({ transcript, run_id: run_id2 }) => {
+  if (drive) await drive.read(transcript, run_id2);
+  return store.readTranscript(transcript, run_id2);
+}));
 server.registerTool("tracker_read_tracker", {
   title: "Read the tracker",
   description: "Returns the tracker rows, optionally filtered by status. Use it to find the action_id of an open action a transcript closes.",
@@ -22452,7 +22830,11 @@ server.registerTool("tracker_summary", {
   title: "Write the run summary",
   description: "Step 8. Writes data/summary_<run_id>.md and the one-page action board data/board_<run_id>.html from the tracker and the log, and returns the summary text and the board's path. Tell the user where the board is; it is the page they read.",
   inputSchema: { run_id, as_of: external_exports.string().optional().describe("Run date YYYY-MM-DD for the overdue section; default today") }
-}, wrap(({ run_id: run_id2, as_of }) => store.summary(run_id2, as_of)));
+}, wrap(async ({ run_id: run_id2, as_of }) => {
+  const out = store.summary(run_id2, as_of);
+  if (drive) out.released = await drive.release(out.board, run_id2);
+  return out;
+}));
 var request = external_exports.string().describe("The request as the requester wrote it, not reworded");
 server.registerTool("library_search", {
   title: "Search the library before building",
@@ -22465,7 +22847,7 @@ server.registerTool("library_brief", {
   inputSchema: { request }
 }, wrap(({ request: request2 }) => {
   const result = search(libraryIndex(), request2);
-  return { verdict: result.verdict, brief: brief(request2, fs4.readFileSync(path3.join(LIBRARY, "brief_template.md"), "utf8"), result.matches, result.verdict) };
+  return { verdict: result.verdict, brief: brief(request2, fs6.readFileSync(path5.join(LIBRARY, "brief_template.md"), "utf8"), result.matches, result.verdict) };
 }));
 server.registerTool("library_index", {
   title: "Read the library index",

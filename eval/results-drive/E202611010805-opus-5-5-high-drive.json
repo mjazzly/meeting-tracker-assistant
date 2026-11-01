@@ -1,0 +1,74 @@
+{
+  "label": "E202611010805-opus-5-5-high-drive",
+  "run_id": "E202611010805",
+  "date": "2026-11-01",
+  "started_at": "2026-11-01T08:05:41.330Z",
+  "mode": "harness",
+  "source": "drive",
+  "blind": true,
+  "counted": true,
+  "skill_version": "v2.0",
+  "server_version": "2.2.0",
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "model_calls": 27,
+  "tokens": {
+    "input": 58,
+    "output": 11949,
+    "cache_read": 505188,
+    "cache_write": 36729
+  },
+  "total_input": 541975,
+  "cost_usd": 0.5238946,
+  "cache": true,
+  "completed": true,
+  "error": null,
+  "verdict": {
+    "five_matched": 5,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": true
+  },
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "transcript": "03_northgate_claims.txt",
+      "match": true,
+      "fails": []
+    },
+    "04_halden_finance.txt": {
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    },
+    "07_halden_followup.txt": {
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  }
+}

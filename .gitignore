@@ -3,6 +3,8 @@ node_modules/
 eval/runs/
 eval/runs-mock/
 test/out/
+test/out-drive/
+data-drive/
 dist/
 
 # never in the public repo

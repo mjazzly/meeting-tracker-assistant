@@ -12,13 +12,32 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { Store, GateStop } from "./lib/store.js";
 import { loadIndex, search, brief, renderIndexMd } from "./lib/library.js";
+import { Drive, authorize } from "./lib/drive.js";
+import { DriveSource } from "./lib/source.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const store = new Store(process.env.TRACKER_DATA || path.join(here, "data"));
+
+// Where the transcripts come from: --source local (the default, the transcripts folder on disk) or
+// --source drive (a Google Drive folder, read through the Drive API; lib/source.js copies each new
+// file into the run's transcripts folder and lib/store.js reads it there, so the gates are the same).
+// One-time Google sign-in, from Terminal: node server.mjs --auth
+const argv = process.argv.slice(2);
+const argOf = (name) => { const i = argv.indexOf(`--${name}`); return i >= 0 ? argv[i + 1] : null; };
+if (argv.includes("--auth")) { await authorize(); process.exit(0); }
+const SOURCE = argOf("source") || process.env.TRACKER_SOURCE || "local";
+if (!["local", "drive"].includes(SOURCE)) { console.error(`--source must be local or drive, not ${SOURCE}`); process.exit(2); }
+// Drive state is kept apart from local state: a shared run log would mark every transcript as done.
+const dataDir = process.env.TRACKER_DATA || path.join(here, SOURCE === "drive" ? "data-drive" : "data");
+if (SOURCE === "drive" && !fs.existsSync(path.join(dataDir, "contacts.csv"))) {
+  fs.mkdirSync(dataDir, { recursive: true });
+  fs.copyFileSync(path.join(here, "data", "contacts.csv"), path.join(dataDir, "contacts.csv"));
+}
+const store = new Store(dataDir);
+const drive = SOURCE === "drive" ? new DriveSource(store, new Drive(), argOf("folder") || process.env.TRACKER_DRIVE_FOLDER) : null;
 const LIBRARY = process.env.TRACKER_LIBRARY || path.join(here, "library");
 const libraryIndex = () => loadIndex(path.join(LIBRARY, "index.json"));
 
-const server = new McpServer({ name: "meeting-tracker", version: "2.1.0" });
+const server = new McpServer({ name: "meeting-tracker", version: "2.2.0" });
 
 const ok = (obj) => ({ content: [{ type: "text", text: typeof obj === "string" ? obj : JSON.stringify(obj, null, 2) }] });
 function wrap(fn) {
@@ -48,13 +67,20 @@ server.registerTool("tracker_scan", {
   title: "Scan for new transcripts",
   description: "Step 1. Lists every transcript not yet processed, with its meeting date and attendees. Declines any transcript whose header is marked confidential (Gate 4) and logs it; its body is never returned.",
   inputSchema: { run_id },
-}, wrap(({ run_id }) => store.scan(run_id)));
+}, wrap(async ({ run_id }) => {
+  if (!drive) return store.scan(run_id);
+  const source = await drive.sync(run_id);
+  return { ...store.scan(run_id), source };
+}));
 
 server.registerTool("tracker_read_transcript", {
   title: "Read one transcript",
   description: "Step 2. Returns the full text of one transcript. Refuses a confidential one (Gate 4), so its body cannot be read even if the scan was skipped.",
   inputSchema: { transcript: z.string().describe("File name, for example 01_halden_kickoff.txt"), run_id },
-}, wrap(({ transcript, run_id }) => store.readTranscript(transcript, run_id)));
+}, wrap(async ({ transcript, run_id }) => {
+  if (drive) await drive.read(transcript, run_id);
+  return store.readTranscript(transcript, run_id);
+}));
 
 server.registerTool("tracker_read_tracker", {
   title: "Read the tracker",
@@ -109,7 +135,11 @@ server.registerTool("tracker_summary", {
   title: "Write the run summary",
   description: "Step 8. Writes data/summary_<run_id>.md and the one-page action board data/board_<run_id>.html from the tracker and the log, and returns the summary text and the board's path. Tell the user where the board is; it is the page they read.",
   inputSchema: { run_id, as_of: z.string().optional().describe("Run date YYYY-MM-DD for the overdue section; default today") },
-}, wrap(({ run_id, as_of }) => store.summary(run_id, as_of)));
+}, wrap(async ({ run_id, as_of }) => {
+  const out = store.summary(run_id, as_of);
+  if (drive) out.released = await drive.release(out.board, run_id);
+  return out;
+}));
 
 // Rung 4: the library index and the "does this exist" search. The index lives in library/index.json
 // (TRACKER_LIBRARY overrides the folder) and is edited only by the owner; these tools read it.

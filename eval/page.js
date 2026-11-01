@@ -68,3 +68,34 @@ export function writePage(resultsDir, outPath, skillHeader) {
   fs.writeFileSync(outPath, L.join("\n") + "\n");
   return outPath;
 }
+
+// eval/SOURCES.md: the same cases with the transcripts read from local files and from the Google
+// Drive folder, side by side, model by model. Local runs are the blind record the exemplar page is
+// built from; Drive runs are recorded apart in eval/results-drive and only ever shown here.
+export function writeSourcesPage(localDir, driveDir, outPath) {
+  const counted = (dir) => (fs.existsSync(dir) ? loadResults(dir) : []).filter((r) => r.counted);
+  const local = counted(localDir), drive = counted(driveDir);
+  const latest = (rs, m) => rs.filter((r) => r.model === m).pop();
+  const models = [...new Set(drive.map((r) => r.model))];
+  const L = ["# The same cases from two sources", "",
+    "Local runs read the eight transcripts from the folder on disk; this is the blind record the exemplar page is built from. Drive runs read the same eight files from a Google Drive folder through the Drive API: the server copies each new file in by its file id, and the same store, gates, skill, checker and fixed answers do the rest. Both run on the owner's machine; only the transcripts folder is in the cloud.", ""];
+  for (const m of models) {
+    const d = latest(drive, m), l = latest(local, m);
+    L.push(`## ${m}${d.effort ? ` (effort ${d.effort})` : ""}`, "");
+    const line = (r) => r ? `${r.verdict.five_matched} of 5, decline ${r.verdict.decline_held ? "held" : "failed"}, state ${r.verdict.state_matched} of 2 (${r.label})` : "no counted run";
+    L.push(`- **Local:** ${line(l)}`, `- **Drive:** ${line(d)}`);
+    const same = l && Object.keys(CASE_NAMES).every((t) => !!l.cases[t]?.match === !!d.cases[t]?.match);
+    L.push(`- **Same result case by case:** ${l ? (same ? "yes" : "no") : "no local run to compare"}`, "");
+    L.push("| Case | Local | Drive |", "|---|---|---|");
+    for (const [t, name] of Object.entries(CASE_NAMES)) {
+      const cell = (r) => (!r || !r.cases[t] ? "" : r.cases[t].match ? "Match" : `**Miss**: ${r.cases[t].fails.join("; ")}`);
+      L.push(`| ${name} | ${cell(l)} | ${cell(d)} |`);
+    }
+    L.push("");
+  }
+  L.push("## Drive run history", "", "| Date | Run | Model | Cases matched | Decline | State cases |", "|---|---|---|---|---|---|");
+  for (const r of drive) L.push(`| ${r.date} | ${r.label} | ${r.model}${r.effort ? ` ${r.effort}` : ""} | ${r.verdict.five_matched} of 5 | ${r.verdict.decline_held ? "held" : "failed"} | ${r.verdict.state_matched} of 2 |`);
+  L.push("", "Rerun: `node eval.mjs --model <model id> --source drive --folder <Drive folder id>`.");
+  fs.writeFileSync(outPath, L.join("\n") + "\n");
+  return outPath;
+}

@@ -1,7 +1,7 @@
 {
   "name": "meeting-tracker-server",
-  "version": "2.0.0",
-  "description": "Tool server for the Meeting Tracker Assistant: the scan, lookup, close, append, resolve-date, note and summary steps as tools the model calls, with the four gates enforced in code. Synthetic data only; the contacts table stands in for a CRM.",
+  "version": "2.2.0",
+  "description": "Tool server for the Meeting Tracker Assistant: the scan, lookup, close, append, resolve-date, note and summary steps as tools the model calls, with the four gates enforced in code. Transcripts from a local folder or a Google Drive folder. Synthetic data only; the contacts table stands in for a CRM.",
   "type": "module",
   "main": "server.js",
   "bin": {
@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "node test/run_cases.js",
-    "eval": "node eval/run_eval.js"
+    "eval": "node eval/run_eval.js",
+    "test:drive": "node test/drive_cases.js"
   },
   "author": "Megat Jazly",
   "license": "UNLICENSED",

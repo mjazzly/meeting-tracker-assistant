@@ -4,6 +4,9 @@
 //   node eval.mjs --model claude-opus-5-5 [--effort high] [--label name] [--max-calls 80]
 //   node eval.mjs --mock          (no API call: a scripted stand-in replays fixed rows; never recorded)
 //   node eval.mjs --page-only     (rebuild EXEMPLAR.md from eval/results without running anything)
+//   node eval.mjs --model claude-opus-5-5 --effort high --source drive --folder <Drive folder id>
+//                                 (the same cases, with the transcripts read from the Google Drive folder;
+//                                  recorded apart in eval/results-drive, compared in eval/SOURCES.md)
 //
 // What a run does:
 //   1. Copies the contacts table and the eight transcripts into an empty folder under eval/runs/.
@@ -24,7 +27,7 @@ import { loadExpected, checkCase, verdict } from "./check.js";
 import { writePage } from "./page.js";
 import { MockModel } from "./mock.js";
 import { renderBoard, renderExemplar } from "../lib/render.js";
-import { loadResults } from "./page.js";
+import { loadResults, writeSourcesPage } from "./page.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.basename(here) === "eval" ? path.dirname(here) : here;
@@ -41,6 +44,12 @@ const MAX_CALLS = Number(arg("max-calls", 80));
 // Prompt caching is on by default: every call resends the skill, the tools and the run so far,
 // and a cache read costs a small fraction of a fresh read. --no-cache turns it off for comparison.
 const CACHE = !flag("no-cache");
+// Where the server reads the transcripts. local (the default) is the blind run on local files and the
+// only source the exemplar page counts. drive reads them from a Google Drive folder through the Drive API.
+const SOURCE = arg("source", "local");
+const FOLDER = arg("folder", process.env.TRACKER_DRIVE_FOLDER || "");
+if (!["local", "drive"].includes(SOURCE)) { console.error(`--source must be local or drive, not ${SOURCE}`); process.exit(2); }
+if (SOURCE === "drive" && !FOLDER) { console.error("--source drive needs --folder <Drive folder id> (or TRACKER_DRIVE_FOLDER)."); process.exit(2); }
 
 const skillPath = path.join(ROOT, "skill", "SKILL.md");
 const skillText = fs.readFileSync(skillPath, "utf8");
@@ -71,7 +80,7 @@ const date = local.slice(0, 10);
 const stamp = local.slice(0, 16).replace(/[-:T]/g, "");
 const RUN_ID = `E${stamp}`;
 const modelTag = MOCK ? "mock" : MODEL.replace(/^claude-/, "");
-const LABEL = arg("label", `${RUN_ID}-${modelTag}${EFFORT ? "-" + EFFORT : ""}`);
+const LABEL = arg("label", `${RUN_ID}-${modelTag}${EFFORT ? "-" + EFFORT : ""}${SOURCE === "drive" ? "-drive" : ""}`);
 const runDir = path.join(EVAL, MOCK ? "runs-mock" : "runs", LABEL);
 const dataDir = path.join(runDir, "data");
 fs.rmSync(runDir, { recursive: true, force: true });
@@ -79,7 +88,8 @@ fs.mkdirSync(path.join(dataDir, "held"), { recursive: true });
 fs.copyFileSync(path.join(ROOT, "data", "contacts.csv"), path.join(dataDir, "contacts.csv"));
 // file by file: some shared folders refuse a whole-directory copy
 fs.mkdirSync(path.join(dataDir, "transcripts"), { recursive: true });
-for (const f of fs.readdirSync(path.join(ROOT, "data", "transcripts")).filter((x) => x.endsWith(".txt"))) {
+// with --source drive the transcripts folder starts empty: the server fills it from Drive at the scan
+if (SOURCE === "local") for (const f of fs.readdirSync(path.join(ROOT, "data", "transcripts")).filter((x) => x.endsWith(".txt"))) {
   fs.copyFileSync(path.join(ROOT, "data", "transcripts", f), path.join(dataDir, "transcripts", f));
 }
 
@@ -87,7 +97,8 @@ for (const f of fs.readdirSync(path.join(ROOT, "data", "transcripts")).filter((x
 const serverFile = fs.existsSync(path.join(ROOT, "server.mjs")) ? "server.mjs" : "server.js";
 const mcp = new Client({ name: "eval-harness", version: "1.0.0" });
 await mcp.connect(new StdioClientTransport({ command: process.execPath, args: [path.join(ROOT, serverFile)],
-  env: { ...process.env, TRACKER_DATA: dataDir }, stderr: "ignore" }));
+  env: { ...process.env, TRACKER_DATA: dataDir, TRACKER_SOURCE: SOURCE, ...(SOURCE === "drive" ? { TRACKER_DRIVE_FOLDER: FOLDER } : {}) },
+  stderr: "ignore" }));
 // The API takes the same JSON Schema the server announces, minus the $schema marker it does not need.
 const tools = (await mcp.listTools()).tools.map((t) => {
   const { $schema, ...input_schema } = t.inputSchema;
@@ -137,7 +148,7 @@ const opening = `Run the tracker. Use run id ${RUN_ID}.`;
 const answers = fs.readFileSync(path.join(EVAL, "answers.txt"), "utf8").trim();
 const messages = [{ role: "user", content: opening }];
 transcript.push({ who: "person", text: opening });
-console.log(`run ${LABEL}: skill ${skillVersion}, model ${MODEL}${EFFORT ? ", effort " + EFFORT : ""}`);
+console.log(`run ${LABEL}: skill ${skillVersion}, model ${MODEL}${EFFORT ? ", effort " + EFFORT : ""}, transcripts from ${SOURCE === "drive" ? "the Drive folder" : "local files"}`);
 
 let completed = true, error = null;
 try {
@@ -171,8 +182,8 @@ try {
 } catch {}
 console.log(`model calls ${calls}; input ${totalIn} (fresh ${tokens.input}, cache write ${tokens.cache_write}, cache read ${tokens.cache_read}), output ${tokens.output}${cost != null ? `; cost US$${cost.toFixed(3)}` : ""}${CACHE ? "; caching on" : "; caching off"}`);
 
-const record = { label: LABEL, run_id: RUN_ID, date, started_at: local, mode: MOCK ? "mock" : "harness", blind: true,
-  counted: !MOCK && completed, skill_version: skillVersion, server_version: "2.1.0", model: MODEL, effort: EFFORT,
+const record = { label: LABEL, run_id: RUN_ID, date, started_at: local, mode: MOCK ? "mock" : "harness", source: SOURCE, blind: true,
+  counted: !MOCK && completed, skill_version: skillVersion, server_version: "2.2.0", model: MODEL, effort: EFFORT,
   model_calls: calls, tokens, total_input: totalIn, cost_usd: cost, cache: CACHE, completed, error, verdict: v, cases,
   note: !completed ? `Did not finish: ${error}` : undefined };
 fs.writeFileSync(path.join(runDir, "transcript.json"), JSON.stringify({ system: "skill/SKILL.md " + skillVersion, transcript }, null, 2));
@@ -182,6 +193,11 @@ fs.writeFileSync(path.join(runDir, "result.json"), JSON.stringify(record, null, 
 const reachedModel = totalIn + tokens.output > 0;
 if (!MOCK && !reachedModel) {
   console.log(`not recorded: the run never reached the model (${error || "no tokens"}). Details in ${runDir}`);
+} else if (!MOCK && SOURCE === "drive") {
+  // recorded apart: the exemplar page stays the blind local record; SOURCES.md sets the two side by side
+  fs.mkdirSync(path.join(EVAL, "results-drive"), { recursive: true });
+  fs.writeFileSync(path.join(EVAL, "results-drive", `${LABEL}.json`), JSON.stringify(record, null, 2));
+  console.log("comparison written:", writeSourcesPage(path.join(EVAL, "results"), path.join(EVAL, "results-drive"), path.join(EVAL, "SOURCES.md")));
 } else if (!MOCK) {
   fs.writeFileSync(path.join(EVAL, "results", `${LABEL}.json`), JSON.stringify(record, null, 2));
   console.log("page written:", writePage(path.join(EVAL, "results"), path.join(EVAL, "EXEMPLAR.md"), { version: skillVersion }));

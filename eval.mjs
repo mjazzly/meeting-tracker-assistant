@@ -1324,14 +1324,14 @@ var init_ProxyTracer = __esm({
 var SpanKind;
 var init_span_kind = __esm({
   "node_modules/@opentelemetry/api/dist/trace/span_kind.mjs"() {
-    SpanKind = /* @__PURE__ */ function(SpanKind2) {
+    SpanKind = /* @__PURE__ */ (function(SpanKind2) {
       SpanKind2[SpanKind2["INTERNAL"] = 0] = "INTERNAL";
       SpanKind2[SpanKind2["SERVER"] = 1] = "SERVER";
       SpanKind2[SpanKind2["CLIENT"] = 2] = "CLIENT";
       SpanKind2[SpanKind2["PRODUCER"] = 3] = "PRODUCER";
       SpanKind2[SpanKind2["CONSUMER"] = 4] = "CONSUMER";
       return SpanKind2;
-    }({});
+    })({});
   }
 });
 
@@ -1339,12 +1339,12 @@ var init_span_kind = __esm({
 var SpanStatusCode;
 var init_status = __esm({
   "node_modules/@opentelemetry/api/dist/trace/status.mjs"() {
-    SpanStatusCode = /* @__PURE__ */ function(SpanStatusCode2) {
+    SpanStatusCode = /* @__PURE__ */ (function(SpanStatusCode2) {
       SpanStatusCode2[SpanStatusCode2["UNSET"] = 0] = "UNSET";
       SpanStatusCode2[SpanStatusCode2["OK"] = 1] = "OK";
       SpanStatusCode2[SpanStatusCode2["ERROR"] = 2] = "ERROR";
       return SpanStatusCode2;
-    }({});
+    })({});
   }
 });
 
@@ -7573,7 +7573,7 @@ var init_models = __esm({
 var require_base64 = __commonJS({
   "node_modules/@stablelib/base64/lib/base64.js"(exports) {
     "use strict";
-    var __extends = exports && exports.__extends || /* @__PURE__ */ function() {
+    var __extends = exports && exports.__extends || /* @__PURE__ */ (function() {
       var extendStatics = function(d, b) {
         extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
           d2.__proto__ = b2;
@@ -7589,12 +7589,12 @@ var require_base64 = __commonJS({
         }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
       };
-    }();
+    })();
     Object.defineProperty(exports, "__esModule", { value: true });
     var INVALID_BYTE = 256;
     var Coder = (
       /** @class */
-      function() {
+      (function() {
         function Coder2(_paddingCharacter) {
           if (_paddingCharacter === void 0) {
             _paddingCharacter = "=";
@@ -7720,7 +7720,7 @@ var require_base64 = __commonJS({
           return paddingLength;
         };
         return Coder2;
-      }()
+      })()
     );
     exports.Coder = Coder;
     var stdCoder = new Coder();
@@ -7734,7 +7734,7 @@ var require_base64 = __commonJS({
     exports.decode = decode;
     var URLSafeCoder = (
       /** @class */
-      function(_super) {
+      (function(_super) {
         __extends(URLSafeCoder2, _super);
         function URLSafeCoder2() {
           return _super !== null && _super.apply(this, arguments) || this;
@@ -7758,7 +7758,7 @@ var require_base64 = __commonJS({
           return result;
         };
         return URLSafeCoder2;
-      }(Coder)
+      })(Coder)
     );
     exports.URLSafeCoder = URLSafeCoder;
     var urlSafeCoder = new URLSafeCoder();
@@ -7921,7 +7921,7 @@ var require_sha256 = __commonJS({
       }
       var Hash = (
         /** @class */
-        function() {
+        (function() {
           function Hash2() {
             this.digestLength = exports2.digestLength;
             this.blockSize = exports2.blockSize;
@@ -8034,12 +8034,12 @@ var require_sha256 = __commonJS({
             this.bufferLength = 0;
           };
           return Hash2;
-        }()
+        })()
       );
       exports2.Hash = Hash;
       var HMAC = (
         /** @class */
-        function() {
+        (function() {
           function HMAC2(key) {
             this.inner = new Hash();
             this.outer = new Hash();
@@ -8100,7 +8100,7 @@ var require_sha256 = __commonJS({
             return out;
           };
           return HMAC2;
-        }()
+        })()
       );
       exports2.HMAC = HMAC;
       function hash(data) {
@@ -27804,7 +27804,7 @@ var init_client = __esm({
               clearTimeout(timeout);
             }
           };
-          const innerFetch = requestOptions === void 0 ? timedFetch : async (innerUrl, innerInit = {}) => {
+          const innerFetch = requestOptions === void 0 ? timedFetch : (async (innerUrl, innerInit = {}) => {
             const innerUrlStr = typeof innerUrl === "string" ? innerUrl : innerUrl instanceof URL ? innerUrl.href : innerUrl.url;
             innerInit.headers = innerInit.headers instanceof Headers ? innerInit.headers : new Headers(innerInit.headers);
             let traceHeaders = [];
@@ -27830,7 +27830,7 @@ var init_client = __esm({
               });
             }
             return timedFetch(innerUrl, innerInit);
-          };
+          });
           const requestMiddleware = requestOptions?.middleware;
           const backendMiddleware = requestOptions?.__span ? this.backendMiddleware().map(withoutTraceHeaders) : this.backendMiddleware();
           const allMiddleware = requestMiddleware?.length || backendMiddleware.length ? [...this.middleware, ...requestMiddleware ?? [], ...backendMiddleware] : this.middleware;
@@ -38970,10 +38970,10 @@ var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   };
   inst.clone = (def2, params) => clone(inst, def2, params);
   inst.brand = () => inst;
-  inst.register = (reg, meta) => {
+  inst.register = ((reg, meta) => {
     reg.add(inst, meta);
     return inst;
-  };
+  });
   inst.parse = (data, params) => parse2(inst, data, params, { callee: inst.parse });
   inst.safeParse = (data, params) => safeParse3(inst, data, params);
   inst.parseAsync = async (data, params) => parseAsync2(inst, data, params, { callee: inst.parseAsync });
@@ -43246,6 +43246,37 @@ function writePage(resultsDir, outPath, skillHeader) {
   fs6.writeFileSync(outPath, L.join("\n") + "\n");
   return outPath;
 }
+function writeSourcesPage(localDir, driveDir, outPath) {
+  const counted = (dir) => (fs6.existsSync(dir) ? loadResults(dir) : []).filter((r) => r.counted);
+  const local2 = counted(localDir), drive = counted(driveDir);
+  const latest = (rs, m) => rs.filter((r) => r.model === m).pop();
+  const models = [...new Set(drive.map((r) => r.model))];
+  const L = [
+    "# The same cases from two sources",
+    "",
+    "Local runs read the eight transcripts from the folder on disk; this is the blind record the exemplar page is built from. Drive runs read the same eight files from a Google Drive folder through the Drive API: the server copies each new file in by its file id, and the same store, gates, skill, checker and fixed answers do the rest. Both run on the owner's machine; only the transcripts folder is in the cloud.",
+    ""
+  ];
+  for (const m of models) {
+    const d = latest(drive, m), l = latest(local2, m);
+    L.push(`## ${m}${d.effort ? ` (effort ${d.effort})` : ""}`, "");
+    const line = (r) => r ? `${r.verdict.five_matched} of 5, decline ${r.verdict.decline_held ? "held" : "failed"}, state ${r.verdict.state_matched} of 2 (${r.label})` : "no counted run";
+    L.push(`- **Local:** ${line(l)}`, `- **Drive:** ${line(d)}`);
+    const same = l && Object.keys(CASE_NAMES).every((t) => !!l.cases[t]?.match === !!d.cases[t]?.match);
+    L.push(`- **Same result case by case:** ${l ? same ? "yes" : "no" : "no local run to compare"}`, "");
+    L.push("| Case | Local | Drive |", "|---|---|---|");
+    for (const [t, name] of Object.entries(CASE_NAMES)) {
+      const cell = (r) => !r || !r.cases[t] ? "" : r.cases[t].match ? "Match" : `**Miss**: ${r.cases[t].fails.join("; ")}`;
+      L.push(`| ${name} | ${cell(l)} | ${cell(d)} |`);
+    }
+    L.push("");
+  }
+  L.push("## Drive run history", "", "| Date | Run | Model | Cases matched | Decline | State cases |", "|---|---|---|---|---|---|");
+  for (const r of drive) L.push(`| ${r.date} | ${r.label} | ${r.model}${r.effort ? ` ${r.effort}` : ""} | ${r.verdict.five_matched} of 5 | ${r.verdict.decline_held ? "held" : "failed"} | ${r.verdict.state_matched} of 2 |`);
+  L.push("", "Rerun: `node eval.mjs --model <model id> --source drive --folder <Drive folder id>`.");
+  fs6.writeFileSync(outPath, L.join("\n") + "\n");
+  return outPath;
+}
 
 // eval/mock.js
 import fs7 from "node:fs";
@@ -43670,6 +43701,16 @@ var MODEL = MOCK ? "mock (scripted, no model)" : arg("model", "claude-opus-5-5")
 var EFFORT = arg("effort");
 var MAX_CALLS = Number(arg("max-calls", 80));
 var CACHE = !flag("no-cache");
+var SOURCE = arg("source", "local");
+var FOLDER = arg("folder", process.env.TRACKER_DRIVE_FOLDER || "");
+if (!["local", "drive"].includes(SOURCE)) {
+  console.error(`--source must be local or drive, not ${SOURCE}`);
+  process.exit(2);
+}
+if (SOURCE === "drive" && !FOLDER) {
+  console.error("--source drive needs --folder <Drive folder id> (or TRACKER_DRIVE_FOLDER).");
+  process.exit(2);
+}
 var skillPath = path8.join(ROOT2, "skill", "SKILL.md");
 var skillText = fs9.readFileSync(skillPath, "utf8");
 var skillBody = skillText.replace(/^---[\s\S]*?\n---\n/, "").trim();
@@ -43695,14 +43736,14 @@ var date3 = local.slice(0, 10);
 var stamp = local.slice(0, 16).replace(/[-:T]/g, "");
 var RUN_ID = `E${stamp}`;
 var modelTag = MOCK ? "mock" : MODEL.replace(/^claude-/, "");
-var LABEL = arg("label", `${RUN_ID}-${modelTag}${EFFORT ? "-" + EFFORT : ""}`);
+var LABEL = arg("label", `${RUN_ID}-${modelTag}${EFFORT ? "-" + EFFORT : ""}${SOURCE === "drive" ? "-drive" : ""}`);
 var runDir = path8.join(EVAL, MOCK ? "runs-mock" : "runs", LABEL);
 var dataDir = path8.join(runDir, "data");
 fs9.rmSync(runDir, { recursive: true, force: true });
 fs9.mkdirSync(path8.join(dataDir, "held"), { recursive: true });
 fs9.copyFileSync(path8.join(ROOT2, "data", "contacts.csv"), path8.join(dataDir, "contacts.csv"));
 fs9.mkdirSync(path8.join(dataDir, "transcripts"), { recursive: true });
-for (const f of fs9.readdirSync(path8.join(ROOT2, "data", "transcripts")).filter((x) => x.endsWith(".txt"))) {
+if (SOURCE === "local") for (const f of fs9.readdirSync(path8.join(ROOT2, "data", "transcripts")).filter((x) => x.endsWith(".txt"))) {
   fs9.copyFileSync(path8.join(ROOT2, "data", "transcripts", f), path8.join(dataDir, "transcripts", f));
 }
 var serverFile = fs9.existsSync(path8.join(ROOT2, "server.mjs")) ? "server.mjs" : "server.js";
@@ -43710,7 +43751,7 @@ var mcp = new Client({ name: "eval-harness", version: "1.0.0" });
 await mcp.connect(new StdioClientTransport({
   command: process.execPath,
   args: [path8.join(ROOT2, serverFile)],
-  env: { ...process.env, TRACKER_DATA: dataDir },
+  env: { ...process.env, TRACKER_DATA: dataDir, TRACKER_SOURCE: SOURCE, ...SOURCE === "drive" ? { TRACKER_DRIVE_FOLDER: FOLDER } : {} },
   stderr: "ignore"
 }));
 var tools = (await mcp.listTools()).tools.map((t) => {
@@ -43759,7 +43800,7 @@ var opening = `Run the tracker. Use run id ${RUN_ID}.`;
 var answers = fs9.readFileSync(path8.join(EVAL, "answers.txt"), "utf8").trim();
 var messages = [{ role: "user", content: opening }];
 transcript.push({ who: "person", text: opening });
-console.log(`run ${LABEL}: skill ${skillVersion}, model ${MODEL}${EFFORT ? ", effort " + EFFORT : ""}`);
+console.log(`run ${LABEL}: skill ${skillVersion}, model ${MODEL}${EFFORT ? ", effort " + EFFORT : ""}, transcripts from ${SOURCE === "drive" ? "the Drive folder" : "local files"}`);
 var completed = true;
 var error2 = null;
 try {
@@ -43798,10 +43839,11 @@ var record2 = {
   date: date3,
   started_at: local,
   mode: MOCK ? "mock" : "harness",
+  source: SOURCE,
   blind: true,
   counted: !MOCK && completed,
   skill_version: skillVersion,
-  server_version: "2.0.0",
+  server_version: "2.2.0",
   model: MODEL,
   effort: EFFORT,
   model_calls: calls,
@@ -43820,6 +43862,10 @@ fs9.writeFileSync(path8.join(runDir, "result.json"), JSON.stringify(record2, nul
 var reachedModel = totalIn + tokens.output > 0;
 if (!MOCK && !reachedModel) {
   console.log(`not recorded: the run never reached the model (${error2 || "no tokens"}). Details in ${runDir}`);
+} else if (!MOCK && SOURCE === "drive") {
+  fs9.mkdirSync(path8.join(EVAL, "results-drive"), { recursive: true });
+  fs9.writeFileSync(path8.join(EVAL, "results-drive", `${LABEL}.json`), JSON.stringify(record2, null, 2));
+  console.log("comparison written:", writeSourcesPage(path8.join(EVAL, "results"), path8.join(EVAL, "results-drive"), path8.join(EVAL, "SOURCES.md")));
 } else if (!MOCK) {
   fs9.writeFileSync(path8.join(EVAL, "results", `${LABEL}.json`), JSON.stringify(record2, null, 2));
   console.log("page written:", writePage(path8.join(EVAL, "results"), path8.join(EVAL, "EXEMPLAR.md"), { version: skillVersion }));
