@@ -1,0 +1,7 @@
+The third attempt at run 1, the clean rerun (the earlier attempts are claude-r1-try1 and claude-r1-try2). Run in the browser with the Mac unticked under Devices for this chat, code execution and file creation off (which also turns skills off), web search off, no connectors, project memory off. The top of the copy shows "Memory is off for this chat" and no "Claude Desktop (macOS), Connected" line.
+The person opened the "Read a file, used a tool" step before copying. It shows one call: project_read on contacts.csv, the project's own knowledge file. It returned no text ("blob upload with no text extract"). No other tool, skill, connector or search step appears in the conversation.
+The model tried to run code and the platform refused it ("To run code, enable code execution and file creation in Settings → Capabilities", shown twice).
+The attached files had no upload prefix in this run; the importer found none to strip.
+The first reply's tracker block had two rows with an unquoted comma (A007, A008); the model wrote a corrected block straight after. The importer reads the final reply only.
+After the fixed answers, the model applied both stops (Gate 1 and Gate 2) and wrote its final blocks, then asked which row the "15 October" sentence belonged to. That sentence is meant for run 2. No reply was sent, per the rules in CASES.md.
+An earlier start in another chat was stopped by the person before any output and was not saved.

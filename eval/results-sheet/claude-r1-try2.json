@@ -1,0 +1,150 @@
+{
+  "run_id": "claude-r1-try2",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (Low)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-r1-try2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": false,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 11,
+    "tracker_from_line": 129,
+    "log_blocks": 2,
+    "log_lines": 30,
+    "log_from_line": 142,
+    "log_run_ids": [
+      "claude-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {
+      "01_halden_kickoff.txt": [
+        "f3043a10"
+      ],
+      "02_meridian_pricing.txt": [
+        "884f6a5a"
+      ],
+      "05_meridian_update.txt": [
+        "1c5e9c4e"
+      ],
+      "03_northgate_claims.txt": [
+        "b827e7ca"
+      ],
+      "04_halden_finance.txt": [
+        "3cb3b9d2"
+      ],
+      "06_northgate_board.txt": [
+        "01aaea89"
+      ]
+    },
+    "stripped": 41,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [
+      "log line 30 transcript 'all' (not a file name)"
+    ],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "line 3 due: expected 'by next Friday', found 'next Friday'",
+        "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 3 due: expected 'by next Friday', found 'next Friday'"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 4,
+    "decline_held": true
+  },
+  "notes": [
+    "Not counted: the Claude Desktop connection to the owner's Mac was available to this chat, so the tool server could have been reached, though the run's one tool step was project_read on contacts.csv. Counted out by the person; run 1 is run again as claude-r1 with the Mac unticked under Devices.",
+    "The second attempt at run 1 (the first is claude-r1-try1). Run in the browser with code execution and file creation off (which also turns skills off), web search off, no connectors chosen.",
+    "The model tried to run code and the platform refused it (\"To run code, enable code execution and file creation in Settings → Capabilities\", shown twice).",
+    "The person opened the \"Read a file, used a tool\" step before copying. It shows one call: project_read on contacts.csv, the project's own knowledge file. It returned no text (\"blob upload with no text extract\"). No skill, connector or search step appears in the conversation.",
+    "The browser gave each attached file an 8 character prefix (f3043a10-01_halden_kickoff.txt). The model wrote the prefixed names into its blocks; the importer stripped the prefix before marking (see names in this record).",
+    "After the fixed answers, the model applied both stops (Gate 1 and Gate 2) and wrote its final blocks, then asked again what the \"15 October\" sentence meant. That sentence is meant for run 2. No reply was sent, per the rules in CASES.md.",
+    "Project memory still empty after the run.",
+    "The line \"Claude Desktop (macOS), Connected\" near the top of the copy was first recorded as the page header only. It was a live connection to the Mac, available to this chat (the person unticked the Mac under Devices for later runs). A first reading that run 2 (claude-r2-try1) reached the tool server through it was later corrected: that run was given the tool server's tracker as a mistaken attachment. Nothing in this run shows it was used: its one tool step is project_read on contacts.csv, and its tracker is its own (run id claude-r1, its own numbering and wording, none of the tool server's rows)."
+  ]
+}

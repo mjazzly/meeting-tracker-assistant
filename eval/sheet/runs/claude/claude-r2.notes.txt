@@ -1,0 +1,6 @@
+The third attempt at run 2, the clean run (the earlier attempts are claude-r2-try1 and claude-r2-try2). Run in the browser with the Mac unticked under Devices for this chat, code execution and file creation off (which also turns skills off), web search off, no connectors, memory off. The top of the copy shows "Memory is off for this chat" and no desktop connection line.
+Attached: carry/claude-r1-tracker.csv (shown in the copy as claude-r1-tracker.csv), then 07_halden_followup.txt and 08_meridian_contracts.txt.
+The person opened the collapsed steps before copying. The one tool step is project_read on contacts.csv, the project's own knowledge file, which returned no text ("blob upload with no text extract"). The rest are summary lines. No other tool, skill, connector or search step appears.
+The model tried to run code and the platform refused it ("To run code, enable code execution and file creation in Settings → Capabilities", shown twice).
+The attached files had no upload prefix in this run.
+The fixed answers were sent once, after the model stopped at Gate 3. The model applied the 15 October answer, added the two held rows and wrote its final blocks. It said the Priya Nair and status update sentences matched nothing open in this run and changed nothing for them.

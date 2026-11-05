@@ -1,0 +1,7 @@
+Row: matched effort (High, as ChatGPT ran)
+A second Claude Project row, added so one row runs at the same effort as the ChatGPT Project (Thinking effort High). The default row (claude-r1, claude-r2, Sonnet 5.5 on Low, the Claude Project's default) stays on the record as it is.
+Same project and settings as claude-r1 and claude-r2 by the person's account: the Mac unticked under Devices for the chat, code execution and file creation off (which also turns skills off), web search off, no connectors, memory off. Model Sonnet 5.5 on High effort.
+The top of the copy shows "Memory is off for this chat" and no desktop connection line. Attached: 01 to 06.
+The copy shows the summary lines "Fetching the contacts file from the project." (twice) and one collapsed step, "Read a file, updated tasks, used a tool", not expanded in the copy, so the copy does not show what that call read. Nothing in the blocks comes from outside the attached files and the contacts table: every row carries run id claude-hi-r1 and every owner's company and role is the contacts table's.
+The browser gave each attached file an 8 character prefix (44446094-01_halden_kickoff.txt); the importer stripped it before marking.
+The fixed answers were sent once. The model applied both stops and wrote its final blocks, then asked which row the "15 October" sentence meant; the copy ends there, with no reply.

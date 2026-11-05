@@ -1,0 +1,87 @@
+{
+  "run_id": "gpt-r2",
+  "platform": "gpt",
+  "platform_name": "ChatGPT Project",
+  "model_reported": "GPT-6 (Thinking effort: High)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/gpt/gpt-r2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 14,
+    "tracker_from_line": 215,
+    "log_blocks": 2,
+    "log_lines": 12,
+    "log_from_line": 233,
+    "log_run_ids": [
+      "gpt-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    }
+  },
+  "misses": [],
+  "carry": {
+    "checked": true,
+    "carried_rows": 11,
+    "kept": true,
+    "changes": []
+  },
+  "verdict": {
+    "state_matched": 2
+  },
+  "notes": [
+    "Platform: ChatGPT Project, not a custom GPT. Custom GPTs can no longer be created in ChatGPT, and the plugins replacing them carry code, which does not fit a test of a sheet with no code behind it. A ChatGPT Project takes instructions and files with no code, as the Claude Project does. The run id keeps the gpt prefix.",
+    "Instructions: sheet/SHEET-gpt.md, not sheet/SHEET.md. The ChatGPT Project instructions take 8,000 characters and SHEET.md is 8,219, so SHEET-gpt.md is SHEET.md with formatting only removed: bold markers, inline backticks, heading markers, list bullets, indents and blank lines. Every word is kept, character for character; the four code fence lines round the worked example are kept. 7,976 characters.",
+    "Setup as gpt-r1 by the person's account: SHEET-gpt.md as the project instructions, contacts.csv as the only project file, Chat mode, GPT-6 with Thinking effort High (ChatGPT's default; each platform's row runs on its own default settings), account memory off, no tools on. Library access locked on; by the person's account the Library holds no meeting tracker files.",
+    "Attached: carry/gpt-r1-tracker.csv, then 07_halden_followup.txt and 08_meridian_contracts.txt. The copy shows the attached tracker as a table preview at the top, one cell per line; the importer does not read it as a block. The transcripts had no \"(1)\" suffix in this run.",
+    "The copy shows no tool, file or search step of any kind, so nothing in it shows a Library file opened or searched; every tracker row carries run id gpt-r1 or gpt-r2.",
+    "The copy shows the Gate 3 question with two answer options, as in gpt-r1's form. The fixed answers were typed once, as one message.",
+    "ChatGPT again offered the tracker and run log as spreadsheet files; the run is imported from the CSV blocks in the chat text, which the copy shows without code fences.",
+    "After the fixed answers (\"Worked for 1m 49s\"), the model added the two held rows with 15 October recorded as said and asked nothing further."
+  ],
+  "platform_verdict": {
+    "five_matched": 5,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": true
+  }
+}

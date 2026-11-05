@@ -1,0 +1,147 @@
+{
+  "run_id": "claude-hi-r1",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (effort: High, matched row)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-hi-r1.txt",
+  "mode": "sheet",
+  "row": "matched effort (High, as ChatGPT ran)",
+  "blind": true,
+  "counted": true,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 11,
+    "tracker_from_line": 92,
+    "log_blocks": 2,
+    "log_lines": 35,
+    "log_from_line": 105,
+    "log_run_ids": [
+      "claude-hi-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {
+      "01_halden_kickoff.txt": [
+        "44446094"
+      ],
+      "02_meridian_pricing.txt": [
+        "329fc642"
+      ],
+      "05_meridian_update.txt": [
+        "0c354bcd"
+      ],
+      "03_northgate_claims.txt": [
+        "b62fdd06"
+      ],
+      "04_halden_finance.txt": [
+        "55cb2dcf"
+      ],
+      "06_northgate_board.txt": [
+        "fde6f5e1"
+      ]
+    },
+    "stripped": 48,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "line 3 due: expected 'by next Friday', found 'next Friday'",
+        "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 3 due: expected 'by next Friday', found 'next Friday'"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 4,
+    "decline_held": true
+  },
+  "notes": [
+    "Row: matched effort (High, as ChatGPT ran)",
+    "A second Claude Project row, added so one row runs at the same effort as the ChatGPT Project (Thinking effort High). The default row (claude-r1, claude-r2, Sonnet 5.5 on Low, the Claude Project's default) stays on the record as it is.",
+    "Same project and settings as claude-r1 and claude-r2 by the person's account: the Mac unticked under Devices for the chat, code execution and file creation off (which also turns skills off), web search off, no connectors, memory off. Model Sonnet 5.5 on High effort.",
+    "The top of the copy shows \"Memory is off for this chat\" and no desktop connection line. Attached: 01 to 06.",
+    "The copy shows the summary lines \"Fetching the contacts file from the project.\" (twice) and one collapsed step, \"Read a file, updated tasks, used a tool\", not expanded in the copy, so the copy does not show what that call read. Nothing in the blocks comes from outside the attached files and the contacts table: every row carries run id claude-hi-r1 and every owner's company and role is the contacts table's.",
+    "The browser gave each attached file an 8 character prefix (44446094-01_halden_kickoff.txt); the importer stripped it before marking.",
+    "The fixed answers were sent once. The model applied both stops and wrote its final blocks, then asked which row the \"15 October\" sentence meant; the copy ends there, with no reply."
+  ]
+}

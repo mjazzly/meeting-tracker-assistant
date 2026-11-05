@@ -1,0 +1,141 @@
+{
+  "run_id": "claude-r1",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (Low)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-r1.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 3,
+    "tracker_rows": 10,
+    "tracker_from_line": 129,
+    "log_blocks": 2,
+    "log_lines": 27,
+    "log_from_line": 141,
+    "log_run_ids": [
+      "claude-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "line 3 due: expected 'by next Friday', found 'next Friday'",
+        "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": false,
+      "fails": [
+        "expected 3 rows, found 2",
+        "no row for source line 6"
+      ]
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 3 due: expected 'by next Friday', found 'next Friday'"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+    },
+    {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "miss": "expected 3 rows, found 2"
+    },
+    {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "miss": "no row for source line 6"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 3,
+    "decline_held": true
+  },
+  "notes": [
+    "The third attempt at run 1, the clean rerun (the earlier attempts are claude-r1-try1 and claude-r1-try2). Run in the browser with the Mac unticked under Devices for this chat, code execution and file creation off (which also turns skills off), web search off, no connectors, project memory off. The top of the copy shows \"Memory is off for this chat\" and no \"Claude Desktop (macOS), Connected\" line.",
+    "The person opened the \"Read a file, used a tool\" step before copying. It shows one call: project_read on contacts.csv, the project's own knowledge file. It returned no text (\"blob upload with no text extract\"). No other tool, skill, connector or search step appears in the conversation.",
+    "The model tried to run code and the platform refused it (\"To run code, enable code execution and file creation in Settings → Capabilities\", shown twice).",
+    "The attached files had no upload prefix in this run; the importer found none to strip.",
+    "The first reply's tracker block had two rows with an unquoted comma (A007, A008); the model wrote a corrected block straight after. The importer reads the final reply only.",
+    "After the fixed answers, the model applied both stops (Gate 1 and Gate 2) and wrote its final blocks, then asked which row the \"15 October\" sentence belonged to. That sentence is meant for run 2. No reply was sent, per the rules in CASES.md.",
+    "An earlier start in another chat was stopped by the person before any output and was not saved."
+  ]
+}

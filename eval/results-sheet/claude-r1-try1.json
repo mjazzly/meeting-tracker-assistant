@@ -1,0 +1,124 @@
+{
+  "run_id": "claude-r1-try1",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (Low)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-r1-try1.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": false,
+  "counted": false,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 11,
+    "tracker_from_line": 92,
+    "log_blocks": 2,
+    "log_lines": 28,
+    "log_from_line": 105,
+    "log_run_ids": [
+      "claude-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "line 3 due: expected 'by next Friday', found 'next Friday'",
+        "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": true,
+      "fails": []
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 3 due: expected 'by next Friday', found 'next Friday'"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 4,
+    "decline_held": true
+  },
+  "notes": [
+    "After the fixed answers, the model applied both stops (Gate 1 and Gate 2) and wrote its final blocks, then asked what the \"15 October\" sentence referred to. That sentence is meant for run 2. No reply was sent, per the rules in CASES.md.",
+    "Project memory still showed \"No memory yet\" after run 1.",
+    "Not blind: the Project chat loaded the meeting tracker skill installed on the account in its first step, \"Checking available skills and tools\", confirmed by the person on expanding that step. The skill, as written in this repo, holds the Priya Nair example and examples close to case 2, which the sheet left out. Recorded, not counted; run 1 is run again as claude-r1 with skills and connectors off."
+  ]
+}

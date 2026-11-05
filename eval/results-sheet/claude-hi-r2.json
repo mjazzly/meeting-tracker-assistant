@@ -1,0 +1,87 @@
+{
+  "run_id": "claude-hi-r2",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (effort: High, matched row)",
+  "date": "2026-11-06",
+  "source_file": "eval/sheet/runs/claude/claude-hi-r2.txt",
+  "mode": "sheet",
+  "row": "matched effort (High, as ChatGPT ran)",
+  "blind": true,
+  "counted": true,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 14,
+    "tracker_from_line": 96,
+    "log_blocks": 2,
+    "log_lines": 15,
+    "log_from_line": 112,
+    "log_run_ids": [
+      "claude-hi-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    }
+  },
+  "misses": [],
+  "carry": {
+    "checked": true,
+    "carried_rows": 11,
+    "kept": true,
+    "changes": []
+  },
+  "verdict": {
+    "state_matched": 2
+  },
+  "notes": [
+    "Row: matched effort (High, as ChatGPT ran)",
+    "A second Claude Project row, added so one row runs at the same effort as the ChatGPT Project (Thinking effort High). The default row (claude-r1, claude-r2, Sonnet 5.5 on Low, the Claude Project's default) stays on the record as it is.",
+    "Same project and settings as claude-r1 and claude-r2 by the person's account: the Mac unticked under Devices for the chat, code execution and file creation off (which also turns skills off), web search off, no connectors, memory off. Model Sonnet 5.5 on High effort.",
+    "Same setup as claude-hi-r1 by the person's account: same Claude Project, Sonnet 5.5 on High, the Mac unticked under Devices, Create and edit files off, memory off. New chat with carry/claude-hi-r1-tracker.csv, 07_halden_followup.txt and 08_meridian_contracts.txt attached. The top of the copy shows \"Memory is off for this chat\" and no desktop connection line.",
+    "The two runs of this row fall on different dates with no change to the setup: run 1 on 2026-11-05 (saved 9:44 PM) and run 2 on 2026-11-06 (around 4:20 AM).",
+    "The person expanded the one tool step before copying: project_read on contacts.csv, which returned no text (\"blob upload with no text extract\"). The rest are summary lines. No other tool, skill, connector or search step appears.",
+    "The attached files had no upload prefix in this run.",
+    "The model stopped at Gate 3 and asked about the 15 October date. The fixed answers were typed once. It recorded the date as said, added the two held rows, said the Priya Nair and status update answers matched no stop in this run and applied nothing for them, and asked nothing further."
+  ],
+  "platform_verdict": {
+    "five_matched": 4,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": true
+  }
+}

@@ -1,0 +1,3 @@
+After the fixed answers, the model applied both stops (Gate 1 and Gate 2) and wrote its final blocks, then asked what the "15 October" sentence referred to. That sentence is meant for run 2. No reply was sent, per the rules in CASES.md.
+Project memory still showed "No memory yet" after run 1.
+Not blind: the Project chat loaded the meeting tracker skill installed on the account in its first step, "Checking available skills and tools", confirmed by the person on expanding that step. The skill, as written in this repo, holds the Priya Nair example and examples close to case 2, which the sheet left out. Recorded, not counted; run 1 is run again as claude-r1 with skills and connectors off.

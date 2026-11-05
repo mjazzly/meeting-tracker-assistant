@@ -151,6 +151,14 @@ node library/run_skill_eval.js --model claude-opus-5-5 --effort high
 
 Each case runs in a fresh conversation with the skill and the three library tools; the reply is checked for the entry named, the tested-on state carried, the limit named on case 6, the question asked on case 4, and the brief with numbered questions on case 5. Results go to `library/results/`; a miss is named with its reason.
 
+## WORK-07: the same tracker as one sheet, with no code
+
+The tracker rewritten as one sheet (role and task, steps, output, stop rules, style) and run on three chat platforms with no code behind it: a Claude Project, a ChatGPT Project and a Gemini Skill. The four gates become written rules in the sheet, and the person carries the tracker from one chat to the next. Each platform ran the same eight cases, blind, marked by the same checker (`eval/check.js`) against the same expected results.
+
+- `sheet/SHEET.md` is the sheet; `sheet/SHEET-gpt.md` is the same words with the formatting removed, for ChatGPT's 8,000 character limit; `sheet/CASES.md` has the eight cases, the fixed answers and how each run is set up.
+- `eval/sheet/RESULTS.md` is the result, built from the records by `node eval/sheet/results.js`: every row and case, each miss by its line, what the sheet kept and what a chat platform loses against code, and the card for anyone picking it up.
+- `eval/sheet/import.js` reads a saved conversation and runs the checker on it; the saved conversations are in `eval/sheet/runs/` and the records in `eval/results-sheet/`.
+
 ## Start again from an empty tracker
 
 Delete `data/tracker.csv`, `data/run_log.csv`, `data/summary_*.md` and the files in `data/held/`. The server recreates the empty files on its next start.

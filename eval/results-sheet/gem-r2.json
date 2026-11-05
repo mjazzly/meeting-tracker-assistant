@@ -1,0 +1,95 @@
+{
+  "run_id": "gem-r2",
+  "platform": "gem",
+  "platform_name": "Gemini Skill (Gems retired)",
+  "model_reported": "Gemini Pro (as shown)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/gem/gem-r2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 13,
+    "tracker_from_line": 40,
+    "log_blocks": 2,
+    "log_lines": 11,
+    "log_from_line": 55,
+    "log_run_ids": [
+      "gem-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": [
+      {
+        "block": "tracker",
+        "line": 45,
+        "cells": 12,
+        "expected": 13,
+        "row": "A005,02_meridian_pricing.txt,5,Update the scenario B model with the distributor volumes and send it to Hannah Cole,Mei Ling Chong,Our firm,Consultant,2026-10-24,\"\"\"by 24 October\"\", meeting date 2026-10-21\",closed,gem-r1,05_meridian_update.txt line 1"
+      }
+    ]
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [
+    "tracker row at line 45 of the saved file has 12 cells, not 13; kept as written"
+  ],
+  "foreign_rows": [],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    }
+  },
+  "misses": [],
+  "carry": {
+    "checked": true,
+    "carried_rows": 10,
+    "kept": true,
+    "changes": []
+  },
+  "verdict": {
+    "state_matched": 2
+  },
+  "notes": [
+    "Platform: Gemini Skill, as in gem-r1 (Gems are retired on personal accounts and replaced by Skills). Same Skill and setup: meeting-tracker-sheet on the person's account, SHEET.md in full as its instructions, contacts.csv its only file, model Pro as shown, memory off, Google Workspace not connected, no other skills.",
+    "New chat, the Skill called with \"@meeting-tracker-sheet Run the tracker. Use run id gem-r2.\" with eval/sheet/runs/gem/carry/gem-r1-tracker.csv, 07_halden_followup.txt and 08_meridian_contracts.txt attached. Gemini shows attachments as chips, so no file name appears in the copied text.",
+    "The copy shows no tool, file or search step. The fixed answers were typed once, as one message.",
+    "Copied with Cmd A, so the last line of the file, \"Evaluating and logging task statuses\", is page chrome. The blocks came as Gemini code snippets, without code fences.",
+    "The carried A005 row came back exactly as carried, still 12 cells (\"closed,gem-r1,05_meridian_update.txt line 1\"): Gemini neither repaired nor dropped it. The importer names it again and keeps it as written.",
+    "The log's close line for A001 has an empty detail; the tracker row carries closed_by \"07_halden_followup.txt line 2\". After the answers the model logged the whole fixed answers text as one note on 08 and asked nothing further."
+  ],
+  "platform_verdict": {
+    "five_matched": 2,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": false
+  }
+}

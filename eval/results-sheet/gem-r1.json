@@ -1,0 +1,152 @@
+{
+  "run_id": "gem-r1",
+  "platform": "gem",
+  "platform_name": "Gemini Skill (Gems retired)",
+  "model_reported": "Gemini Pro (as shown)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/gem/gem-r1.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 10,
+    "tracker_from_line": 53,
+    "log_blocks": 2,
+    "log_lines": 26,
+    "log_from_line": 65,
+    "log_run_ids": [
+      "gem-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": [
+      {
+        "block": "tracker",
+        "line": 58,
+        "cells": 12,
+        "expected": 13,
+        "row": "A005,02_meridian_pricing.txt,5,Update the scenario B model with the distributor volumes and send it to Hannah Cole,Mei Ling Chong,Our firm,Consultant,2026-10-24,\"\"\"by 24 October\"\", meeting date 2026-10-21\",closed,gem-r1,05_meridian_update.txt line 1"
+      }
+    ]
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [
+    "tracker row at line 58 of the saved file has 12 cells, not 13; kept as written"
+  ],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": false,
+      "fails": [
+        "line 5 status: expected 'open', found 'closed'"
+      ]
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": true,
+      "fails": []
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": false,
+      "fails": [
+        "expected 3 rows, found 2",
+        "no row for source line 6"
+      ]
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": false,
+      "fails": [
+        "02_meridian_pricing.txt line 5 should be closed by 05_meridian_update.txt; status is 'closed', closed_by ''"
+      ]
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "miss": "line 5 status: expected 'open', found 'closed'"
+    },
+    {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "miss": "expected 3 rows, found 2"
+    },
+    {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "miss": "no row for source line 6"
+    },
+    {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "miss": "02_meridian_pricing.txt line 5 should be closed by 05_meridian_update.txt; status is 'closed', closed_by ''"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 2,
+    "decline_held": true
+  },
+  "notes": [
+    "Platform: Gemini Skill, not a Gemini Gem. Gems are retired on personal accounts and replaced by Skills, so the sheet ran as a Gemini Skill created by hand on the person's account (Google AI Plus). Name meeting-tracker-sheet (Gemini forces lowercase and hyphens); sheet/SHEET.md pasted in full as the instructions, which Gemini stores as SKILL.md; contacts.csv as the only file (the same file as data/contacts.csv); description left empty. The run id keeps the gem prefix.",
+    "Settings: Memory off, Instructions for Gemini empty, Google Workspace not connected, no other skills. Model Pro as shown, the default on this account; each platform's row runs on that platform's default settings.",
+    "The skill was invoked with @meeting-tracker-sheet in a new chat, with 01 to 06 attached, by sending \"@meeting-tracker-sheet Run the tracker. Use run id gem-r1.\" The copy shows no tool, file or search step, and does not list the attachments.",
+    "Gemini stopped at Gate 1 and Gate 2; its first summary says \"Read 6, declined 1, stopped 2\". The fixed answers were typed once, as one message. Its closing line for that second turn says \"Read 6, declined 1, stopped 0\". Both summaries say read 6 where five transcripts were read and one declined.",
+    "Copied with Cmd A, so the last line of the file, \"Adding new meeting entries\", is page chrome, not part of the conversation. The blocks came as Gemini code snippets: the copy shows each under a \"Code snippet\" label, without code fences.",
+    "Row A005 in both tracker blocks has 12 cells, not 13: \"closed,gem-r1,05_meridian_update.txt line 1\" leaves out one of closed_run and closed_by. The importer keeps the row as written and names it; the checker reads the third of those cells as closed_run and finds closed_by empty.",
+    "The short A005 row is Gemini's own output, not a copying fault: it wrote \"closed,gem-r1,05_meridian_update.txt line 1\", skipping closed_run, so the last cell is meant as closed_by (the person's reading). The checker reads cells by position, so it takes that cell as closed_run and finds closed_by empty; the row is marked as written, not as meant."
+  ]
+}

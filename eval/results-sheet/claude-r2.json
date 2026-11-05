@@ -1,0 +1,85 @@
+{
+  "run_id": "claude-r2",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (Low)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-r2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 13,
+    "tracker_from_line": 91,
+    "log_blocks": 2,
+    "log_lines": 11,
+    "log_from_line": 106,
+    "log_run_ids": [
+      "claude-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    }
+  },
+  "misses": [],
+  "carry": {
+    "checked": true,
+    "carried_rows": 10,
+    "kept": true,
+    "changes": []
+  },
+  "verdict": {
+    "state_matched": 2
+  },
+  "notes": [
+    "The third attempt at run 2, the clean run (the earlier attempts are claude-r2-try1 and claude-r2-try2). Run in the browser with the Mac unticked under Devices for this chat, code execution and file creation off (which also turns skills off), web search off, no connectors, memory off. The top of the copy shows \"Memory is off for this chat\" and no desktop connection line.",
+    "Attached: carry/claude-r1-tracker.csv (shown in the copy as claude-r1-tracker.csv), then 07_halden_followup.txt and 08_meridian_contracts.txt.",
+    "The person opened the collapsed steps before copying. The one tool step is project_read on contacts.csv, the project's own knowledge file, which returned no text (\"blob upload with no text extract\"). The rest are summary lines. No other tool, skill, connector or search step appears.",
+    "The model tried to run code and the platform refused it (\"To run code, enable code execution and file creation in Settings → Capabilities\", shown twice).",
+    "The attached files had no upload prefix in this run.",
+    "The fixed answers were sent once, after the model stopped at Gate 3. The model applied the 15 October answer, added the two held rows and wrote its final blocks. It said the Priya Nair and status update sentences matched nothing open in this run and changed nothing for them."
+  ],
+  "platform_verdict": {
+    "five_matched": 3,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": false
+  }
+}

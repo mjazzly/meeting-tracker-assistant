@@ -1,0 +1,6 @@
+Platform: Gemini Skill, as in gem-r1 (Gems are retired on personal accounts and replaced by Skills). Same Skill and setup: meeting-tracker-sheet on the person's account, SHEET.md in full as its instructions, contacts.csv its only file, model Pro as shown, memory off, Google Workspace not connected, no other skills.
+New chat, the Skill called with "@meeting-tracker-sheet Run the tracker. Use run id gem-r2." with eval/sheet/runs/gem/carry/gem-r1-tracker.csv, 07_halden_followup.txt and 08_meridian_contracts.txt attached. Gemini shows attachments as chips, so no file name appears in the copied text.
+The copy shows no tool, file or search step. The fixed answers were typed once, as one message.
+Copied with Cmd A, so the last line of the file, "Evaluating and logging task statuses", is page chrome. The blocks came as Gemini code snippets, without code fences.
+The carried A005 row came back exactly as carried, still 12 cells ("closed,gem-r1,05_meridian_update.txt line 1"): Gemini neither repaired nor dropped it. The importer names it again and keeps it as written.
+The log's close line for A001 has an empty detail; the tracker row carries closed_by "07_halden_followup.txt line 2". After the answers the model logged the whole fixed answers text as one note on 08 and asked nothing further.

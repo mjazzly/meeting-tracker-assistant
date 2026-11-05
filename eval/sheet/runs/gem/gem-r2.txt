@@ -1,0 +1,75 @@
+Platform: Gemini Skill (Gems retired)
+Model: Gemini Pro (as shown)
+Date: 2026-11-05
+
+
+Conversation with Gemini
+@meeting-tracker-sheet Run the tracker. Use run id gem-r2.
+
+Code snippet
+action_id,transcript,source_line,action,owner,owner_company,owner_role,due,due_note,status,added_run,closed_run,closed_by
+A001,01_halden_kickoff.txt,3,Send the spend export for the last twelve months,Sofia Lindqvist,Halden Logistics,Head of Procurement,2026-10-22,"""by Thursday"", meeting date 2026-10-20",closed,gem-r1,gem-r2,07_halden_followup.txt line 2
+A002,01_halden_kickoff.txt,5,Send the draft category taxonomy to Sofia Lindqvist,Aiden Brooks,Our firm,Consultant,2026-10-27,"""by 27 October"", meeting date 2026-10-20",open,gem-r1,,
+A003,01_halden_kickoff.txt,6,Set up the introductions to the three logistics partners,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-31,"""by the end of this month"", meeting date 2026-10-20",open,gem-r1,,
+A004,02_meridian_pricing.txt,3,Send the revised price list to the distributors,not stated,,,2026-10-28,"""by 28 October"", meeting date 2026-10-21",open,gem-r1,,
+A005,02_meridian_pricing.txt,5,Update the scenario B model with the distributor volumes and send it to Hannah Cole,Mei Ling Chong,Our firm,Consultant,2026-10-24,"""by 24 October"", meeting date 2026-10-21",closed,gem-r1,05_meridian_update.txt line 1
+A006,02_meridian_pricing.txt,6,Brief the sales team before the list goes out,not stated,,,not stated,"""before the list goes out""",open,gem-r1,,
+A007,03_northgate_claims.txt,3,Get the claims handler interview list to Lena Marsh,Yusuf Rahman,Northgate Insurance,Head of Claims,by next Friday,"relative date, meeting date not stated",confirm,gem-r1,,
+A008,03_northgate_claims.txt,5,Share the current process maps,Grace Tan,Northgate Insurance,Transformation Lead,by Wednesday,"relative date, meeting date not stated",confirm,gem-r1,,
+A009,04_halden_finance.txt,3,Send the cost centre mapping,Priya Nair,Halden Logistics,Finance Director,2026-10-29,"""by 29 October"", meeting date 2026-10-22",open,gem-r1,,
+A010,04_halden_finance.txt,5,Confirm with the board secretary that the diagnostic is on the November agenda,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-30,"""by 30 October"", meeting date 2026-10-22",open,gem-r1,,
+A011,07_halden_followup.txt,6,Book the category workshop with Sofia's team,Aiden Brooks,Our firm,Consultant,2026-11-06,"""by 6 November"", meeting date 2026-10-23",open,gem-r2,,
+Code snippet
+timestamp,run_id,transcript,step,result,detail
+1,gem-r2,07_halden_followup.txt,scan,new,meeting date 2026-10-23
+2,gem-r2,07_halden_followup.txt,close,A001,
+3,gem-r2,07_halden_followup.txt,note,note,"Lines 3, 4, 5, and 7 confirm existing actions or statuses, so they are not new actions or closures"
+4,gem-r2,07_halden_followup.txt,lookup,one,Aiden Brooks
+5,gem-r2,07_halden_followup.txt,append,1 rows,A011
+6,gem-r2,08_meridian_contracts.txt,scan,new,meeting date 2026-10-22
+7,gem-r2,08_meridian_contracts.txt,lookup,one,Hannah Cole
+8,gem-r2,08_meridian_contracts.txt,lookup,one,Mei Ling Chong
+9,gem-r2,08_meridian_contracts.txt,stop,held,"Gate 3: due date 2026-10-15 is before meeting date 2026-10-22"
+08_meridian_contracts.txt: Hannah Cole's due date "by 15 October" falls before the meeting date (22 October). Is this a mis-said date, or should it be recorded exactly as said?
+
+Read 2, declined 0, stopped 1.
+
+Priya Nair is Halden. Yes, no actions in the status update. Record the 15 October date as said. Leave the Northgate dates at confirm for now.
+
+Code snippet
+action_id,transcript,source_line,action,owner,owner_company,owner_role,due,due_note,status,added_run,closed_run,closed_by
+A001,01_halden_kickoff.txt,3,Send the spend export for the last twelve months,Sofia Lindqvist,Halden Logistics,Head of Procurement,2026-10-22,"""by Thursday"", meeting date 2026-10-20",closed,gem-r1,gem-r2,07_halden_followup.txt line 2
+A002,01_halden_kickoff.txt,5,Send the draft category taxonomy to Sofia Lindqvist,Aiden Brooks,Our firm,Consultant,2026-10-27,"""by 27 October"", meeting date 2026-10-20",open,gem-r1,,
+A003,01_halden_kickoff.txt,6,Set up the introductions to the three logistics partners,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-31,"""by the end of this month"", meeting date 2026-10-20",open,gem-r1,,
+A004,02_meridian_pricing.txt,3,Send the revised price list to the distributors,not stated,,,2026-10-28,"""by 28 October"", meeting date 2026-10-21",open,gem-r1,,
+A005,02_meridian_pricing.txt,5,Update the scenario B model with the distributor volumes and send it to Hannah Cole,Mei Ling Chong,Our firm,Consultant,2026-10-24,"""by 24 October"", meeting date 2026-10-21",closed,gem-r1,05_meridian_update.txt line 1
+A006,02_meridian_pricing.txt,6,Brief the sales team before the list goes out,not stated,,,not stated,"""before the list goes out""",open,gem-r1,,
+A007,03_northgate_claims.txt,3,Get the claims handler interview list to Lena Marsh,Yusuf Rahman,Northgate Insurance,Head of Claims,by next Friday,"relative date, meeting date not stated",confirm,gem-r1,,
+A008,03_northgate_claims.txt,5,Share the current process maps,Grace Tan,Northgate Insurance,Transformation Lead,by Wednesday,"relative date, meeting date not stated",confirm,gem-r1,,
+A009,04_halden_finance.txt,3,Send the cost centre mapping,Priya Nair,Halden Logistics,Finance Director,2026-10-29,"""by 29 October"", meeting date 2026-10-22",open,gem-r1,,
+A010,04_halden_finance.txt,5,Confirm with the board secretary that the diagnostic is on the November agenda,Daniel Okafor,Halden Logistics,Chief Operating Officer,2026-10-30,"""by 30 October"", meeting date 2026-10-22",open,gem-r1,,
+A011,07_halden_followup.txt,6,Book the category workshop with Sofia's team,Aiden Brooks,Our firm,Consultant,2026-11-06,"""by 6 November"", meeting date 2026-10-23",open,gem-r2,,
+A012,08_meridian_contracts.txt,2,Send the distributor contract list,Hannah Cole,Meridian Foods,Operations Manager,2026-10-15,"""by 15 October"", meeting date 2026-10-22",open,gem-r2,,
+A013,08_meridian_contracts.txt,3,Mark the agreements with a price-change clause and send the marked list to Tom Reyes,Mei Ling Chong,Our firm,Consultant,2026-10-29,"""by 29 October"", meeting date 2026-10-22",open,gem-r2,,
+Code snippet
+timestamp,run_id,transcript,step,result,detail
+1,gem-r2,07_halden_followup.txt,scan,new,meeting date 2026-10-23
+2,gem-r2,07_halden_followup.txt,close,A001,
+3,gem-r2,07_halden_followup.txt,note,note,"Lines 3, 4, 5, and 7 confirm existing actions or statuses, so they are not new actions or closures"
+4,gem-r2,07_halden_followup.txt,lookup,one,Aiden Brooks
+5,gem-r2,07_halden_followup.txt,append,1 rows,A011
+6,gem-r2,08_meridian_contracts.txt,scan,new,meeting date 2026-10-22
+7,gem-r2,08_meridian_contracts.txt,lookup,one,Hannah Cole
+8,gem-r2,08_meridian_contracts.txt,lookup,one,Mei Ling Chong
+9,gem-r2,08_meridian_contracts.txt,stop,held,"Gate 3: due date 2026-10-15 is before meeting date 2026-10-22"
+10,gem-r2,08_meridian_contracts.txt,note,answered,"Priya Nair is Halden. Yes, no actions in the status update. Record the 15 October date as said. Leave the Northgate dates at confirm for now."
+11,gem-r2,08_meridian_contracts.txt,append,2 rows,"A012, A013"
+No questions. Read 2, declined 0, stopped 0.
+
+
+
+
+
+Gemini is AI and can make mistakes.
+
+Evaluating and logging task statuses

@@ -1,0 +1,155 @@
+{
+  "run_id": "claude-r2-try2",
+  "platform": "claude",
+  "platform_name": "Claude Project",
+  "model_reported": "Sonnet 5.5 (Low)",
+  "date": "2026-11-05",
+  "source_file": "eval/sheet/runs/claude/claude-r2-try2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": false,
+  "counted": false,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 1,
+    "tracker_rows": 14,
+    "tracker_from_line": 27,
+    "log_blocks": 1,
+    "log_lines": 2,
+    "log_from_line": 43,
+    "log_run_ids": [
+      "claude-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": [
+      {
+        "block": "run log",
+        "line": 45,
+        "cells": 7,
+        "expected": 6,
+        "row": "2,claude-r2,08_meridian_contracts.txt,scan,skipped,Already in the tracker transcript column (A013, A014)"
+      }
+    ]
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [
+    "run log row at line 45 of the saved file has 7 cells, not 6; kept as written",
+    "14 rows carry a run id that is neither claude-r2 nor in the carried file: rows from a run this chat never had"
+  ],
+  "foreign_rows": [
+    "A001 (01_halden_kickoff.txt line 3) added_run 'R2026-10-25-1'",
+    "A001 (01_halden_kickoff.txt line 3) closed_run 'R2026-10-25-1'",
+    "A002 (01_halden_kickoff.txt line 5) added_run 'R2026-10-25-1'",
+    "A003 (01_halden_kickoff.txt line 6) added_run 'R2026-10-25-1'",
+    "A004 (02_meridian_pricing.txt line 3) added_run 'R2026-10-25-1'",
+    "A005 (02_meridian_pricing.txt line 5) added_run 'R2026-10-25-1'",
+    "A005 (02_meridian_pricing.txt line 5) closed_run 'R2026-10-25-1'",
+    "A006 (02_meridian_pricing.txt line 6) added_run 'R2026-10-25-1'",
+    "A007 (03_northgate_claims.txt line 3) added_run 'R2026-10-25-1'",
+    "A008 (03_northgate_claims.txt line 5) added_run 'R2026-10-25-1'",
+    "A009 (07_halden_followup.txt line 6) added_run 'R2026-10-25-1'",
+    "A010 (04_halden_finance.txt line 3) added_run 'R2026-10-25-1'",
+    "A011 (04_halden_finance.txt line 5) added_run 'R2026-10-25-1'",
+    "A012 (04_halden_finance.txt line 6) added_run 'R2026-10-25-1'",
+    "A013 (08_meridian_contracts.txt line 2) added_run 'R2026-10-25-1'",
+    "A014 (08_meridian_contracts.txt line 3) added_run 'R2026-10-25-1'"
+  ],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": false,
+      "fails": [
+        "gate past_due did not fire in the log",
+        "2 rows appended although the gate should have held them"
+      ]
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": false,
+      "held": false,
+      "verdict": "miss"
+    }
+  },
+  "misses": [
+    {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "miss": "gate past_due did not fire in the log"
+    },
+    {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "miss": "2 rows appended although the gate should have held them"
+    }
+  ],
+  "carry": {
+    "checked": true,
+    "carried_rows": 10,
+    "kept": false,
+    "changes": [
+      "A001 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A002 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A003 action: carried 'Set up introductions to the three logistics partners', came back 'Set up the introductions to Halden Logistics' three logistics partners'",
+      "A003 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A004 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A005 action: carried 'Update the scenario B model with distributor volumes and send it to Hannah Cole', came back 'Update the scenario B model with the distributor volumes and send it to Hannah Cole'",
+      "A005 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A005 closed_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A006 due_note: carried '\"before the list goes out\"', came back '\"before the list goes out\", names no date'",
+      "A006 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A007 action: carried 'Send the claims handler interview list to Lena Marsh', came back 'Get the claims handler interview list to Lena Marsh'",
+      "A007 due: carried 'next Friday', came back 'by next Friday'",
+      "A007 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A008 action: carried 'Share the current process maps with Lena Marsh', came back 'Share the current process maps'",
+      "A008 due: carried 'Wednesday', came back 'by Wednesday'",
+      "A008 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A009 transcript: carried '04_halden_finance.txt', came back '07_halden_followup.txt'",
+      "A009 source_line: carried '3', came back '6'",
+      "A009 action: carried 'Send the cost centre mapping', came back 'Book the category workshop with Sofia Lindqvist's team'",
+      "A009 owner: carried 'Priya Nair', came back 'Aiden Brooks'",
+      "A009 owner_company: carried 'Halden Logistics', came back 'Our firm'",
+      "A009 owner_role: carried 'Finance Director', came back 'Consultant'",
+      "A009 due: carried '2026-10-29', came back '2026-11-06'",
+      "A009 due_note: carried '\"by 29 October\", meeting date 2026-10-22', came back '\"by 6 November\", meeting date 2026-10-23'",
+      "A009 added_run: carried 'claude-r1', came back 'R2026-10-25-1'",
+      "A010 source_line: carried '5', came back '3'",
+      "A010 action: carried 'Confirm with the board secretary that the diagnostic is on the November agenda', came back 'Send the cost centre mapping'",
+      "A010 owner: carried 'Daniel Okafor', came back 'Priya Nair'",
+      "A010 owner_role: carried 'Chief Operating Officer', came back 'Finance Director'",
+      "A010 due: carried '2026-10-30', came back '2026-10-29'",
+      "A010 due_note: carried '\"by 30 October\", meeting date 2026-10-22', came back '\"by 29 October\", meeting date 2026-10-22'",
+      "A010 added_run: carried 'claude-r1', came back 'R2026-10-25-1'"
+    ]
+  },
+  "verdict": {
+    "state_matched": 1
+  },
+  "notes": [
+    "Not blind: the person attached the WORK-01 tool server's own tracker (data/tracker.csv on the owner's machine, run R2026-10-25-1, 24 Oct 2026) by mistake, in place of the carried tracker from claude-r1. That tracker already holds the rows and closures for 07 and 08. The model wrote it out row for row (identical apart from line endings), skipped both transcripts as already in the tracker (\"read 0, skipped 2\") and added nothing. Recorded, not counted.",
+    "Setup by the person's account: browser, the Mac unticked under Devices for this chat, code execution and file creation off (skills off with them), web search off, no connectors, memory off. The top of the copy shows \"Memory is off for this chat\" and no desktop connection line. The steps in the copy are summary lines only; the one about files is \"Reading the contacts file from the project.\" No other tool, skill, connector or search step appears.",
+    "The model tried to run code and the platform refused it, once.",
+    "The attached files had no upload prefix in this run.",
+    "The person sent the fixed answers once by their account, but the copy holds no fixed answers message: the model asked no questions and the conversation ends after its one reply.",
+    "The carried tracker it should have been given is claude-r1's (eval/sheet/runs/claude/carry/claude-r1-tracker.csv); the carry check compares against that. None of its 10 rows came back as carried. Case 7 marks as a match only because the attached tracker already held the closure of A001 by 07 line 2 and the 07 line 6 row; this run did not read 07.",
+    "The run log's second line has an unquoted comma in its detail (\"(A013, A014)\"), so it has 7 cells, not 6. The importer keeps it as written and names it (first imported, before the importer kept such rows, only the first log line was read; the marking is the same either way)."
+  ]
+}

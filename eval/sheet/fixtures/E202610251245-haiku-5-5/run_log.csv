@@ -1,0 +1,38 @@
+timestamp,run_id,transcript,step,result,detail
+2026-10-25T12:45:15,E202610251245,01_halden_kickoff.txt,scan,new,meeting date 2026-10-20
+2026-10-25T12:45:15,E202610251245,02_meridian_pricing.txt,scan,new,meeting date 2026-10-21
+2026-10-25T12:45:15,E202610251245,03_northgate_claims.txt,scan,new,meeting date not stated
+2026-10-25T12:45:15,E202610251245,04_halden_finance.txt,scan,new,meeting date 2026-10-22
+2026-10-25T12:45:15,E202610251245,05_meridian_update.txt,scan,new,meeting date 2026-10-22
+2026-10-25T12:45:15,E202610251245,06_northgate_board.txt,decline,declined,Classification: Confidential in header; body not read
+2026-10-25T12:45:15,E202610251245,07_halden_followup.txt,scan,new,meeting date 2026-10-23
+2026-10-25T12:45:15,E202610251245,08_meridian_contracts.txt,scan,new,meeting date 2026-10-22
+2026-10-25T12:45:42,E202610251245,01_halden_kickoff.txt,lookup,one,"Sofia Lindqvist: Halden Logistics, Head of Procurement"
+2026-10-25T12:45:42,E202610251245,01_halden_kickoff.txt,lookup,one,"Aiden Brooks: Our firm, Consultant"
+2026-10-25T12:45:42,E202610251245,01_halden_kickoff.txt,lookup,one,"Daniel Okafor: Halden Logistics, Chief Operating Officer"
+2026-10-25T12:45:42,E202610251245,02_meridian_pricing.txt,lookup,one,"Mei Ling Chong: Our firm, Consultant"
+2026-10-25T12:45:42,E202610251245,03_northgate_claims.txt,lookup,one,"Yusuf Rahman: Northgate Insurance, Head of Claims"
+2026-10-25T12:45:42,E202610251245,03_northgate_claims.txt,lookup,one,"Grace Tan: Northgate Insurance, Transformation Lead"
+2026-10-25T12:45:42,E202610251245,04_halden_finance.txt,lookup,multiple,"Priya Nair: Halden Logistics, Finance Director; Meridian Foods, Marketing Director"
+2026-10-25T12:45:42,E202610251245,08_meridian_contracts.txt,lookup,one,"Hannah Cole: Meridian Foods, Operations Manager"
+2026-10-25T12:45:46,E202610251245,01_halden_kickoff.txt,append,3 rows,"A001, A002, A003"
+2026-10-25T12:45:50,E202610251245,02_meridian_pricing.txt,append,3 rows,"A004, A005, A006"
+2026-10-25T12:45:52,E202610251245,03_northgate_claims.txt,append,2 rows,"A007, A008"
+2026-10-25T12:45:56,E202610251245,04_halden_finance.txt,stop,held,"Gate 1 duplicate name: Priya Nair matches 2 contacts (Halden Logistics, Finance Director; Meridian Foods, Marketing Director)"
+2026-10-25T12:45:58,E202610251245,05_meridian_update.txt,close,A005,closed by line 1: Update the scenario B model with distributor volumes and send it to Hannah Cole
+2026-10-25T12:46:00,E202610251245,05_meridian_update.txt,stop,held,Gate 2 no actions: transcript held no actions; summary carries one sentence
+2026-10-25T12:46:02,E202610251245,07_halden_followup.txt,close,A001,closed by line 2: Send the spend export for the last twelve months
+2026-10-25T12:46:02,E202610251245,07_halden_followup.txt,append,1 rows,A009
+2026-10-25T12:46:05,E202610251245,08_meridian_contracts.txt,stop,held,Gate 3 past due: line 2 due 2026-10-15 is before the meeting date 2026-10-22
+2026-10-25T12:46:12,E202610251245,01_halden_kickoff.txt,note,note,"Not actions: line 2 (wish, earlier the better); line 4 (conditional, once the export lands); line 7 (ERP access already handled); line 8 (we will pick it up next week, nothing checkable)."
+2026-10-25T12:46:12,E202610251245,02_meridian_pricing.txt,note,note,"Not actions: line 2 (decision to take scenario B, not a deliverable); line 4 (confirms the line 3 price list action, not a new row); line 7 (Tom leaves the sales brief to Meridian to decide, excluded by rule). Line 6 kept as unowned with no date."
+2026-10-25T12:46:12,E202610251245,03_northgate_claims.txt,note,note,"Not actions: line 6 (we will mark what has changed when we interview; a sentence about method, per v1.2 rule); line 7 (request to keep interviews to forty minutes; method, not a checkable deliverable). Lines 3 and 5 kept with owners named in the same sentence."
+2026-10-25T12:46:12,E202610251245,04_halden_finance.txt,note,note,"Line 2: Daniel says Priya owns the mapping; the commitment is Priya's own on line 3, so no extra row. Line 6: we will send the first cut, with no named owner, kept as not stated; the date depends on Priya's file so no date given."
+2026-10-25T12:46:12,E202610251245,07_halden_followup.txt,note,note,"Line 7: Daniel says partner introductions are in progress; that is not a closure, so A003 stays open. Line 5: confirms existing taxonomy action, no new row."
+2026-10-25T12:46:12,E202610251245,08_meridian_contracts.txt,note,note,"Line 1: need statement (we need the list to check clauses), not a commitment; the commitment is Hannah's on line 2, held at Gate 3."
+2026-10-25T12:46:14,E202610251245,,summary,written,eval/runs/E202610251245-haiku-5-5/data/summary_E202610251245.md; eval/runs/E202610251245-haiku-5-5/data/board_E202610251245.html
+2026-10-25T12:46:25,E202610251245,05_meridian_update.txt,append,0 rows,"no actions, confirmed by user"
+2026-10-25T12:46:29,E202610251245,04_halden_finance.txt,lookup,answered,"Priya Nair: Halden Logistics, Finance Director (user chose)"
+2026-10-25T12:46:29,E202610251245,04_halden_finance.txt,append,3 rows,"A010, A011, A012"
+2026-10-25T12:46:29,E202610251245,08_meridian_contracts.txt,append,2 rows,"A013, A014; date recorded as said, confirmed by user"
+2026-10-25T12:46:30,E202610251245,,summary,written,eval/runs/E202610251245-haiku-5-5/data/summary_E202610251245.md; eval/runs/E202610251245-haiku-5-5/data/board_E202610251245.html
