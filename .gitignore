@@ -13,3 +13,7 @@ dist/
 .DS_Store
 *.pdf
 *.tar.gz
+test/out-hosted/
+hosted/core/
+hosted/node_modules/
+hosted/.vercel/

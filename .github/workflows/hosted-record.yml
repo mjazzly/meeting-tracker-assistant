@@ -1,0 +1,31 @@
+# The hosted tracker's own record. No secret is needed: the numbers come from the service's public,
+# read-only /api/state, and the job writes with the repository's own token.
+#   Daily, 8:30 AM Kuala Lumpur time (00:30 UTC), after the 7:00 to 7:59 AM run: results/hosted/<day>.json.
+# If GitHub's scheduler creates no runs, cron-job.org calls this workflow's dispatch endpoint instead,
+# as it does for the scorecard. Every number on the page is read from results/hosted/ and results/ci/.
+name: hosted record
+on:
+  schedule:
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: hosted-record
+env:
+  HOSTED_URL: ${{ vars.HOSTED_URL }}
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    if: ${{ vars.HOSTED_URL != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Daily record
+        run: |
+          day=$(TZ=Asia/Kuala_Lumpur date +%F)
+          mkdir -p results/hosted
+          f="results/hosted/$day.json"
+          curl -fsS "$HOSTED_URL/api/state" | jq --arg day "$day" --arg at "$(date -u +%FT%TZ)" '{day: $day, written_at: $at} + .' > "$f"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$f"
+          git diff --cached --quiet || { git commit -m "Record the hosted tracker's day $day"; git pull --rebase origin main; git push; }

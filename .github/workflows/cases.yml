@@ -1,0 +1,57 @@
+# The gate between a change and the live service (hosted/DESIGN.md, "CI"). On every push to any branch,
+# and on dispatch (the weekly rerun from cron-job.org calls the dispatch endpoint for main):
+#   1. No key: the smoke test, the Drive cases, the hosted cases.
+#   2. With the tracker-ci workspace key: the eight cases through the hosted runner's own code on the
+#      smallest model, marked by eval/check.js against the bar in harness.json (hosted/ci.js; one rerun
+#      of the whole pass before red).
+#   3. On main only: the record is committed to results/ci/ with the [ci] prefix, green or red; on green
+#      only, live is fast-forwarded to the commit that passed. Vercel production tracks live, so nothing
+#      reaches the service from a red run or from any other branch.
+# Commits made with the workflow's own token start no new workflow run.
+name: cases
+on:
+  push:
+    paths-ignore:
+      - "results/**"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cases-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  cases:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Tests with no key
+        run: |
+          npm test
+          node test/drive_cases.js
+          node test/hosted_cases.js
+      - name: The eight cases on the smallest model
+        id: eight
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node hosted/ci.js ${{ github.ref == 'refs/heads/main' && '--record results/ci' || '' }}
+      - name: Keep the record
+        if: always() && github.ref == 'refs/heads/main' && (steps.eight.outcome == 'success' || steps.eight.outcome == 'failure')
+        run: |
+          ls results/ci/*.json >/dev/null 2>&1 || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/ci
+          git commit -m "[ci] eight cases for ${GITHUB_SHA::7}: ${{ steps.eight.outcome == 'success' && 'green' || 'red' }}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Move live to the commit that passed
+        if: success() && github.ref == 'refs/heads/main'
+        run: git push origin "${GITHUB_SHA}:refs/heads/live"

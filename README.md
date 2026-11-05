@@ -28,6 +28,11 @@ Rung 4 adds the library: `library/index.json` lists everything built so far (the
 | `library/expected.json`, `library/library_test.js` | Six search cases with expected verdicts written first, and the one-command test. |
 | `skill/check-before-build/SKILL.md` | The check-before-build skill: search first, return the match with its limits or the brief to fill, stop at three gates. |
 | `pages/check_before_build_page.html` | The one-page workflow diagram for rung 4, in the set's theme. |
+| `lib/tools.js` | The thirteen tools, registered on one MCP server around a store. `server.js` serves them over stdio; the hosted runner serves the same registration in memory. |
+| `lib/drive-sa.js` | Drive as a service account (v3.0): a signed JWT, no consent screen, the same calls as `lib/drive.js`. |
+| `hosted/` | The tracker on a schedule (WORK-08, v3.0): `DESIGN.md`, the runner and its parts in `lib/`, the Vercel routes in `api/`, `scripts/make-folder.js` and `scripts/probe.js`, and `ci.js`, the eight cases through the runner's own code. |
+| `test/hosted_cases.js`, `test/hosted_mock.js` | Offline test of the hosted runner and routes (cases H1 to H22 in `hosted/DESIGN.md`) against the fake Drive as a service account, and the scripted model it uses. |
+| `.github/workflows/cases.yml`, `hosted-record.yml` | The gate on every push (tests, then the eight cases; only a green run on `main` moves `live`), and the daily record of the service in `results/hosted/`. |
 
 ## The thirteen tools
 
@@ -158,6 +163,31 @@ The tracker rewritten as one sheet (role and task, steps, output, stop rules, st
 - `sheet/SHEET.md` is the sheet; `sheet/SHEET-gpt.md` is the same words with the formatting removed, for ChatGPT's 8,000 character limit; `sheet/CASES.md` has the eight cases, the fixed answers and how each run is set up.
 - `eval/sheet/RESULTS.md` is the result, built from the records by `node eval/sheet/results.js`: every row and case, each miss by its line, what the sheet kept and what a chat platform loses against code, and the card for anyone picking it up.
 - `eval/sheet/import.js` reads a saved conversation and runs the checker on it; the saved conversations are in `eval/sheet/runs/` and the records in `eval/results-sheet/`.
+
+## Run it on a schedule (hosted, v3.0)
+
+v3.0 runs the tracker with nobody at the keyboard. A Vercel function in `hosted/` runs once a day (Vercel Cron, 7:00 to 7:59 AM Kuala Lumpur), reads new transcripts from a Google Drive folder through `lib/source.js`, keeps the tracker, the log, the held rows and the saved answers in that same folder, writes the board back to it, and holds every gate question for a person to answer on `/held`. The answer is applied by the next run. `hosted/DESIGN.md` is the design: the routes, the folder, the run step by step, the cycle, CI, every secret and setting, and the cases.
+
+The folder is made once, with your own desktop sign-in, so your account owns every file. A service account has no Drive storage of its own, so it can only update files that already exist; the service never creates or deletes one.
+
+```
+node hosted/scripts/make-folder.js --check-sign-in
+node hosted/scripts/make-folder.js
+node hosted/scripts/probe.js --key <service account key file> --tracker <DRIVE_TRACKER_ID>
+```
+
+The first checks that the desktop sign-in still works (if not, run `node server.mjs --auth`). The second makes `Meeting tracker/` with `transcripts/` (eight empty files, filled one a day by the service), `tracker/` and `released/`, and prints the folder ids. The third checks, with the service account, that an update in place works and a create is refused.
+
+Offline, with no key and no network:
+
+```
+npm test && node test/drive_cases.js && node test/hosted_cases.js
+node hosted/ci.js --mock
+```
+
+**If a run stops with "needs a person: the last save did not complete".** A save sets `mt:pushing` in Upstash before its first write and clears it after `run_log.csv`, the last file. If the flag is left, the save stopped part way and every later run stops until a person has looked. Open the folder and compare `tracker/tracker.csv`, `held.json`, `answers.json` and `run_log.csv` with the run the flag names (the save order is tracker, held, answers, summary, board, log). Put right what the half-finished save left, then in the Upstash console run `DEL mt:pushing`.
+
+**To stop every run at once:** in the Upstash console, `SET mt:kill on`. `DEL mt:kill` starts them again.
 
 ## Start again from an empty tracker
 

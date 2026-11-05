@@ -1,0 +1,16 @@
+/* The tracker page's own rules, in the site's terms: white panels, no shadows, amber for stops. */
+header.hero{padding:56px 0 24px}
+section{padding:16px 0}
+.quiet{font-size:14.5px;color:var(--ink-soft);margin-top:10px}
+.mono{font-family:var(--mono);font-size:12.5px}
+.gate-mark{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--amber-tint);color:var(--amber)}
+ul.held{list-style:none}
+ul.held li{padding:14px 0;border-top:1px solid var(--line)}
+ul.held li:first-child{border-top:none;padding-top:0}
+ul.held p{margin-top:6px;font-size:15px}
+iframe.board{width:100%;height:1400px;border:0;border-radius:var(--radius);background:var(--panel)}
+form.answer{display:grid;gap:8px;margin-top:10px;font-size:15px}
+form.answer input[type=date],form.answer input[name=line]{font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:8px}
+form.answer button{justify-self:start;appearance:none;border:0;cursor:pointer;padding:8px 18px;border-radius:999px;background:var(--marine);color:#fff;font:inherit;font-weight:700;font-size:14.5px}
+form.answer button:hover{background:var(--marine-deep)}
+@media (max-width:600px){.wrap{padding:0 16px}iframe.board{height:1800px}}

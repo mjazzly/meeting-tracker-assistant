@@ -1,0 +1,20 @@
+{
+  "name": "meeting-tracker-hosted",
+  "version": "3.0.0",
+  "description": "The meeting tracker on a schedule: Vercel functions in front of lib/store.js, state in a Google Drive folder. See DESIGN.md.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/copy-core.js",
+    "core": "node scripts/copy-core.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.3.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@upstash/redis": "1.40.0",
+    "zod": "3.25.76"
+  }
+}

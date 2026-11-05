@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "functions": {
+    "api/run.js": { "maxDuration": 300, "includeFiles": "core/**" },
+    "api/held.js": { "maxDuration": 30, "includeFiles": "core/**" },
+    "api/page.js": { "maxDuration": 10, "includeFiles": "core/**" },
+    "api/state.js": { "maxDuration": 10, "includeFiles": "core/**" },
+    "api/board.js": { "maxDuration": 10, "includeFiles": "core/**" }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/page" },
+    { "source": "/held", "destination": "/api/held" },
+    { "source": "/board", "destination": "/api/board" }
+  ],
+  "crons": [
+    { "path": "/api/run", "schedule": "0 23 * * *" }
+  ],
+  "git": {
+    "deploymentEnabled": { "*": false, "live": true }
+  }
+}
