@@ -2,9 +2,9 @@
 
 Turns meeting transcripts into an action tracker the model keeps itself. It looks every named person up in a contacts table through a tool it calls, appends to the tracker without overwriting, closes actions a later meeting resolves, and stops to ask at four gates rather than guess: a name that matches two people, a meeting with no actions, a date before the meeting it was set in, and a transcript marked confidential.
 
-**Owner:** Megat Jazly. **Current version:** v2.0. **Limits:** synthetic transcripts and a synthetic contacts table that stands in for a CRM; one folder; no scheduling; no external system connected.
+**Owner:** Megat Jazly. **Current version:** v2.2. **Limits:** synthetic transcripts and a synthetic contacts table that stands in for a CRM; one folder; no scheduling; no external system connected.
 
-**Tested on:** claude-opus-5-5 (effort high), 2026-10-25, automated harness run: 5 of 5 cases matched, decline held, bar met.
+**Tested on:** claude-opus-5-5 (effort high), 2026-11-06, automated harness run: 5 of 5 cases matched, decline held, bar met.
 
 **The bar:** four of the five cases matched and the decline holding, against expected results written before the first run. A miss is named with its line, never rounded up.
 
@@ -19,6 +19,8 @@ Turns meeting transcripts into an action tracker the model keeps itself. It look
 | 2026-10-24 | E202610242220-opus-5-5-high | v2.0 | harness, automated | claude-opus-5-5 high | 5 of 5 | held | 2 of 2 | yes | 542,346 / 10,588 |
 | 2026-10-25 | E202610251245-haiku-5-5 | v2.0 | harness, automated | claude-haiku-5-5 | 4 of 5 | held | 2 of 2 | yes | 40 / 18,065 |
 | 2026-10-25 | E202610251246-opus-5-5-high | v2.0 | harness, automated | claude-opus-5-5 high | 5 of 5 | held | 2 of 2 | yes | 50 / 11,169 |
+| 2026-11-06 | E202611061651-haiku-5-5 | v2.2 | harness, automated | claude-haiku-5-5 | 5 of 5 | held | 2 of 2 | yes | 48 / 17,243 |
+| 2026-11-06 | E202611061700-opus-5-5-high | v2.2 | harness, automated | claude-opus-5-5 high | 5 of 5 | held | 2 of 2 | yes | 46 / 11,034 |
 
 ## What each run found
 
@@ -26,7 +28,7 @@ Turns meeting transcripts into an action tracker the model keeps itself. It look
 - **Run 2:** First blind run. Four of five; the miss was case 3 line 6, a sentence about how interviews will be run taken as an unowned action. It came from v1.1's own fix for run 1. The v1.2 rule followed: an action needs something at the end that someone could check was done.
 - **Run 3:** First run on connected tools: the model called the tool server on the owner's machine for every step; no file was carried by hand. Five of five; the run 2 miss did not recur, and the model logged seven notes explaining its close calls.
 
-## Latest counted run, case by case (E202610251246-opus-5-5-high)
+## Latest counted run, case by case (E202611061700-opus-5-5-high)
 
 | Case | Result | Why not, if not |
 |---|---|---|
