@@ -344,6 +344,9 @@ head("H21", "public routes cost nothing");
   const mark = w.fake.calls.length, calls = w.model.calls;
   const pages = [await app.home(w.deps), await app.state(w.deps), await app.board(w.deps)];
   check(pages.every((p) => p.status === 200) && w.fake.calls.length === mark && w.model.calls === calls, "GET /, /api/state and /board: 200, no Drive call, no model call");
+  check(pages.every((p) => /s-maxage=60/.test(p.headers["cache-control"])), "each is cached at the edge for a minute, so a flood of visits cannot spend the shared Redis allowance");
+  const priv = [await app.held(w.deps, w.req("GET", "/held", { headers: { cookie: w.cookie } })), await app.runRoute(w.deps, w.req("GET", "/api/run"))];
+  check(priv.every((p) => p.headers["cache-control"] === "no-store"), "/held and /api/run are never cached");
   const all = pages.map((p) => p.body).join("\n");
   check(![ENV.CRON_SECRET, ENV.RUN_TOKEN, ENV.ANSWER_TOKEN, ENV.ANTHROPIC_API_KEY, ENV.IP_SALT, "PRIVATE KEY"].some((s) => all.includes(s)), "no token or key in any public body");
   check(!/\/edit|usp=|<form/.test(all) && pages[0].body.includes(`drive/folders/${w.ids.folder}`), "no edit link and no form; the folder link is the plain view link");
@@ -357,6 +360,9 @@ head("H22", "a preview has no settings");
   const b = await app.runRoute({ env: { CRON_SECRET: ENV.CRON_SECRET }, kv: w.kv }, w.req("GET", "/api/run", { headers: { authorization: `Bearer ${ENV.CRON_SECRET}` } }));
   check(a.status === 503 && b.status === 503 && JSON.parse(b.body).missing.includes("ANTHROPIC_API_KEY"), "not configured, naming what is missing");
   check((await w.kv.get(K.lock)) === null && w.saCalls().length === 0, "no lock, no Drive call");
+  const bare = { env: {}, kv: null };
+  const pub = [await app.home(bare), await app.state(bare), await app.board(bare)];
+  check(pub.every((p) => p.status === 503 && /not configured/i.test(p.body)), "the public routes answer not configured too, never a crash");
   done(w);
 }
 

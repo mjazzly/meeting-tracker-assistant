@@ -20,7 +20,10 @@ const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").
 const same = (a, b) => { const x = Buffer.from(String(a || "")), y = Buffer.from(String(b || "")); return x.length === y.length && x.length > 0 && crypto.timingSafeEqual(x, y); };
 const sha = (s) => crypto.createHash("sha256").update(s).digest("hex");
 const html = (status, body, headers = {}) => ({ status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...headers }, body });
-const json = (status, obj) => ({ status, headers: { "content-type": "application/json", "cache-control": "no-store" }, body: JSON.stringify(obj, null, 2) });
+const json = (status, obj, headers = {}) => ({ status, headers: { "content-type": "application/json", "cache-control": "no-store", ...headers }, body: JSON.stringify(obj, null, 2) });
+// The three public routes are cached at Vercel's edge for a minute, so a flood of visits reaches the
+// function (and the Upstash database it shares with the data answers demo) at most once a minute per region.
+const PUBLIC = { "cache-control": "public, max-age=0, s-maxage=60, stale-while-revalidate=300" };
 
 // ---------- failed tokens: ten in a day closes that address for the day ----------
 const ipKey = (env, ip) => sha(`${env.IP_SALT || "meeting-tracker"}|${ip || "unknown"}`).slice(0, 16);
@@ -59,8 +62,12 @@ async function snapshot(kv) {
   return { snap, runs };
 }
 
+// A deployment without Upstash (a preview, or before setup) answers every route plainly, never with a crash.
+const unset = (deps) => !deps.kv;
+
 // ---------- GET / ----------
 export async function home(deps) {
+  if (unset(deps)) return html(503, page("Meeting tracker", `<section><p>Not configured.</p></section>`));
   const { snap, runs } = await snapshot(deps.kv);
   const env = deps.env || {};
   const folder = env.DRIVE_FOLDER_ID ? `https://drive.google.com/drive/folders/${encodeURIComponent(env.DRIVE_FOLDER_ID)}` : null;
@@ -77,23 +84,25 @@ export async function home(deps) {
 <section><div class="panel"><h2>Waiting on a person (${waiting.length})</h2>${qs}<p class="quiet">Answers are given on a page only the owner can open, and applied by the next run.</p></div></section>
 <section><h2>The board as last released${snap?.board_run ? `, <span class="mono">${esc(snap.board_run)}</span>` : ""}</h2>
 <iframe class="board" src="/board" title="The action board" loading="lazy"></iframe></section>`;
-  return html(200, page("Meeting tracker, running on its own", main));
+  return html(200, page("Meeting tracker, running on its own", main), PUBLIC);
 }
 
 // ---------- GET /board ----------
 export async function board(deps) {
+  if (unset(deps)) return html(503, "<!doctype html><p>Not configured.</p>");
   const b = await deps.kv.get(K.board);
-  return { status: 200, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store",
+  return { status: 200, headers: { "content-type": "text/html; charset=utf-8", ...PUBLIC,
     "content-security-policy": "default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:" },
     body: b || "<!doctype html><p>No board yet.</p>" };
 }
 
 // ---------- GET /api/state ----------
 export async function state(deps) {
+  if (unset(deps)) return json(503, { error: "not configured" });
   const { snap, runs } = await snapshot(deps.kv);
   const spent = Number(await deps.kv.get(K.monthCost(monthKey()))) / 1e6 || 0;
   return json(200, { last_run: runs[0] || null, runs, ...(snap || {}), model: MODEL, tier: TIER,
-    month: monthKey(), cost_month_usd: Number(spent.toFixed(6)), budget_usd: LIMITS.budgetUsd });
+    month: monthKey(), cost_month_usd: Number(spent.toFixed(6)), budget_usd: LIMITS.budgetUsd }, PUBLIC);
 }
 
 // ---------- GET /api/run ----------
