@@ -1,6 +1,6 @@
 {
   "day": "2026-11-06",
-  "written_at": "2026-11-06T02:08:56Z",
+  "written_at": "2026-11-06T07:14:22Z",
   "last_run": {
     "at": "2026-11-06T02:05:27.624Z",
     "trigger": "manual",
@@ -489,6 +489,7 @@
   "answered": [],
   "answers_needing_a_person": 0,
   "board_run": "R2026-11-06-10",
+  "effort": "high",
   "month": "2026-11",
   "cost_month_usd": 0.02979,
   "budget_usd": 3
