@@ -8,7 +8,7 @@
 // req: { method, url, headers (lower-case names), body (string), ip }; returns { status, headers, body }.
 import crypto from "node:crypto";
 import { K, monthKey } from "./kv.js";
-import { run, MODEL, TIER, LIMITS } from "./runner.js";
+import { run, MODEL, TIER, EFFORT, LIMITS } from "./runner.js";
 import { Folder } from "./folder.js";
 import { sentence } from "./questions.js";
 import { klDate } from "./cycle.js";
@@ -101,7 +101,7 @@ export async function state(deps) {
   if (unset(deps)) return json(503, { error: "not configured" });
   const { snap, runs } = await snapshot(deps.kv);
   const spent = Number(await deps.kv.get(K.monthCost(monthKey()))) / 1e6 || 0;
-  return json(200, { last_run: runs[0] || null, runs, ...(snap || {}), model: MODEL, tier: TIER,
+  return json(200, { last_run: runs[0] || null, runs, ...(snap || {}), model: MODEL, effort: EFFORT, tier: TIER,
     month: monthKey(), cost_month_usd: Number(spent.toFixed(6)), budget_usd: LIMITS.budgetUsd }, PUBLIC);
 }
 

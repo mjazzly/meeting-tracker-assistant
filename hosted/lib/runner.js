@@ -24,6 +24,10 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 export const CORE = path.join(here, "..", "core");
 export const MODEL = "claude-haiku-5-5";   // fixed in code: the smallest tier; no setting or request changes it
 export const TIER = "smallest";
+// Fixed in code beside the model. Measured on 6 Nov 2026, five live-cadence passes each (results/ci-measure/):
+// at the default effort the bar was met in 3 of 5, with one case slipping at random in each pass; at high,
+// in 5 of 5, with only case 3 missed (the skill's due-date wording), for about a third more cost a pass.
+export const EFFORT = "high";
 export const LIMITS = {
   perRun: 2,              // transcripts read per invocation; the rest carry to the next run
   maxCalls: 40,           // model calls per run
@@ -87,7 +91,7 @@ export async function run(deps, { feed = "due", trigger = "cron" } = {}) {
   const { kv, drive } = deps;
   const at = now.toISOString();
   const month = monthKey(now);
-  const base = { at, trigger, model: MODEL };
+  const base = { at, trigger, model: MODEL, effort: deps.effort || EFFORT };
 
   const token = crypto.randomBytes(8).toString("hex");
   if (!(await kv.set(K.lock, token, { nx: true, ex: L.lockSeconds }))) {
@@ -164,8 +168,10 @@ export async function run(deps, { feed = "due", trigger = "cron" } = {}) {
         if (clock() - t0 > L.timeMs) { stopped = `the time limit (${Math.round(L.timeMs / 1000)} seconds)`; break; }
         if ((Number(await kv.get(K.monthCost(month))) / 1e6 || 0) >= L.budgetUsd) { stopped = "the month budget"; break; }
         calls++;
+        // deps.effort is set only by hosted/ci.js --measure to compare effort levels; the service and the CI gate
+        // always run at EFFORT
         const res = await deps.model.create({ model: MODEL, max_tokens: Math.min(L.maxTokensPerCall, L.maxOutput - tokens.output),
-          system, tools, messages, cache_control: { type: "ephemeral" } });
+          system, tools, messages, cache_control: { type: "ephemeral" }, output_config: { effort: deps.effort || EFFORT } });
         const u = res.usage || {};
         const t = { input: u.input_tokens || 0, output: u.output_tokens || 0, cache_read: u.cache_read_input_tokens || 0, cache_write: u.cache_creation_input_tokens || 0 };
         for (const k of Object.keys(tokens)) tokens[k] += t[k];
@@ -215,7 +221,7 @@ export async function run(deps, { feed = "due", trigger = "cron" } = {}) {
     const prev = JSON.parse((await kv.get(K.snapshot)) || "null");
     const tracker = store.tracker();
     const snap = {
-      skill_version: skillVersion(), model: MODEL, tier: TIER, updated_at: at,
+      skill_version: skillVersion(), model: MODEL, effort: deps.effort || EFFORT, tier: TIER, updated_at: at,
       cycle: cycle.started ? { day: cycle.day, cycle: cycle.cycle, started: cycle.cycleStart } : { day: null, starts: deps.cycleStart || null },
       counts: { actions: tracker.length, open: tracker.filter((r) => r.status === "open").length,
         confirm: tracker.filter((r) => r.status === "confirm").length, closed: tracker.filter((r) => r.status === "closed").length },

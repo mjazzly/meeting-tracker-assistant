@@ -185,6 +185,8 @@ npm test && node test/drive_cases.js && node test/hosted_cases.js
 node hosted/ci.js --mock
 ```
 
+`hosted/ci.js` gates on the live cadence (one transcript per run, each `/held` answer applied in the next run) and records the batched cadence beside it. `node hosted/ci.js --measure 5 [--effort high]` runs five live-cadence passes with no gate and prints a per-case tally, for choosing a model or effort level; it needs a `tracker-ci` key in `ANTHROPIC_API_KEY`. The service and the gate run the smallest model at high effort (`EFFORT` in `hosted/lib/runner.js`), chosen from those measured passes; `hosted/DESIGN.md` has the numbers.
+
 **If a run stops with "needs a person: the last save did not complete".** A save sets `mt:pushing` in Upstash before its first write and clears it after `run_log.csv`, the last file. If the flag is left, the save stopped part way and every later run stops until a person has looked. Open the folder and compare `tracker/tracker.csv`, `held.json`, `answers.json` and `run_log.csv` with the run the flag names (the save order is tracker, held, answers, summary, board, log). Put right what the half-finished save left, then in the Upstash console run `DEL mt:pushing`.
 
 **To stop every run at once:** in the Upstash console, `SET mt:kill on`. `DEL mt:kill` starts them again.

@@ -81,7 +81,7 @@ How the store's files map to the folder (the runner does the mapping; `store.js`
 
 Clearing `mt:pushing` is a person's job, never the service's: open the folder, compare `tracker.csv`, `held.json`, `answers.json` and `run_log.csv` with the run the flag names, put right what the half-finished save left, then `DEL mt:pushing` in the Upstash console. The README gives the steps.
 
-The model is fixed in code as the smallest tier (`claude-haiku-5-5`), with prompt caching on, as in the harness. The month budget in code is US$3, under each workspace's US$5 limit. A full pass of eight cost US$0.02 to US$0.05 on the harness records, so the budget is a backstop, not a forecast.
+The model is fixed in code as the smallest tier (`claude-haiku-5-5`) at **high effort**, with prompt caching on, as in the harness. High effort was chosen on 6 Nov 2026 from measured passes ("Effort, measured" below). The month budget in code is US$3, under each workspace's US$5 limit. A full pass of eight cost US$0.02 to US$0.05 on the harness records, so the budget is a backstop, not a forecast.
 
 ## The cycle
 
@@ -94,10 +94,14 @@ Step 4's evening pass (eight manual `feed=next` calls) runs before `CYCLE_START`
 On every push to any branch, and on dispatch. Only `main` can move `live`.
 
 1. **No key:** `npm test`, `node test/drive_cases.js`, `node test/hosted_cases.js`.
-2. **With the `tracker-ci` key:** `node hosted/ci.js`. The runner's own code against the fake Drive with the eight transcripts and the setup script's empty layout, smallest model. Order, as in the harness so `eval/expected/` stays valid: four invocations of two transcripts each, then `eval/answers.txt` saved through the `/held` answer path as one entry, then one more invocation that applies it. `eval/check.js` marks the final tracker against the bar in `harness.json`. Every miss is printed by case and line. If the bar is not met, the whole pass runs once more (the cases share state, so one cannot be rerun alone); red if the second pass misses too. Both passes are kept in the record.
+2. **With the `tracker-ci` key:** `node hosted/ci.js`, the runner's own code against the fake Drive with the setup script's empty layout, on the smallest model at the service's own settings. Two cadences, both marked by `eval/check.js` against the bar in `harness.json`, every miss printed by case and line:
+   - **Live cadence, the gate.** What the service does: one transcript fed and read per run. After each run, every question it held is answered through the `/held` path with the sentence the form writes, so each answer is applied in the next run, alongside the next transcript (runs 5, 6 and 9). The form's choices say what `eval/answers.txt` says; 03's meeting date is left unanswered, as the key leaves it. If the bar is not met, the live pass runs once more; red only if that pass misses too.
+   - **Batched cadence, recorded, not gating.** Two transcripts per run, as after a missed day, then `eval/answers.txt` word for word in a run with nothing new.
+   Changed on 6 Nov 2026 after step 4: CI had gated only on the batched cadence, which the service never runs on a normal day. See "Why the live pass and CI differed" below.
+   `node hosted/ci.js --measure N [--effort high]` runs N live-cadence passes with no gate and prints a per-case tally, to choose a model or effort by. `--effort` exists only there; the service never sets one.
 3. **On `main` only:** commit the record to `results/ci/` with the `[ci]` prefix, green or red, so the record shows every time the gate held as well as every pass. **On green only**, fast-forward `live` to the commit that passed. Commits made with the workflow's own token start no new workflow run.
 
-A ruleset on `live` blocks force pushes and deletion and restricts updates to the Actions app. If GitHub does not allow that bypass on this repo, the rule stays written down, and the record shows that every move of `live` came from a workflow run.
+A ruleset on `live` blocks force pushes and deletion and restricts updates to the Actions app. If GitHub does not allow that bypass on this repo, the rule stays written down, and the record shows that every move of `live` came from a workflow run. As set on 6 Nov 2026 (ruleset "live moves only from CI", active): GitHub offered no GitHub Actions entry in the bypass list, so the ruleset blocks deletion and force pushes only, and "restrict updates" is off, since with no bypass it would refuse the workflow's own fast-forward. Every move of `live` names its workflow run in `results/ci/`.
 
 Weekly rerun: cron-job.org calls the dispatch endpoint with a fine-grained token limited to Actions on this repo, as the scorecard's does.
 
@@ -168,3 +172,41 @@ Written before any code. Each runs the runner against the fake Drive (extended f
 `lib/store.js`, `lib/source.js`, `eval/expected/`, `eval/check.js`, `eval/answers.txt`, the bar in `harness.json`. `lib/drive.js` gains the service account sign-in in a new `lib/drive-sa.js`, same `list`, `download`, `upload` shape, Node only, no package added. `server.js` keeps its stdio wiring and imports the tools from `lib/tools.js`. `skill/SKILL.md` moves to v2.1 in its limits line and version log only.
 
 New packages, in `hosted/package.json` only: `@upstash/redis`, as in the demo.
+
+## Step 4, as run (6 Nov 2026)
+
+Ten manual runs from Terminal with `RUN_TOKEN` (`R2026-11-06-1` to `-10`), one transcript fed per run, then the edit check (`-11`). The record of all eleven is `results/hosted/2026-11-06.json`, written by the record job started by hand before the first cycle's reset.
+
+- **Gates.** Gate 1 held 04 (Priya Nair, two contacts); Gate 2 held 05; Gate 3 held 08 (line 2 due 2026-10-15, meeting 2026-10-22); 06 was declined from its header alone, its body never downloaded; 03's two dates went to `confirm` with the meeting date question.
+- **Answers.** Gate 1 answered on `/held` and applied by run 5; Gates 2 and 3 answered and applied by run 10. 03's meeting date left unanswered, as the key leaves it. Each answer was marked applied only in the run whose tracker rows were saved first.
+- **Drive.** Every write was an update in place by the service account; nothing was created or deleted.
+- **Edit check.** 02 given a new version in Drive (same file id): run 11 flagged it as edited after it was processed, read nothing twice, made no model call, and left `tracker.csv` byte for byte unchanged.
+- **Against the key** (eval/check.js on the folder's final state): 2 of 5 matched, the decline held, both state cases held; below the bar. 01 took line 2 as an action; 03 dropped "by" from both dates; 05 did not close 02 line 5. The three CI passes on the same code and model before and around it met the bar (4, 5 and 4 of 5). The misses are the smallest model's reading on one live pass; the service's own parts (gates, answers, saves, decline, edit flag) all held.
+- **Cost.** US$0.0298 for the eleven runs, all in the `tracker-hosted` workspace; the two runs with nothing to read cost nothing.
+
+## Why the live pass and CI differed (6 Nov 2026)
+
+Compared input by input. The same on both paths: every transcript's bytes (the MD5 the service logged equals the repo file's), the skill, the tools, the store and the runner (identical blobs at all three CI commits; the live runs were served by `c471088`), the model and its settings. Temperature cannot be set on these models, so the same input can give a different reading from run to run on either path.
+
+Different: CI read two transcripts per run and applied `eval/answers.txt` once, after all eight, in a run with nothing new; the service reads one per run and applies each `/held` answer in the next run, sometimes alongside a new transcript.
+
+Per miss, against the five earlier smallest-model runs (three CI passes, two harness runs): 03's dropped "by" missed in 4 of 5 on both paths, so it is the model on that input, not the path. 05's missing closure matched in 5 of 5 earlier; the live run that missed it first applied the Gate 1 answer for 04 and never called `tracker_read_tracker`, a run shape CI had never exercised, so it is most likely the path. 01's line 2 matched in 5 of 5 earlier on an input that differed only in the scan listing one transcript instead of two; unresolved by one live sample. CI now gates on the live cadence, and repeated measured passes settle the rest.
+
+## Effort, measured (6 Nov 2026)
+
+Five live-cadence passes each with `node hosted/ci.js --measure 5`, on the smallest model, the code as committed with this note; records in `results/ci-measure/` (`M202611060220-local.json` at the default effort, `M202611060235-local-high.json` at high).
+
+| | Default effort | High effort |
+|---|---|---|
+| Bar met | 3 of 5 | 5 of 5 |
+| Of the five cases, matched per pass | 4, 3, 4, 4, 3 | 4, 4, 4, 4, 4 |
+| 01, 04, 06, 07 | 5 of 5 each | 5 of 5 each |
+| 02 | 4 of 5 (a due date read as 2024, so Gate 3 fired) | 5 of 5 |
+| 03 | 0 of 5 ("by" dropped) | 0 of 5 ("by" dropped) |
+| 05 | 4 of 5 (Gate 2 did not fire once) | 5 of 5 |
+| 08 | 4 of 5 (one row left at `confirm`) | 5 of 5 |
+| Cost a pass | US$0.025 | US$0.033 |
+
+What it settles about the step 4 live pass (2 of 5): 01's line 2 and 05's missing closure matched in every live-cadence pass at both efforts, including the run that applies an answer and reads a new transcript together, so on the morning they were the default effort's one-off slips, not the path. 03 missed in every pass at both efforts: the skill's due-date wording, which sheet v1.1 addresses as its own change. One tier up was priced (about twenty times the cost per token) and not measured; high effort on the smallest model met the bar in every pass for about a third more.
+
+From this commit the service and the CI gate both run at high effort (`EFFORT` in `hosted/lib/runner.js`); `--effort` in the measure mode is the only override.

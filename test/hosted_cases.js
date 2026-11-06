@@ -366,5 +366,22 @@ head("H22", "a preview has no settings");
   done(w);
 }
 
+// ---------- H23 ----------
+head("H23", "the service runs at high effort; only hosted/ci.js --measure changes it");
+{
+  const w = await world({ day: 1 });
+  const seen = [];
+  w.model.onCall = (req) => { seen.push(req.output_config); };
+  await w.run();
+  check(seen.length > 0 && seen.every((x) => x?.effort === "high"), "every model call the service makes carries effort high");
+  const v = await world({ day: 1 });
+  const seen2 = [];
+  v.model.onCall = (req) => { seen2.push(req.output_config); };
+  v.deps.effort = "medium";
+  await v.run();
+  check(seen2.length > 0 && seen2.every((x) => x?.effort === "medium"), "a measure override (medium here) replaces it on every call");
+  done(w); done(v);
+}
+
 console.log(failures ? `\n${failures} failed` : "\nall passed");
 process.exit(failures ? 1 : 0);

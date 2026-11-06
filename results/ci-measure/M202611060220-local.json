@@ -1,0 +1,1376 @@
+{
+  "label": "M202611060220-local",
+  "started_at": "2026-11-06T02:20:24.317Z",
+  "commit": null,
+  "ref": null,
+  "workflow_run": null,
+  "trigger": "local",
+  "mode": "measure",
+  "skill_version": "v2.1",
+  "model": "claude-haiku-5-5",
+  "effort": "default",
+  "bar": "four of the five matched and the decline held",
+  "green": null,
+  "passes": [
+    {
+      "cadence": "live",
+      "gating": false,
+      "verdict": {
+        "five_matched": 4,
+        "decline_held": true,
+        "state_matched": 1,
+        "passed": true
+      },
+      "cases": {
+        "01_halden_kickoff.txt": {
+          "transcript": "01_halden_kickoff.txt",
+          "match": true,
+          "fails": []
+        },
+        "02_meridian_pricing.txt": {
+          "transcript": "02_meridian_pricing.txt",
+          "match": true,
+          "fails": []
+        },
+        "03_northgate_claims.txt": {
+          "transcript": "03_northgate_claims.txt",
+          "match": false,
+          "fails": [
+            "line 3 due: expected 'by next Friday', found 'next Friday'",
+            "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+          ]
+        },
+        "04_halden_finance.txt": {
+          "transcript": "04_halden_finance.txt",
+          "match": true,
+          "fails": []
+        },
+        "05_meridian_update.txt": {
+          "transcript": "05_meridian_update.txt",
+          "match": true,
+          "fails": []
+        },
+        "06_northgate_board.txt": {
+          "transcript": "06_northgate_board.txt",
+          "match": true,
+          "fails": []
+        },
+        "07_halden_followup.txt": {
+          "transcript": "07_halden_followup.txt",
+          "match": true,
+          "fails": []
+        },
+        "08_meridian_contracts.txt": {
+          "transcript": "08_meridian_contracts.txt",
+          "match": false,
+          "fails": [
+            "line 2 status: expected 'open', found 'confirm'"
+          ]
+        }
+      },
+      "answers": [
+        "04_halden_finance.txt: Priya Nair is Halden Logistics, Finance Director.",
+        "05_meridian_update.txt: yes, there are no actions in it.",
+        "08_meridian_contracts.txt: record the date on line 2 as said."
+      ],
+      "runs": [
+        {
+          "run_id": "R2026-10-28-1",
+          "outcome": "done",
+          "fed": [
+            "01_halden_kickoff.txt"
+          ],
+          "read": [
+            "01_halden_kickoff.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3329,
+            "cache_read": 50988,
+            "cache_write": 14098
+          },
+          "cost_usd": 0.003938
+        },
+        {
+          "run_id": "R2026-10-28-2",
+          "outcome": "done",
+          "fed": [
+            "02_meridian_pricing.txt"
+          ],
+          "read": [
+            "02_meridian_pricing.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2169,
+            "cache_read": 48911,
+            "cache_write": 12868
+          },
+          "cost_usd": 0.003184
+        },
+        {
+          "run_id": "R2026-10-28-3",
+          "outcome": "done",
+          "fed": [
+            "03_northgate_claims.txt"
+          ],
+          "read": [
+            "03_northgate_claims.txt"
+          ],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2374,
+            "cache_read": 53303,
+            "cache_write": 14725
+          },
+          "cost_usd": 0.003562
+        },
+        {
+          "run_id": "R2026-10-28-4",
+          "outcome": "done",
+          "fed": [
+            "04_halden_finance.txt"
+          ],
+          "read": [
+            "04_halden_finance.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2448,
+            "cache_read": 48568,
+            "cache_write": 12833
+          },
+          "cost_usd": 0.003315
+        },
+        {
+          "run_id": "R2026-10-28-5",
+          "outcome": "done",
+          "fed": [
+            "05_meridian_update.txt"
+          ],
+          "read": [
+            "05_meridian_update.txt"
+          ],
+          "held": 1,
+          "appended": 3,
+          "closed": 1,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 10,
+          "tokens": {
+            "input": 22,
+            "output": 4054,
+            "cache_read": 107026,
+            "cache_write": 17925
+          },
+          "cost_usd": 0.00534
+        },
+        {
+          "run_id": "R2026-10-28-6",
+          "outcome": "done",
+          "fed": [
+            "06_northgate_board.txt"
+          ],
+          "read": [],
+          "held": 0,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 4,
+          "tokens": {
+            "input": 10,
+            "output": 1340,
+            "cache_read": 27287,
+            "cache_write": 11144
+          },
+          "cost_usd": 0.002337
+        },
+        {
+          "run_id": "R2026-10-28-7",
+          "outcome": "done",
+          "fed": [
+            "07_halden_followup.txt"
+          ],
+          "read": [
+            "07_halden_followup.txt"
+          ],
+          "held": 0,
+          "appended": 1,
+          "closed": 1,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2450,
+            "cache_read": 54384,
+            "cache_write": 14729
+          },
+          "cost_usd": 0.003611
+        },
+        {
+          "run_id": "R2026-10-28-8",
+          "outcome": "done",
+          "fed": [
+            "08_meridian_contracts.txt"
+          ],
+          "read": [
+            "08_meridian_contracts.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2855,
+            "cache_read": 56953,
+            "cache_write": 15586
+          },
+          "cost_usd": 0.003947
+        },
+        {
+          "run_id": "R2026-10-28-9",
+          "outcome": "done",
+          "fed": [],
+          "read": [],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 5,
+          "tokens": {
+            "input": 12,
+            "output": 2252,
+            "cache_read": 39405,
+            "cache_write": 12965
+          },
+          "cost_usd": 0.003142
+        }
+      ],
+      "model_calls": 55,
+      "tokens": {
+        "input": 128,
+        "output": 23271,
+        "cache_read": 486825,
+        "cache_write": 126873
+      },
+      "cost_usd": 0.032376
+    },
+    {
+      "cadence": "live",
+      "gating": false,
+      "verdict": {
+        "five_matched": 3,
+        "decline_held": true,
+        "state_matched": 2,
+        "passed": false
+      },
+      "cases": {
+        "01_halden_kickoff.txt": {
+          "transcript": "01_halden_kickoff.txt",
+          "match": true,
+          "fails": []
+        },
+        "02_meridian_pricing.txt": {
+          "transcript": "02_meridian_pricing.txt",
+          "match": false,
+          "fails": [
+            "a gate fired where none was expected: Gate 3 past due: line 5 due 2024-10-24 is before the meeting date 2026-10-21"
+          ]
+        },
+        "03_northgate_claims.txt": {
+          "transcript": "03_northgate_claims.txt",
+          "match": false,
+          "fails": [
+            "line 3 due: expected 'by next Friday', found 'next Friday'",
+            "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+          ]
+        },
+        "04_halden_finance.txt": {
+          "transcript": "04_halden_finance.txt",
+          "match": true,
+          "fails": []
+        },
+        "05_meridian_update.txt": {
+          "transcript": "05_meridian_update.txt",
+          "match": true,
+          "fails": []
+        },
+        "06_northgate_board.txt": {
+          "transcript": "06_northgate_board.txt",
+          "match": true,
+          "fails": []
+        },
+        "07_halden_followup.txt": {
+          "transcript": "07_halden_followup.txt",
+          "match": true,
+          "fails": []
+        },
+        "08_meridian_contracts.txt": {
+          "transcript": "08_meridian_contracts.txt",
+          "match": true,
+          "fails": []
+        }
+      },
+      "answers": [
+        "04_halden_finance.txt: Priya Nair is Halden Logistics, Finance Director.",
+        "05_meridian_update.txt: yes, there are no actions in it.",
+        "08_meridian_contracts.txt: record the date on line 2 as said."
+      ],
+      "runs": [
+        {
+          "run_id": "R2026-10-28-1",
+          "outcome": "done",
+          "fed": [
+            "01_halden_kickoff.txt"
+          ],
+          "read": [
+            "01_halden_kickoff.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3062,
+            "cache_read": 59484,
+            "cache_write": 5249
+          },
+          "cost_usd": 0.002783
+        },
+        {
+          "run_id": "R2026-10-28-2",
+          "outcome": "done",
+          "fed": [
+            "02_meridian_pricing.txt"
+          ],
+          "read": [
+            "02_meridian_pricing.txt"
+          ],
+          "held": 1,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 7,
+          "tokens": {
+            "input": 16,
+            "output": 3095,
+            "cache_read": 69328,
+            "cache_write": 5028
+          },
+          "cost_usd": 0.002871
+        },
+        {
+          "run_id": "R2026-10-28-3",
+          "outcome": "done",
+          "fed": [
+            "03_northgate_claims.txt"
+          ],
+          "read": [
+            "03_northgate_claims.txt"
+          ],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 7,
+          "tokens": {
+            "input": 16,
+            "output": 2583,
+            "cache_read": 70637,
+            "cache_write": 6416
+          },
+          "cost_usd": 0.002801
+        },
+        {
+          "run_id": "R2026-10-28-4",
+          "outcome": "done",
+          "fed": [
+            "04_halden_finance.txt"
+          ],
+          "read": [
+            "04_halden_finance.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2801,
+            "cache_read": 57488,
+            "cache_write": 4674
+          },
+          "cost_usd": 0.002561
+        },
+        {
+          "run_id": "R2026-10-28-5",
+          "outcome": "done",
+          "fed": [
+            "05_meridian_update.txt"
+          ],
+          "read": [
+            "05_meridian_update.txt"
+          ],
+          "held": 1,
+          "appended": 3,
+          "closed": 1,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 9,
+          "tokens": {
+            "input": 20,
+            "output": 3538,
+            "cache_read": 103102,
+            "cache_write": 8427
+          },
+          "cost_usd": 0.003855
+        },
+        {
+          "run_id": "R2026-10-28-6",
+          "outcome": "done",
+          "fed": [
+            "06_northgate_board.txt"
+          ],
+          "read": [],
+          "held": 0,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 4,
+          "tokens": {
+            "input": 10,
+            "output": 1579,
+            "cache_read": 35832,
+            "cache_write": 2247
+          },
+          "cost_usd": 0.00143
+        },
+        {
+          "run_id": "R2026-10-28-7",
+          "outcome": "done",
+          "fed": [
+            "07_halden_followup.txt"
+          ],
+          "read": [
+            "07_halden_followup.txt"
+          ],
+          "held": 0,
+          "appended": 1,
+          "closed": 1,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2537,
+            "cache_read": 63715,
+            "cache_write": 6253
+          },
+          "cost_usd": 0.002689
+        },
+        {
+          "run_id": "R2026-10-28-8",
+          "outcome": "done",
+          "fed": [
+            "08_meridian_contracts.txt"
+          ],
+          "read": [
+            "08_meridian_contracts.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3236,
+            "cache_read": 57893,
+            "cache_write": 4493
+          },
+          "cost_usd": 0.00276
+        },
+        {
+          "run_id": "R2026-10-28-9",
+          "outcome": "done",
+          "fed": [],
+          "read": [],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 5,
+          "tokens": {
+            "input": 12,
+            "output": 1815,
+            "cache_read": 47522,
+            "cache_write": 3757
+          },
+          "cost_usd": 0.001854
+        }
+      ],
+      "model_calls": 56,
+      "tokens": {
+        "input": 130,
+        "output": 24246,
+        "cache_read": 565001,
+        "cache_write": 46544
+      },
+      "cost_usd": 0.023604
+    },
+    {
+      "cadence": "live",
+      "gating": false,
+      "verdict": {
+        "five_matched": 4,
+        "decline_held": true,
+        "state_matched": 2,
+        "passed": true
+      },
+      "cases": {
+        "01_halden_kickoff.txt": {
+          "transcript": "01_halden_kickoff.txt",
+          "match": true,
+          "fails": []
+        },
+        "02_meridian_pricing.txt": {
+          "transcript": "02_meridian_pricing.txt",
+          "match": true,
+          "fails": []
+        },
+        "03_northgate_claims.txt": {
+          "transcript": "03_northgate_claims.txt",
+          "match": false,
+          "fails": [
+            "line 3 due: expected 'by next Friday', found 'next Friday'",
+            "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+          ]
+        },
+        "04_halden_finance.txt": {
+          "transcript": "04_halden_finance.txt",
+          "match": true,
+          "fails": []
+        },
+        "05_meridian_update.txt": {
+          "transcript": "05_meridian_update.txt",
+          "match": true,
+          "fails": []
+        },
+        "06_northgate_board.txt": {
+          "transcript": "06_northgate_board.txt",
+          "match": true,
+          "fails": []
+        },
+        "07_halden_followup.txt": {
+          "transcript": "07_halden_followup.txt",
+          "match": true,
+          "fails": []
+        },
+        "08_meridian_contracts.txt": {
+          "transcript": "08_meridian_contracts.txt",
+          "match": true,
+          "fails": []
+        }
+      },
+      "answers": [
+        "04_halden_finance.txt: Priya Nair is Halden Logistics, Finance Director.",
+        "05_meridian_update.txt: yes, there are no actions in it.",
+        "08_meridian_contracts.txt: record the date on line 2 as said."
+      ],
+      "runs": [
+        {
+          "run_id": "R2026-10-28-1",
+          "outcome": "done",
+          "fed": [
+            "01_halden_kickoff.txt"
+          ],
+          "read": [
+            "01_halden_kickoff.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 7,
+          "tokens": {
+            "input": 16,
+            "output": 3051,
+            "cache_read": 71111,
+            "cache_write": 5360
+          },
+          "cost_usd": 0.002908
+        },
+        {
+          "run_id": "R2026-10-28-2",
+          "outcome": "done",
+          "fed": [
+            "02_meridian_pricing.txt"
+          ],
+          "read": [
+            "02_meridian_pricing.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2290,
+            "cache_read": 57013,
+            "cache_write": 4086
+          },
+          "cost_usd": 0.002227
+        },
+        {
+          "run_id": "R2026-10-28-3",
+          "outcome": "done",
+          "fed": [
+            "03_northgate_claims.txt"
+          ],
+          "read": [
+            "03_northgate_claims.txt"
+          ],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2062,
+            "cache_read": 57248,
+            "cache_write": 4207
+          },
+          "cost_usd": 0.002131
+        },
+        {
+          "run_id": "R2026-10-28-4",
+          "outcome": "done",
+          "fed": [
+            "04_halden_finance.txt"
+          ],
+          "read": [
+            "04_halden_finance.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3926,
+            "cache_read": 58109,
+            "cache_write": 5447
+          },
+          "cost_usd": 0.003226
+        },
+        {
+          "run_id": "R2026-10-28-5",
+          "outcome": "done",
+          "fed": [
+            "05_meridian_update.txt"
+          ],
+          "read": [
+            "05_meridian_update.txt"
+          ],
+          "held": 1,
+          "appended": 3,
+          "closed": 1,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 9,
+          "tokens": {
+            "input": 20,
+            "output": 3121,
+            "cache_read": 103164,
+            "cache_write": 8409
+          },
+          "cost_usd": 0.003645
+        },
+        {
+          "run_id": "R2026-10-28-6",
+          "outcome": "done",
+          "fed": [
+            "06_northgate_board.txt"
+          ],
+          "read": [],
+          "held": 0,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 4,
+          "tokens": {
+            "input": 10,
+            "output": 1557,
+            "cache_read": 35983,
+            "cache_write": 2287
+          },
+          "cost_usd": 0.001425
+        },
+        {
+          "run_id": "R2026-10-28-7",
+          "outcome": "done",
+          "fed": [
+            "07_halden_followup.txt"
+          ],
+          "read": [
+            "07_halden_followup.txt"
+          ],
+          "held": 0,
+          "appended": 1,
+          "closed": 1,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 7,
+          "tokens": {
+            "input": 16,
+            "output": 3119,
+            "cache_read": 81584,
+            "cache_write": 8890
+          },
+          "cost_usd": 0.003488
+        },
+        {
+          "run_id": "R2026-10-28-8",
+          "outcome": "done",
+          "fed": [
+            "08_meridian_contracts.txt"
+          ],
+          "read": [
+            "08_meridian_contracts.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3272,
+            "cache_read": 65841,
+            "cache_write": 6941
+          },
+          "cost_usd": 0.003163
+        },
+        {
+          "run_id": "R2026-10-28-9",
+          "outcome": "done",
+          "fed": [],
+          "read": [],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 5,
+          "tokens": {
+            "input": 12,
+            "output": 1818,
+            "cache_read": 47751,
+            "cache_write": 3873
+          },
+          "cost_usd": 0.001872
+        }
+      ],
+      "model_calls": 56,
+      "tokens": {
+        "input": 130,
+        "output": 24216,
+        "cache_read": 577804,
+        "cache_write": 49500
+      },
+      "cost_usd": 0.024085
+    },
+    {
+      "cadence": "live",
+      "gating": false,
+      "verdict": {
+        "five_matched": 4,
+        "decline_held": true,
+        "state_matched": 2,
+        "passed": true
+      },
+      "cases": {
+        "01_halden_kickoff.txt": {
+          "transcript": "01_halden_kickoff.txt",
+          "match": true,
+          "fails": []
+        },
+        "02_meridian_pricing.txt": {
+          "transcript": "02_meridian_pricing.txt",
+          "match": true,
+          "fails": []
+        },
+        "03_northgate_claims.txt": {
+          "transcript": "03_northgate_claims.txt",
+          "match": false,
+          "fails": [
+            "line 3 due: expected 'by next Friday', found 'next Friday'",
+            "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+          ]
+        },
+        "04_halden_finance.txt": {
+          "transcript": "04_halden_finance.txt",
+          "match": true,
+          "fails": []
+        },
+        "05_meridian_update.txt": {
+          "transcript": "05_meridian_update.txt",
+          "match": true,
+          "fails": []
+        },
+        "06_northgate_board.txt": {
+          "transcript": "06_northgate_board.txt",
+          "match": true,
+          "fails": []
+        },
+        "07_halden_followup.txt": {
+          "transcript": "07_halden_followup.txt",
+          "match": true,
+          "fails": []
+        },
+        "08_meridian_contracts.txt": {
+          "transcript": "08_meridian_contracts.txt",
+          "match": true,
+          "fails": []
+        }
+      },
+      "answers": [
+        "04_halden_finance.txt: Priya Nair is Halden Logistics, Finance Director.",
+        "05_meridian_update.txt: yes, there are no actions in it.",
+        "08_meridian_contracts.txt: record the date on line 2 as said."
+      ],
+      "runs": [
+        {
+          "run_id": "R2026-10-28-1",
+          "outcome": "done",
+          "fed": [
+            "01_halden_kickoff.txt"
+          ],
+          "read": [
+            "01_halden_kickoff.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 7,
+          "tokens": {
+            "input": 16,
+            "output": 3104,
+            "cache_read": 72451,
+            "cache_write": 6276
+          },
+          "cost_usd": 0.003063
+        },
+        {
+          "run_id": "R2026-10-28-2",
+          "outcome": "done",
+          "fed": [
+            "02_meridian_pricing.txt"
+          ],
+          "read": [
+            "02_meridian_pricing.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2172,
+            "cache_read": 57130,
+            "cache_write": 4082
+          },
+          "cost_usd": 0.002169
+        },
+        {
+          "run_id": "R2026-10-28-3",
+          "outcome": "done",
+          "fed": [
+            "03_northgate_claims.txt"
+          ],
+          "read": [
+            "03_northgate_claims.txt"
+          ],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2508,
+            "cache_read": 58131,
+            "cache_write": 4757
+          },
+          "cost_usd": 0.002431
+        },
+        {
+          "run_id": "R2026-10-28-4",
+          "outcome": "done",
+          "fed": [
+            "04_halden_finance.txt"
+          ],
+          "read": [
+            "04_halden_finance.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2762,
+            "cache_read": 57266,
+            "cache_write": 4587
+          },
+          "cost_usd": 0.002528
+        },
+        {
+          "run_id": "R2026-10-28-5",
+          "outcome": "done",
+          "fed": [
+            "05_meridian_update.txt"
+          ],
+          "read": [
+            "05_meridian_update.txt"
+          ],
+          "held": 1,
+          "appended": 3,
+          "closed": 1,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 9,
+          "tokens": {
+            "input": 20,
+            "output": 3797,
+            "cache_read": 104392,
+            "cache_write": 8932
+          },
+          "cost_usd": 0.004061
+        },
+        {
+          "run_id": "R2026-10-28-6",
+          "outcome": "done",
+          "fed": [
+            "06_northgate_board.txt"
+          ],
+          "read": [],
+          "held": 0,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 3,
+          "tokens": {
+            "input": 8,
+            "output": 1421,
+            "cache_read": 26825,
+            "cache_write": 2394
+          },
+          "cost_usd": 0.001279
+        },
+        {
+          "run_id": "R2026-10-28-7",
+          "outcome": "done",
+          "fed": [
+            "07_halden_followup.txt"
+          ],
+          "read": [
+            "07_halden_followup.txt"
+          ],
+          "held": 0,
+          "appended": 1,
+          "closed": 1,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2841,
+            "cache_read": 65397,
+            "cache_write": 7090
+          },
+          "cost_usd": 0.002962
+        },
+        {
+          "run_id": "R2026-10-28-8",
+          "outcome": "done",
+          "fed": [
+            "08_meridian_contracts.txt"
+          ],
+          "read": [
+            "08_meridian_contracts.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2974,
+            "cache_read": 65377,
+            "cache_write": 6904
+          },
+          "cost_usd": 0.003005
+        },
+        {
+          "run_id": "R2026-10-28-9",
+          "outcome": "done",
+          "fed": [],
+          "read": [],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 5,
+          "tokens": {
+            "input": 12,
+            "output": 1710,
+            "cache_read": 47861,
+            "cache_write": 3901
+          },
+          "cost_usd": 0.001822
+        }
+      ],
+      "model_calls": 54,
+      "tokens": {
+        "input": 126,
+        "output": 23289,
+        "cache_read": 554830,
+        "cache_write": 48923
+      },
+      "cost_usd": 0.02332
+    },
+    {
+      "cadence": "live",
+      "gating": false,
+      "verdict": {
+        "five_matched": 3,
+        "decline_held": true,
+        "state_matched": 2,
+        "passed": false
+      },
+      "cases": {
+        "01_halden_kickoff.txt": {
+          "transcript": "01_halden_kickoff.txt",
+          "match": true,
+          "fails": []
+        },
+        "02_meridian_pricing.txt": {
+          "transcript": "02_meridian_pricing.txt",
+          "match": true,
+          "fails": []
+        },
+        "03_northgate_claims.txt": {
+          "transcript": "03_northgate_claims.txt",
+          "match": false,
+          "fails": [
+            "line 3 due: expected 'by next Friday', found 'next Friday'",
+            "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+          ]
+        },
+        "04_halden_finance.txt": {
+          "transcript": "04_halden_finance.txt",
+          "match": true,
+          "fails": []
+        },
+        "05_meridian_update.txt": {
+          "transcript": "05_meridian_update.txt",
+          "match": false,
+          "fails": [
+            "gate no_actions did not fire in the log"
+          ]
+        },
+        "06_northgate_board.txt": {
+          "transcript": "06_northgate_board.txt",
+          "match": true,
+          "fails": []
+        },
+        "07_halden_followup.txt": {
+          "transcript": "07_halden_followup.txt",
+          "match": true,
+          "fails": []
+        },
+        "08_meridian_contracts.txt": {
+          "transcript": "08_meridian_contracts.txt",
+          "match": true,
+          "fails": []
+        }
+      },
+      "answers": [
+        "04_halden_finance.txt: Priya Nair is Halden Logistics, Finance Director.",
+        "08_meridian_contracts.txt: record the date on line 2 as said."
+      ],
+      "runs": [
+        {
+          "run_id": "R2026-10-28-1",
+          "outcome": "done",
+          "fed": [
+            "01_halden_kickoff.txt"
+          ],
+          "read": [
+            "01_halden_kickoff.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3597,
+            "cache_read": 60850,
+            "cache_write": 5732
+          },
+          "cost_usd": 0.003125
+        },
+        {
+          "run_id": "R2026-10-28-2",
+          "outcome": "done",
+          "fed": [
+            "02_meridian_pricing.txt"
+          ],
+          "read": [
+            "02_meridian_pricing.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2618,
+            "cache_read": 59996,
+            "cache_write": 5120
+          },
+          "cost_usd": 0.00255
+        },
+        {
+          "run_id": "R2026-10-28-3",
+          "outcome": "done",
+          "fed": [
+            "03_northgate_claims.txt"
+          ],
+          "read": [
+            "03_northgate_claims.txt"
+          ],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2748,
+            "cache_read": 57600,
+            "cache_write": 4736
+          },
+          "cost_usd": 0.002543
+        },
+        {
+          "run_id": "R2026-10-28-4",
+          "outcome": "done",
+          "fed": [
+            "04_halden_finance.txt"
+          ],
+          "read": [
+            "04_halden_finance.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3234,
+            "cache_read": 58107,
+            "cache_write": 4765
+          },
+          "cost_usd": 0.002795
+        },
+        {
+          "run_id": "R2026-10-28-5",
+          "outcome": "done",
+          "fed": [
+            "05_meridian_update.txt"
+          ],
+          "read": [
+            "05_meridian_update.txt"
+          ],
+          "held": 0,
+          "appended": 3,
+          "closed": 1,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 8,
+          "tokens": {
+            "input": 18,
+            "output": 3262,
+            "cache_read": 91296,
+            "cache_write": 7813
+          },
+          "cost_usd": 0.003522
+        },
+        {
+          "run_id": "R2026-10-28-6",
+          "outcome": "done",
+          "fed": [
+            "06_northgate_board.txt"
+          ],
+          "read": [],
+          "held": 0,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 2,
+          "tokens": {
+            "input": 6,
+            "output": 426,
+            "cache_read": 8681,
+            "cache_write": 8866
+          },
+          "cost_usd": 0.001409
+        },
+        {
+          "run_id": "R2026-10-28-7",
+          "outcome": "done",
+          "fed": [
+            "07_halden_followup.txt"
+          ],
+          "read": [
+            "07_halden_followup.txt"
+          ],
+          "held": 0,
+          "appended": 1,
+          "closed": 1,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 2477,
+            "cache_read": 63483,
+            "cache_write": 6229
+          },
+          "cost_usd": 0.002653
+        },
+        {
+          "run_id": "R2026-10-28-8",
+          "outcome": "done",
+          "fed": [
+            "08_meridian_contracts.txt"
+          ],
+          "read": [
+            "08_meridian_contracts.txt"
+          ],
+          "held": 1,
+          "appended": 0,
+          "closed": 0,
+          "answers_given": 0,
+          "answers_applied": 0,
+          "model_calls": 6,
+          "tokens": {
+            "input": 14,
+            "output": 3293,
+            "cache_read": 57702,
+            "cache_write": 4788
+          },
+          "cost_usd": 0.002823
+        },
+        {
+          "run_id": "R2026-10-28-9",
+          "outcome": "done",
+          "fed": [],
+          "read": [],
+          "held": 0,
+          "appended": 2,
+          "closed": 0,
+          "answers_given": 1,
+          "answers_applied": 1,
+          "model_calls": 5,
+          "tokens": {
+            "input": 12,
+            "output": 1748,
+            "cache_read": 47467,
+            "cache_write": 3793
+          },
+          "cost_usd": 0.001824
+        }
+      ],
+      "model_calls": 51,
+      "tokens": {
+        "input": 120,
+        "output": 23403,
+        "cache_read": 505182,
+        "cache_write": 51842
+      },
+      "cost_usd": 0.023244
+    }
+  ]
+}
