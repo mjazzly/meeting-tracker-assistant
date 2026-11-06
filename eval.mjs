@@ -12,11 +12,20 @@ var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require
   if (typeof require !== "undefined") return require.apply(this, arguments);
   throw Error('Dynamic require of "' + x + '" is not supported');
 });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+var __esm = (fn, res, err) => function __init() {
+  if (err) throw err[0];
+  try {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  } catch (e) {
+    throw err = [e], e;
+  }
 };
 var __commonJS = (cb, mod) => function __require2() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  try {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  } catch (e) {
+    throw mod = 0, e;
+  }
 };
 var __export = (target, all) => {
   for (var name in all)
@@ -666,7 +675,7 @@ var init_global_utils = __esm({
     init_version2();
     init_semver();
     major = VERSION2.split(".")[0];
-    GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for(`opentelemetry.js.api.${major}`);
+    GLOBAL_OPENTELEMETRY_API_KEY = /* @__PURE__ */ Symbol.for(`opentelemetry.js.api.${major}`);
     _global = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
   }
 });
@@ -2113,8 +2122,8 @@ var brand_privateNullableHeaders, clearSentinel, APPEND_HEADERS, appendHeaderVal
 var init_headers = __esm({
   "node_modules/@anthropic-ai/sdk/internal/headers.mjs"() {
     init_values();
-    brand_privateNullableHeaders = Symbol.for("brand.privateNullableHeaders");
-    clearSentinel = Symbol("clear");
+    brand_privateNullableHeaders = /* @__PURE__ */ Symbol.for("brand.privateNullableHeaders");
+    clearSentinel = /* @__PURE__ */ Symbol("clear");
     APPEND_HEADERS = /* @__PURE__ */ new Set(["x-stainless-helper"]);
     appendHeaderValue = (existing, addition) => {
       const tokens2 = existing ? existing.split(",").map((t) => t.trim()).filter(Boolean) : [];
@@ -3923,7 +3932,7 @@ var init_stainless_helper_header = __esm({
   "node_modules/@anthropic-ai/sdk/internal/stainless-helper-header.mjs"() {
     STAINLESS_HELPER_HEADER = "x-stainless-helper";
     STAINLESS_HELPER_METHOD_HEADER = "x-stainless-helper-method";
-    SDK_HELPER_SYMBOL = Symbol("anthropic.sdk.stainlessHelper");
+    SDK_HELPER_SYMBOL = /* @__PURE__ */ Symbol("anthropic.sdk.stainlessHelper");
   }
 });
 
@@ -35817,7 +35826,6 @@ function $constructor(name, initializer3, params) {
   Object.defineProperty(_, "name", { value: name });
   return _;
 }
-var $brand = Symbol("zod_brand");
 var $ZodAsyncError = class extends Error {
   constructor() {
     super(`Encountered Promise during synchronous parse. Use .parseAsync() instead.`);
@@ -38319,8 +38327,6 @@ function en_default() {
 }
 
 // node_modules/zod/v4/core/registries.js
-var $output = Symbol("ZodOutput");
-var $input = Symbol("ZodInput");
 var $ZodRegistry = class {
   constructor() {
     this._map = /* @__PURE__ */ new Map();
@@ -41089,9 +41095,6 @@ function isTerminal(status) {
   return status === "completed" || status === "failed" || status === "cancelled";
 }
 
-// node_modules/zod-to-json-schema/dist/esm/Options.js
-var ignoreOverride = Symbol("Let zodToJsonSchema decide on which parser to use");
-
 // node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 var ALPHA_NUMERIC = new Set("ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz0123456789");
 
@@ -43492,7 +43495,8 @@ function renderBoard(dataDir2, { runId = "", asOf = null, title = "Where the wee
   const tiles = [
     ["n", "Open actions", open.length, `across ${num(accounts.length)} client account${accounts.length === 1 ? "" : "s"}`],
     ["n", "Due in the next seven days", week.length, `${dShort(runDate)} to ${dShort(addDays(runDate, 7))}`],
-    ["r", "Overdue", overdue.length, overdue.length ? overdue.map((r) => `${r.owner.split(" ")[0]}, ${dShort(r.due)}`).join("; ") : "nothing past its date"],
+    // one short line, no names: the rows carry each owner, and an action with no owner has none to show
+    ["r", "Overdue", overdue.length, overdue.length === 0 ? "nothing past its date" : overdue.length === 1 ? `past its date, due ${dShort(overdue[0].due)}` : `past their date, the oldest due ${dShort(overdue.map((r) => r.due).sort()[0])}`],
     ["a", "No owner named", unowned.length, "nobody took these on in the meeting"],
     ["g", "Closed by a later meeting", closed.length, "a later transcript says it happened"]
   ].map(([c, k, v2, d]) => `<div class="tile"><span class="st ${c}"></span><div class="k">${k}</div><div class="v">${v2}</div><div class="d">${esc2(d)}</div></div>`).join("");
