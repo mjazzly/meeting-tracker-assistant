@@ -13554,7 +13554,8 @@ function renderBoard(dataDir2, { runId = "", asOf = null, title = "Where the wee
   const tiles = [
     ["n", "Open actions", open.length, `across ${num(accounts.length)} client account${accounts.length === 1 ? "" : "s"}`],
     ["n", "Due in the next seven days", week.length, `${dShort(runDate)} to ${dShort(addDays(runDate, 7))}`],
-    ["r", "Overdue", overdue.length, overdue.length ? overdue.map((r) => `${r.owner.split(" ")[0]}, ${dShort(r.due)}`).join("; ") : "nothing past its date"],
+    // one short line, no names: the rows carry each owner, and an action with no owner has none to show
+    ["r", "Overdue", overdue.length, overdue.length === 0 ? "nothing past its date" : overdue.length === 1 ? `past its date, due ${dShort(overdue[0].due)}` : `past their date, the oldest due ${dShort(overdue.map((r) => r.due).sort()[0])}`],
     ["a", "No owner named", unowned.length, "nobody took these on in the meeting"],
     ["g", "Closed by a later meeting", closed.length, "a later transcript says it happened"]
   ].map(([c, k, v, d]) => `<div class="tile"><span class="st ${c}"></span><div class="k">${k}</div><div class="v">${v}</div><div class="d">${esc2(d)}</div></div>`).join("");
