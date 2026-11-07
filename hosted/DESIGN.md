@@ -214,3 +214,18 @@ From this commit the service and the CI gate both run at high effort (`EFFORT` i
 ## Step 5, the red check (6 Nov 2026)
 
 Shown once, on branch `red-check/drop-unowned-actions` (commit `d8cead4`, never to merge): one line of `skill/SKILL.md` reversed so unowned actions are left out, a prompt regression the offline tests cannot see (they passed on the branch, as did the mock path). CI run 42155655463: the tests with no key passed; the eight cases failed the bar on the live cadence, reran once and failed again (2 of 5 both times, 02 and 04 named by their missing unowned lines, 03 as usual), so the run was red; the batched pass was recorded in the log at 2 of 5. "Keep the record" and "Move live" were skipped; `live` stayed at `a83000b` before and after. Cost US$0.0957 in `tracker-ci`. The branch is kept on GitHub as the evidence.
+
+## Skill v2.2, measured (6 Nov 2026)
+
+Five live-cadence passes with `node hosted/ci.js --measure 5`, at the service's own settings (smallest model, high effort), on skill v2.2 (`cea6696`); record `results/ci-measure/M202611060640-local.json`. Beside it, the v2.1 high-effort passes from "Effort, measured" above.
+
+| | v2.1, high effort | v2.2, high effort |
+|---|---|---|
+| Bar met | 5 of 5 | 5 of 5 |
+| Of the five cases, matched per pass | 4, 4, 4, 4, 4 | 4, 5, 5, 5, 5 |
+| 03 ("by" kept) | 0 of 5 | 5 of 5 |
+| 01 | 5 of 5 | 4 of 5 (line 2, "before the November board meeting", taken as an action once) |
+| 02, 04 to 08 | 5 of 5 each | 5 of 5 each |
+| Cost a pass | US$0.033 | US$0.032 |
+
+The v2.2 rule fixed case 3 in every pass. 01's line 2 is the same reading the step 4 live pass made; it slips now and then at either effort and is the one miss left. The CI gate on `cea6696` (one live-cadence pass and one batched pass) matched all eight in both.
