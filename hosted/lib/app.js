@@ -83,7 +83,19 @@ export async function home(deps) {
 <section><div class="panel"><h2>Last run</h2><p>${runLine(runs[0])}</p><p class="quiet">${esc(cyc)} The model is the ${TIER} tier.</p></div></section>
 <section><div class="panel"><h2>Waiting on a person (${waiting.length})</h2>${qs}<p class="quiet">Answers are given on a page only the owner can open, and applied by the next run.</p></div></section>
 <section><h2>The board as last released${snap?.board_run ? `, <span class="mono">${esc(snap.board_run)}</span>` : ""}</h2>
-<iframe class="board" src="/board" title="The action board" loading="lazy"></iframe></section>`;
+<div class="board-fit"><div class="board-stage"><iframe class="board" src="/board" title="The action board" loading="lazy"></iframe></div></div></section>
+<script>
+// The board is released as one A4 landscape page (297mm by 210mm, about 1123 by 794px). Scale it to the
+// width of its box and give the box the scaled height, so nothing is cut off at the right and nothing is
+// empty below. On a narrow screen it never shrinks past 0.6, and the box scrolls sideways instead, so the
+// words stay readable. Without this script the box scrolls sideways at the board's own size.
+(function(){var box=document.querySelector(".board-fit"),stage=box&&box.querySelector(".board-stage"),f=box&&box.querySelector("iframe.board");if(!f)return;
+var W=Math.round(297/25.4*96),A4=Math.round(210/25.4*96),H=A4;
+function fit(){var s=Math.max(0.6,Math.min(1,box.clientWidth/W));f.style.transform="scale("+s+")";stage.style.width=Math.ceil(W*s)+"px";stage.style.height=Math.ceil(H*s)+"px";}
+// The page keeps a printing margin under its last line; once the board has loaded, end the box where the words end.
+function trim(){try{var d=f.contentDocument,b=0;if(!d||!d.body)return;d.body.querySelectorAll(".page *").forEach(function(e){var r=e.getBoundingClientRect();if(r.height)b=Math.max(b,r.bottom+d.documentElement.scrollTop);});if(b>200)H=Math.min(A4,Math.ceil(b+24));}catch(e){}fit();}
+fit();addEventListener("resize",fit);f.addEventListener("load",trim);if(f.contentDocument&&f.contentDocument.readyState==="complete"&&f.contentDocument.body&&f.contentDocument.body.children.length)trim();})();
+</script>`;
   return html(200, page("Meeting tracker, running on its own", main), PUBLIC);
 }
 
