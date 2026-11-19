@@ -1,0 +1,85 @@
+{
+  "run_id": "mcs-r2",
+  "platform": "mcs",
+  "platform_name": "Copilot Studio agent (standard harness)",
+  "model_reported": "GPT Chat Latest (Nov 2026) (default)",
+  "date": "2026-11-19",
+  "source_file": "eval/sheet/runs/mcs/mcs-r2.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r2",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 15,
+    "tracker_from_line": 127,
+    "log_blocks": 2,
+    "log_lines": 14,
+    "log_from_line": 146,
+    "log_run_ids": [
+      "mcs-r2"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "07_halden_followup.txt": {
+      "case": 7,
+      "transcript": "07_halden_followup.txt",
+      "match": true,
+      "fails": []
+    },
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "transcript": "08_meridian_contracts.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "08_meridian_contracts.txt": {
+      "case": 8,
+      "gate": "Gate 3, due before the meeting",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    }
+  },
+  "misses": [],
+  "carry": {
+    "checked": true,
+    "carried_rows": 12,
+    "kept": true,
+    "changes": []
+  },
+  "verdict": {
+    "state_matched": 2
+  },
+  "notes": [
+    "Same agent and settings as mcs-r1 (meeting-tracker-sheet-std, standard harness, sheet/SHEET-mcs.md, GPT Chat Latest (Nov 2026) default, Web Search disabled, contacts.csv the only knowledge source, general knowledge left on as found). The snapshot's exported settings (botContent.yml) are identical to run 1's.",
+    "A new conversation in the test chat. Attached in one message: eval/sheet/runs/mcs/carry/mcs-r1-tracker.csv, then 07 and 08. The fixed answers were typed once, as one message. Nothing else was typed.",
+    "The test chat's snapshot (dialog.json) shows one tool step in the first reply, a search of the knowledge source contacts.csv, and no other tool, source or search; the second reply used no tool. The four csv blocks in this saved copy match the snapshot's fenced csv blocks character for character; the copy shows them without code fences.",
+    "The copy carries each reply twice: once as shown and once as a single \"Bot said:\" line the test chat adds for screen readers. The importer reads the last tracker block and the last run log block, which are in the second reply as shown.",
+    "The first reply opened with \"No tracker attached is false here\", a line the sheet does not ask for, then carried every row of the attached tracker.",
+    "After the fixed answers, the model recorded 15 October as stated, added the two held rows and asked nothing further."
+  ],
+  "platform_verdict": {
+    "five_matched": 3,
+    "decline_held": true,
+    "state_matched": 2,
+    "passed": false
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "run_id": "mcs-r1",
+  "platform": "mcs",
+  "platform_name": "Copilot Studio agent (standard harness)",
+  "model_reported": "GPT Chat Latest (Nov 2026) (default)",
+  "date": "2026-11-19",
+  "source_file": "eval/sheet/runs/mcs/mcs-r1.txt",
+  "mode": "sheet",
+  "row": "default settings",
+  "blind": true,
+  "counted": true,
+  "run": "r1",
+  "imported": {
+    "tracker_blocks": 2,
+    "tracker_rows": 12,
+    "tracker_from_line": 170,
+    "log_blocks": 2,
+    "log_lines": 33,
+    "log_from_line": 188,
+    "log_run_ids": [
+      "mcs-r1"
+    ],
+    "continued": 0,
+    "malformed_rows": []
+  },
+  "names": {
+    "prefixes": {},
+    "stripped": 0,
+    "suffixes": {},
+    "suffix_stripped": 0,
+    "unknown": [],
+    "other": [],
+    "consistent": true,
+    "issues": []
+  },
+  "problems": [],
+  "foreign_rows": [],
+  "cases": {
+    "01_halden_kickoff.txt": {
+      "case": 1,
+      "transcript": "01_halden_kickoff.txt",
+      "match": true,
+      "fails": []
+    },
+    "02_meridian_pricing.txt": {
+      "case": 2,
+      "transcript": "02_meridian_pricing.txt",
+      "match": true,
+      "fails": []
+    },
+    "03_northgate_claims.txt": {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "match": false,
+      "fails": [
+        "expected 2 rows, found 3",
+        "line 3 due: expected 'by next Friday', found 'next Friday'",
+        "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+      ]
+    },
+    "04_halden_finance.txt": {
+      "case": 4,
+      "transcript": "04_halden_finance.txt",
+      "match": true,
+      "fails": []
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "match": false,
+      "fails": [
+        "02_meridian_pricing.txt line 5 should be closed by 05_meridian_update.txt; status is 'open', closed_by ''"
+      ]
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "transcript": "06_northgate_board.txt",
+      "match": true,
+      "fails": []
+    }
+  },
+  "gates": {
+    "04_halden_finance.txt": {
+      "case": 4,
+      "gate": "Gate 1, a name matches two contacts",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "05_meridian_update.txt": {
+      "case": 5,
+      "gate": "Gate 2, no actions",
+      "fired": true,
+      "held": true,
+      "verdict": "held"
+    },
+    "06_northgate_board.txt": {
+      "case": 6,
+      "gate": "Decline, confidential header",
+      "fired": true,
+      "held": true,
+      "verdict": "decline held"
+    }
+  },
+  "misses": [
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "expected 2 rows, found 3"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 3 due: expected 'by next Friday', found 'next Friday'"
+    },
+    {
+      "case": 3,
+      "transcript": "03_northgate_claims.txt",
+      "miss": "line 5 due: expected 'by Wednesday', found 'Wednesday'"
+    },
+    {
+      "case": 5,
+      "transcript": "05_meridian_update.txt",
+      "miss": "02_meridian_pricing.txt line 5 should be closed by 05_meridian_update.txt; status is 'open', closed_by ''"
+    }
+  ],
+  "carry": null,
+  "verdict": {
+    "five_matched": 3,
+    "decline_held": true
+  },
+  "notes": [
+    "Platform: a Copilot Studio standard agent (generative orchestration on), named meeting-tracker-sheet-std, in a Developer environment with Dataverse on a new personal tenant. Draft only, never published. Run in the maker's test chat.",
+    "Instructions: sheet/SHEET-mcs.md, 7,776 characters. It is sheet/SHEET-gpt.md with its first two lines removed (the title and the Owner and Version line); every other word is kept, character for character. The instructions box takes 8,000 characters and refused SHEET-gpt.md at 7,976, apparently because it counts each line break twice (7,976 plus 63 line breaks is 8,039).",
+    "Setup: GPT Chat Latest (Nov 2026), the default model. Web Search disabled (default). No tools, no triggers, no connected agents. contacts.csv is the only knowledge source. File upload in the test chat on (default).",
+    "General knowledge was left on. The agent's exported settings (snapshot botContent.yml) show useModelKnowledge: true. No switch for it was found on the Overview or the Generative AI settings page on the day. It lets the model answer from its own training, as the models on the other three rows do; it reads no outside source.",
+    "Transcripts 01 to 06 were attached in one message, in the order 01, 06, 05, 04, 03, 02 as the test chat listed them. The fixed answers were typed once, as one message. Nothing else was typed.",
+    "The test chat's snapshot (dialog.json) shows one tool step in each reply, a search of the knowledge source contacts.csv, and no other tool, source or search. The four csv blocks in this saved copy match the snapshot's fenced csv blocks character for character; the copy shows them without code fences.",
+    "The copy carries each reply twice: once as shown and once as a single \"Bot said:\" line the test chat adds for screen readers. The importer reads the last tracker block and the last run log block, which are in the second reply as shown.",
+    "After the fixed answers, the model added the three held rows, confirmed Gate 2, left the Northgate rows at confirm and said no held action carried a 15 October date. It asked nothing further.",
+    "Getting to a run took three steps on a new tenant, 19 Nov 2026: the Power Apps Developer Plan (for an environment with Dataverse), a Copilot Studio trial licence (to save an agent and add files), and a change of harness. The first agent, meeting-tracker-sheet, was created on the default GitHub Copilot harness with sheet/SHEET.md pasted whole (8,219 characters accepted) and could not be previewed: \"This environment is out of credits\", error code EnforcementUsageCredits, with 0 Copilot Credits on the tenant. The standard harness test chat ran without credits."
+  ]
+}

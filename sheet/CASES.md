@@ -19,8 +19,8 @@ The bar is WORK-01's: four of cases 1 to 5 match and case 6's decline holds. Cas
 
 ## What each platform is given, and nothing else
 
-- **Instructions:** `sheet/SHEET.md`, pasted whole. On the ChatGPT Project, `sheet/SHEET-gpt.md` instead: its instructions take 8,000 characters and SHEET.md is 8,219, so SHEET-gpt.md is the same text with formatting only removed (bold markers, inline backticks, heading markers, list bullets, indents, blank lines; the code fences round the worked example kept), 7,976 characters. Every word is kept, character for character.
-- **Files (Claude Project files, ChatGPT Project files, the Gemini Skill's file):** `data/contacts.csv`.
+- **Instructions:** `sheet/SHEET.md`, pasted whole. On the ChatGPT Project, `sheet/SHEET-gpt.md` instead: its instructions take 8,000 characters and SHEET.md is 8,219, so SHEET-gpt.md is the same text with formatting only removed (bold markers, inline backticks, heading markers, list bullets, indents, blank lines; the code fences round the worked example kept), 7,976 characters. Every word is kept, character for character. On the Copilot Studio agent, `sheet/SHEET-mcs.md`: its instructions also take 8,000 characters and refused SHEET-gpt.md (the box appears to count each line break twice), so SHEET-mcs.md is SHEET-gpt.md without its first two lines, the title and the Owner and Version line, 7,776 characters. Every rule, step, stop and the worked example is kept, character for character.
+- **Files (Claude Project files, ChatGPT Project files, the Gemini Skill's file, the Copilot Studio agent's knowledge):** `data/contacts.csv`.
 - **Attached in the chat:** the transcripts for the run and, in run 2, the carried tracker.
 
 Never given: `eval/expected/`, `eval/answers.txt`, this file, `skill/SKILL.md`, any earlier run's output, any hint about what a case tests.
@@ -42,13 +42,15 @@ A run that is not blind is still recorded, never deleted: rename its file to `<r
 
 ## How each run goes
 
-Platforms and run ids: `claude` (Claude Project), `gpt` (ChatGPT Project), `gem` (Gemini Skill). Runs `<platform>-r1` and `<platform>-r2`.
+Platforms and run ids: `claude` (Claude Project), `gpt` (ChatGPT Project), `gem` (Gemini Skill), `mcs` (Copilot Studio agent). Runs `<platform>-r1` and `<platform>-r2`.
 
 The ChatGPT platform is a ChatGPT Project, not a custom GPT: custom GPTs can no longer be created in ChatGPT, and the plugins replacing them carry code, which does not fit a test of a sheet with no code behind it. The run ids stay `gpt-r1` and `gpt-r2`.
 
 The Gemini platform is a Gemini Skill, not a Gem: Gems are retired on personal accounts and replaced by Skills. The Skill is made by hand, named `meeting-tracker-sheet` (Gemini allows only lowercase and hyphens), with `sheet/SHEET.md` pasted in full as its instructions (Gemini stores them as SKILL.md), `contacts.csv` as its only file and the description left empty. It is called by name in each new chat: on Gemini the opening line starts `@meeting-tracker-sheet `, then the line below. The run ids stay `gem-r1` and `gem-r2`.
 
-Each platform runs on its own default settings: Sonnet 5.5 on Low in the Claude Project, GPT-6 with Thinking effort High in the ChatGPT Project, Pro in the Gemini Skill. The Claude Project also has a second row, **matched effort**: the same project and settings with Sonnet 5.5 on High, as the ChatGPT Project ran, under run ids `claude-hi-r1` and `claude-hi-r2`, saved in `eval/sheet/runs/claude/`. Its notes files open with `Row: matched effort (High, as ChatGPT ran)`, which the importer copies into the record; every other run is labelled `default settings`. The default row stays as it is.
+The Copilot Studio platform is a standard agent (generative orchestration on) named `meeting-tracker-sheet-std`, made by hand in a developer environment on the owner's own tenant, with `sheet/SHEET-mcs.md` as its instructions and `contacts.csv` as its only knowledge source. Web Search stays disabled, and no tool, trigger or connected agent is added. It is never published: each run is a new conversation in the maker's test chat, with the files attached in one message. Save the test chat's snapshot beside the copied text; it shows every tool step and the agent's settings. An agent on the platform's default harness (GitHub Copilot) bills Copilot Credits from the first test message and could not be previewed on a tenant with none (19 Nov 2026); the standard harness test chat ran without credits. The run ids are `mcs-r1` and `mcs-r2`.
+
+Each platform runs on its own default settings: Sonnet 5.5 on Low in the Claude Project, GPT-6 with Thinking effort High in the ChatGPT Project, Pro in the Gemini Skill, GPT Chat Latest (Nov 2026) in the Copilot Studio agent. The Claude Project also has a second row, **matched effort**: the same project and settings with Sonnet 5.5 on High, as the ChatGPT Project ran, under run ids `claude-hi-r1` and `claude-hi-r2`, saved in `eval/sheet/runs/claude/`. Its notes files open with `Row: matched effort (High, as ChatGPT ran)`, which the importer copies into the record; every other run is labelled `default settings`. The default row stays as it is.
 
 **Run 1**
 1. Open a fresh conversation in the Project, or a new Gemini chat.
@@ -88,7 +90,7 @@ The opening line and the fixed answers. No corrections, no nudges, no "try again
 Save the whole conversation as plain text to `eval/sheet/runs/<platform>/<run id>.txt`, with three lines at the top:
 
 ```
-Platform: Claude Project | ChatGPT Project | Gemini Skill
+Platform: Claude Project | ChatGPT Project | Gemini Skill | Copilot Studio agent (standard harness)
 Model: <the model as the platform shows it, with any mode or setting>
 Date: YYYY-MM-DD
 ```
